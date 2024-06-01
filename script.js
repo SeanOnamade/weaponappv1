@@ -151,6 +151,7 @@ const weaponTypes = { // come back to change up later
   Medic_Melee: { name: "Medic_Melee" },
   Knife: { name: "Knife" }, // Spy Melee
   Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher" },
+  Crossbow: { name: "Crossbow" },
   // Surprise: { name: "Surprise" }, // mine
 };
 
@@ -251,6 +252,7 @@ const weaponTypesByClass = [
   [
     // Medic
     { slot: 1, type: weaponTypes.Syringe_Gun },
+    { slot: 1, type: weaponTypes.Crossbow },
     // { slot: 1, type: weaponTypes.Surprise },
 
     { slot: 2, type: weaponTypes.Medi_Gun },
@@ -264,6 +266,7 @@ const weaponTypesByClass = [
     // Sniper
     { slot: 1, type: weaponTypes.Sniper_Rifle },
     { slot: 1, type: weaponTypes.Bow },
+    { slot: 1, type: weaponTypes.Crossbow }, // Why not
     // { slot: 1, type: weaponTypes.Surprise },
 
     { slot: 2, type: weaponTypes.Submachine_Gun },
@@ -318,9 +321,21 @@ const weaponTypeGroups = {
   Sapper: ["Sapper"],
   SemiAutomaticBullet: ["Revolver", "Pistol"], // interesting...
   SingleBullet: ["Sniper_Rifle"],
-  SingleShotProjectile: ["Bow", "Flare_Gun"],
-  Slot1: ["Scattergun", "Rocket_Launcher", "Shotgun", "Flamethrower", "Grenade_Launcher", "Demoknight_Boots", "Backpack", "Minigun", "Syringe_Gun", "Sniper_Rifle", "Bow"],
-  Slot2: ["Pistol", "Throwable_Weapon", "Throwable_AoE", "Scout_Lunch_Box", "Shotgun", "Banner", "Backpack", "Boots", "Flare_Gun", "Stickybomb_Launcher", "Demoknight_Shield", "Heavy_Lunch_Box", "Medi_Gun"],
+  SingleShotProjectile: ["Bow", "Flare_Gun", "Crossbow"],
+  Slot1: ["Scattergun", "Rocket_Launcher", 
+  "Shotgun", "Flamethrower", 
+  "Grenade_Launcher", "Demoknight_Boots", 
+  "Backpack", "Minigun", 
+  "Syringe_Gun", "Sniper_Rifle", 
+  "Bow", "Indivisible_Particle_Smasher", 
+  "Crossbow"],
+  Slot2: ["Pistol", "Throwable_Weapon", 
+  "Throwable_AoE", "Scout_Lunch_Box", 
+  "Shotgun", "Banner", 
+  "Backpack", "Boots", 
+  "Flare_Gun", "Stickybomb_Launcher", 
+  "Demoknight_Shield", "Heavy_Lunch_Box", 
+  "Medi_Gun", "Indivisible_Particle_Smasher"],
   
   // Surprise: ["Surprise"]
 };
@@ -371,6 +386,7 @@ weaponTypeGroups.AllCanHeadshot = [
     "Bow",
     "Revolver",
     "Sniper_Rifle",
+    "Crossbow",
   // ...weaponTypeGroups.Surprise,
 ];
 weaponTypeGroups.AllCanHit = [
@@ -441,6 +457,7 @@ weaponTypeGroups.AllReflectable = [
   "Melee_with_Projectile",
   "Rocket_Launcher",
   "Throwable_Weapon",
+  "Crossbow",
   // ...weaponTypeGroups.Surprise,
 ];
 weaponTypeGroups.AllReloading = [
@@ -487,37 +504,31 @@ weaponTypeGroups.AllSpy = weaponTypesByClass[8].map((w) => w.type.name);
 const mandatoryPros = { // Apparently, weapons with this must choose at least one pro; I need to go through these
 
   Banner: [
-        {
-          pointCost: -1,
-          text: "While active: Provides group buff that slowly heals nearby teammates",
-        },
-        {
-          pointCost: -1,
-          text: "While active: Provides group buff that increases the attack rate of nearby teammates",
-        },
+        { pointCost: -1, text: "While active: Provides group buff that slowly heals nearby teammates", },
+        { pointCost: -1, text: "While active: Provides group buff that increases the attack rate of nearby teammates", },
     ],
 
+  Crossbow: [
+        { pointCost: 0, text: "This weapon will reload automatically when not active", },
+        { pointCost: 0, text: "Bolts deal damage based on distance traveled",},
+    ],
+
+  Demoknight_Boots: [
+    { pointCost: 1, text: "+200% increase in air control and in turning control while charging", },
+  ],
+
   Demoknight_Shield: [
-    {
-      pointCost: 0,
-      text: "Alt-Fire: Charge toward your enemies and remove debuffs. Gain a critical melee strike after impacting an enemy at distance",
-    },
-    {
-      pointCost: 0,
-      text: "Alt-Fire: Charge toward your enemies and remove debuffs. Restore health after impacting an enemy",
-    },
-    {
-      pointCost: 0,
-      text: "Alt-Fire: Charge toward your enemies and remove debuffs. On impact enemies receive great knockback",
-    },
+    { pointCost: 0, text: "Alt-Fire: Charge toward your enemies and remove debuffs. Gain a critical melee strike after impacting an enemy at distance", },
+    { pointCost: 0, text: "Alt-Fire: Charge toward your enemies and remove debuffs. Restore health after impacting an enemy", },
+    { pointCost: 0, text: "Alt-Fire: Charge toward your enemies and remove debuffs. On impact enemies receive great knockback", },
+  ],
+  Demoknight_Melee: [
+    { pointCost: 0, text: "This Weapon has a large melee range and deploys and holsters slower", },
   ],
 
   Explosive_Melee: [
     { pointCost: 1, text: "Every third hit will cause an explosion" },
-    {
-      pointCost: 1,
-      text: "The first hit will apply great knockback on the enemy",
-    },
+    { pointCost: 1, text: "The first hit will apply great knockback on the enemy" },
   ],
 
   Flare_Gun: [
@@ -526,166 +537,70 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
   ],
 
   Heavy_Lunch_Box: [
-    {
-      pointCost: -1,
-      text: "Eat to receive 35% damage resistance for 10 seconds. Alt-Fire: Share with a friend (Small Health Kit)",
-    },
-    {
-      pointCost: -1,
-      text: "Eat to receive 25% movespeed for 15 seconds. Alt-Fire: Share with a friend (Small Health Kit)",
-    },
+    { pointCost: -1, text: "Eat to receive 35% damage resistance for 10 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
+    { pointCost: -1, text: "Eat to receive 25% movespeed for 15 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
   ],
 
   Medi_Gun: [
-    {
-      pointCost: -1,
-      text: "ÜberCharge grants +100% speed of movement and attack",
-    },
-    {
-      pointCost: -1,
-      text: "ÜberCharge grants +300% faster control point capture rate",
-    },
+    { pointCost: -1, text: "ÜberCharge grants +100% speed of movement and attack", },
+    { pointCost: -1, text: "ÜberCharge grants +300% faster control point capture rate", },
     { pointCost: -1, text: "ÜberCharge grants invisibility" },
     { pointCost: -1, text: "ÜberCharge grants the ability to fly" },
   ],
 
   Melee_with_Projectile: [
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Launches a projectile that makes enemies bleed",
-    },
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Launches a projectile that applies knockback on enemies",
-    },
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Launches a projectile that heals teammates",
-    },
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Launches a projectile that makes teammates faster",
-    },
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Launches a projectile that explodes on impact",
-    },
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Launches a projectile that disables sentries for 3 seconds",
-    },
+    { pointCost: 1, text: "Alt-Fire: Launches a projectile that makes enemies bleed", },
+    { pointCost: 1, text: "Alt-Fire: Launches a projectile that applies knockback on enemies", },
+    { pointCost: 1, text: "Alt-Fire: Launches a projectile that heals teammates", },
+    { pointCost: 1, text: "Alt-Fire: Launches a projectile that makes teammates faster", },
+    { pointCost: 1, text: "Alt-Fire: Launches a projectile that explodes on impact", },
+    { pointCost: 1, text: "Alt-Fire: Launches a projectile that disables sentries for 3 seconds", },
   ],
 
   Pybro_Melee: [ // make this a regular stat with pyro class limit
     { pointCost: 1, text: "Damage removes Sappers" },
-    {
-      pointCost: 1,
-      text: "Hitting friendly buildings helps them deploy faster",
-    },
+    { pointCost: 1, text: "Hitting friendly buildings helps them deploy faster", },
   ],
 
   Indivisible_Particle_Smasher: [
-    { pointCost: 0, 
-        text: "Does not require ammo and projectiles penetrate" 
-    },
+    { pointCost: 0, text: "Does not require ammo and projectiles penetrate" },
   ],
 
   Sapper: [
-    {
-      pointCost: 0,
-      text: "Place on enemy buildings to disable and slowly drain away its health",
-    },
-    {
-      pointCost: 0,
-      text: "Place on enemy buildings to disable for 10 seconds. Deals no damage",
-    },
-    {
-      pointCost: 0,
-      text: "Place on enemy buildings to drain their health faster than regular sapper. Does not disable the building",
-    },
+    { pointCost: 0, text: "Place on enemy buildings to disable and slowly drain away its health" },
+    { pointCost: 0, text: "Place on enemy buildings to disable for 10 seconds. Deals no damage" },
+    { pointCost: 0, text: "Place on enemy buildings to drain their health faster than regular sapper. Does not disable the building", },
   ],
 
   Scout_Lunch_Box: [
-    {
-      pointCost: 0,
-      text: "While effect is active: All attacks incite 5 seconds of bleed",
-    },
-    {
-      pointCost: 0,
-      text: "While effect is active: User can air-jump twice as many times",
-    },
-    {
-      pointCost: 0,
-      text: "While effect is active: Grants 35% resistance to all damage",
-    },
+    { pointCost: 0, text: "While effect is active: All attacks incite 5 seconds of bleed", },
+    { pointCost: 0, text: "While effect is active: User can air-jump twice as many times", },
+    { pointCost: 0, text: "While effect is active: Grants 35% resistance to all damage", },
   ],
 
   Throwable_AoE: [
-    {
-      pointCost: 0,
-      text: "On Hit: Covered teammates receive temporary 35% damage resistance",
-    },
-    {
-      pointCost: 0,
-      text: "On Hit: Remove ally's debuffs",
-    },
-    {
-      pointCost: 0,
-      text: "On Hit: Remove all the enemy's buffs",
-    },
-    {
-      pointCost: 0,
-      text: "On Hit: Covered engineer buildings get disabled for 4 seconds",
-    },
-    {
-      pointCost: 0,
-      text: "On Hit: Covered enemies can be seen through walls by your teammates for 5 seconds",
-    },
-    {
-      pointCost: 0,
-      text: "Extinguish teammates to earn a guaranteed minicrit on your next attack",
-    },
+    { pointCost: 0, text: "On Hit: Covered teammates receive temporary 35% damage resistance", },
+    { pointCost: 0, text: "On Hit: Remove ally's debuffs", },
+    { pointCost: 0, text: "On Hit: Remove all the enemy's buffs", },
+    { pointCost: 0, text: "On Hit: Covered engineer buildings get disabled for 4 seconds", },
+    { pointCost: 0, text: "On Hit: Covered enemies can be seen through walls by your teammates for 5 seconds", },
+    { pointCost: 0, text: "Extinguish teammates to earn a guaranteed minicrit on your next attack", },
   ],
 
   Throwable_Weapon: [
-    {
-      pointCost: 0,
-      text: "Throw at your enemy to deal damage and make them bleed for 5 seconds",
-    },
-    {
-      pointCost: 0,
-      text: "Throw at your enemy to deal damage and mark them for death for 5 seconds",
-    },
-    {
-      pointCost: 0,
-      text: "Throw at your enemy to deal damage and ignite them for 5 seconds",
-    },
+    { pointCost: 0, text: "Throw at your enemy to deal damage and make them bleed for 5 seconds", },
+    { pointCost: 0, text: "Throw at your enemy to deal damage and mark them for death for 5 seconds", },
+    { pointCost: 0, text: "Throw at your enemy to deal damage and ignite them for 5 seconds", },
+    { pointCost: -1, text: "Two throwables instead of one!", },
   ],
 
-  
   Wrench: [
-    {
-      pointCost: 0,
-      text: "Upgrades, repairs and speeds up construction of friendly buildings on hit.",
-    },
-    {
-      pointCost: 1,
-      text: "Hitting an enemy building twice reverts it to a lower level version of itself",
-    },
-    {
-      pointCost: 1,
-      text: "Removes sappers in a single hit",
-    },
-    {
-      pointCost: 1,
-      text: "As a team player, you spend -50% less metal when upgrading the buildings of your teammates",
-    },
-    {
-      pointCost: 1,
-      text: "Alt-Fire: Takes away metal from the ammo pool of your own sentry",
-    },
+    { pointCost: 0, text: "Doubles repairs and construction speed of friendly buildings on hit.", },
+    { pointCost: 1, text: "Hitting an enemy building twice reverts it to a lower level version of itself", },
+    { pointCost: 1, text: "Removes sappers in a single hit", },
+    { pointCost: 1, text: "As a team player, you spend -50% less metal when upgrading the buildings of your teammates", },
+    { pointCost: 1, text: "Alt-Fire: Takes away metal from the ammo pool of your own sentry", },
   ],
-  
   
 };
 
@@ -719,11 +634,28 @@ const weaponEffects = [
     valueCon: 30,
   },
   {
+    for: weaponTypeGroups.AllScout.filter(
+        (i) => !weaponTypeGroups.Passive.includes(i)
+      ),
+      
+    classLimit: ["Scout"],
+    pro: "+<value>% jump height while active",
+    con: "-<value>% decreased jump height while active",
+    valuePro: 100,
+    valueCon: 50,
+  },
+  {
     for: ["Scout_Lunch_Box"],
     pro: "+<value>% movespeed per second until you stop moving, for 10s",
     con: "-<value>% movespeed per jump while weapon effect is active",
     valuePro: 5,
     valueCon: 10,
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Scout"],
+    pro: "On Kill: Your next attack will douse an enemy in Mad Milk",
+    con: "On Miss: User is covered with Mad Milk for 5s",
   },
   //// AllSoldier ////
   //// AllPyro ////
@@ -748,6 +680,12 @@ const weaponEffects = [
     classLimit: ["Pyro"],
     pro: "Minicrits vs burning players",
     con: "-25% damage penalty vs burning players",
+  },
+  {
+    for: weaponTypeGroups.AllPyro,
+    classLimit: ["Pyro"],
+    pro: "Upon death: Ingite all enemies around you in a ball of fire",
+    con: "All afterburn times are halved",
   },
   {
     for: weaponTypeGroups.AllPyro.filter((i) =>
@@ -1222,6 +1160,13 @@ const weaponEffects = [
     valuePro: 20,
     valueCon: 10,
   },
+  {
+    for: ["Medic_Melee"],
+    pro: "Enemies near you get poisoned, taking <value> damage per second for 5 seconds",
+    con: "Getting hit by a melee poisons you, <value> damage per second for 5 seconds",
+    valuePro: 5,
+    valueCon: 5,
+  },
   //// AllSniper ////
   {
     for: weaponTypeGroups.AllSniper,
@@ -1246,12 +1191,30 @@ const weaponEffects = [
     pro: "No movespeed penalty while scoped",
     con: "Cannot move while scoped",
   },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Sniper"],
+    pro: "On Kill: Your next attack will douse an enemy in jarate",
+    con: "On Miss: User is covered with jarate for 3s",
+  },
   //// AllSpy ////
   {
-    for: weaponTypeGroups.AllSpy,
+    for: weaponTypeGroups.AllSpy.filter(
+    (i) =>
+        i !== "Sapper" &&
+        i !== "Invis_Watch"
+    ),
     classLimit: ["Spy"],
-    pro: "Attacking while disguised deals up to an additional <value>% damage depending on how long you've been near an enemy.",
-    con: "Cannot disguise for <value> seconds after attacking/sapping",
+    pro: "Attacking while disguised grants you +<value>% movespeed for 5s afterwards",
+    con: "Cannot disguise for <value> seconds after attacking/stabbing",
+    valuePro: 20,
+    valueCon: 5,
+  },
+  {
+    for: weaponTypes.Revolver,
+    classLimit: ["Spy"],
+    pro: "Attacking while disguised deals up to an additional <value>% damage depending on how long you've been near an enemy",
+    con: "Nerves: Accuracy attacking while disguised deals down to -<value>% less damage, depending on how long you've been near an enemy",
     valuePro: 20,
     valueCon: 15,
   },
@@ -1274,10 +1237,10 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllSpy,
     classLimit: ["Spy"],
-    pro: "+<value>% cloak gained when you backstab",
-    con: "-<value>% cloak lost when you backstab",
+    pro: "+<value>% cloak gained upon backstab",
+    con: "-<value>% cloak lost upon backstab",
     valuePro: 100,
-    valueCon: 40,
+    valueCon: 50,
   },
   {
     for: weaponTypeGroups.AllSpy,
@@ -1290,8 +1253,8 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllSpy,
     classLimit: ["Spy"],
-    pro: "+<value>% running speed after for 3 seconds after receiving damage",
-    con: "-<value>% running speed after for 3 seconds after receiving damage",
+    pro: "+<value>% movespeed for 3 seconds after receiving damage",
+    con: "-<value>% movespeed for 3 seconds after receiving damage",
     valuePro: 20,
     valueCon: 15,
   },
@@ -1304,8 +1267,8 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllSpy,
     classLimit: ["Spy"],
-    pro: "Unable to see enemy health",
-    con: "In addition to HP, can see enemy's loadout, ammo, all charges, and weather they're a Spy or not",
+    pro: "In addition to HP, can see enemy's loadout, ammo, all charges, and weather they're a Spy or not",
+    con: "Unable to see enemy health",
   },
   {
     for: weaponTypes.Revolver,
@@ -1386,11 +1349,18 @@ const weaponEffects = [
     con: "Sappers can be destroyed in a single hit",
   },
   {
-    for: ["Sapper"],
     pro: "+<value>% sapper damage bonus",
     con: "-<value>% sapper damage penalty",
     valuePro: 50,
     valueCon: 50,
+  },
+  {
+    for: ["Sapper"],
+    classLimit: ["Spy"],
+    pro: "Sapping grants you a +<value>% movespeed bonus for 10s",
+    con: "Cannot disguise for <value> seconds after sapping",
+    valuePro: 20,
+    valueCon: 10,
   },
   {
     for: ["Knife"],
@@ -1458,6 +1428,11 @@ const weaponEffects = [
     pro: "Lethal headshots cause victim to explode, damaging their nearby allies",
     con: "Lethal headshots mark user for death for 3s",
   },
+  {
+    for: weaponTypeGroups.AllCanHeadshot,
+    pro: "On Headshot: Remove debuffs and heal for 25 HP",
+    con: "On Lethal Headshot: Weapon is inaccessible for 5s",
+  },
   //// AllCanHit ////
   {
     for: weaponTypeGroups.AllCanHit.filter((i) =>
@@ -1484,7 +1459,10 @@ const weaponEffects = [
   },
   
   {
-    for: weaponTypeGroups.AllCanHit,
+    for: weaponTypeGroups.AllCanHit.filter(
+        (i) =>
+            i !== "Knife"
+    ),
     pro: "Crits against user only deal regular damage",
     con: "Cannot deal crits with this weapon",
   },
@@ -1493,6 +1471,13 @@ const weaponEffects = [
     pro: "+<value>% movespeed while deployed",
     con: "-<value>% movespeed while deployed",
     valuePro: 20,
+    valueCon: 20,
+  },
+  {
+    for: weaponTypeGroups.AllCanHit,
+    pro: "On Hit: +<value>% reload, attack, and firing speed for 10s",
+    con: "On Hit: Emeny gains +<value>% reload, attack, and firing speed for 5s",
+    valuePro: 50,
     valueCon: 20,
   },
   //// AllDoesDamage ////
@@ -1529,9 +1514,17 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.AllDoesDamage,
-    pro: "On Kill: +<value> max health for 30 seconds",
+    pro: "On Kill: +<value> max health for 30 seconds; health raises to compensate if full",
     con: "On Kill: Any buffs disappear", // idk about this one
     valuePro: 35,
+  },
+  //// No Melee ////
+  {
+    for: weaponTypeGroups.AllDoesDamage.filter(
+        (i) => !weaponTypeGroups.Melee.includes(i),
+    ),
+    pro: "On Kill: Powerplay. Locked to melee and Übercharged for 6s. Cannot crit during this time.", // idk about this one
+    con: "On Kill: Locked to melee for 3s", 
   },
   {
     for: weaponTypeGroups.AllDoesDamage,
@@ -1684,7 +1677,7 @@ const weaponEffects = [
         (i) => !weaponTypeGroups.Melee.includes(i),
       ),
     pro: "+<value>% damage bonus against airborne targets",
-    con: "+<value>% damage vulnerability from airborne targets",
+    con: "+<value>% damage vulnerability from airborne enemies",
     valuePro: 30,
     valueCon: 30,
   },
@@ -1961,10 +1954,16 @@ const weaponEffects = [
     con: "Any debuffs the enemy has or receives and applied to the user for half the duration",
   },
   {
+    for: weaponTypeGroups.ConsumableProjectile,
+    pro: "On Hit: Half the recharge time is filled",
+    con: "On Miss: 50% slower recharge time",
+  },
+  {
     for: weaponTypeGroups.ExplosiveProjectile,
     pro: "Increased air-strafing control",
     con: "Decreased air-strafing control",
   },
+  //// AllMelee ////
   {
     for: weaponTypeGroups.Melee,
     pro: "Taunting removes any debuffs for self and nearby allies. Taunt takes 2 second",
@@ -1987,6 +1986,11 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Melee,
+    pro: "On Melee Hit: Ignite target for 3s",
+    con: "On Melee Hit Receives: User is ignited for 3s",
+  },
+  {
+    for: weaponTypeGroups.Melee,
     pro: "-<value>% damage from ranged sources while active",
     con: "+<value>% damage from ranged sources while active",
     valuePro: 30,
@@ -1999,6 +2003,14 @@ const weaponEffects = [
     valuePro: 30,
     valueCon: 30,
   },
+  {
+    for: weaponTypeGroups.Melee,
+    pro: "On Hit: All of enemy's attacks are <value>% weaker for 8s",
+    con: "On Melee Hit Received: Your melee attacks are <value>% weaker for 8s",
+    valuePro: 20,
+    valueCon: 30,
+  },
+  //// AllPassive ////
   {
     for: weaponTypeGroups.Passive,
     pro: "+<value>% healing from all sources",
@@ -2053,6 +2065,16 @@ const weaponEffects = [
   },
 
   //// ---------- ////
+
+  //// Class Combo Specific ////
+  {
+    for: [...weaponTypeGroups.All].filter(
+      (i) => !weaponTypeGroups.Passive.includes(i)
+    ),
+    classLimit: ["Engineer", "Medic"],
+    pro: "Enemies who you hit or who hit you are visible through walls for 8s",
+    con: "After getting hit by an enemy, they can see you through walls for 5s",
+  },
   
   //// Misc., Weapon-Specific ////
   {
@@ -2078,9 +2100,14 @@ const weaponEffects = [
   },
   
   {
-    for: ["Sniper_Rifle", "Revolver", "Bow", "Flare_Gun"],
-    pro: "Fires quietly",
+    for: ["Sniper_Rifle", "Revolver", "Bow", "Flare_Gun", "Crossbow"],
+    pro: "Fires very, very quietly",
     con: "Fires tracer rounds",
+  },
+  {
+    for: ["Bow", "Crossbow"],
+    pro: "Arrows ignite on hit",
+    con: "Reflected arrows are ignited and explode on hit",
   },
   {
     for: ["Rocket_Launcher", "Stickybomb_Launcher"],
@@ -2101,6 +2128,16 @@ const weaponEffects = [
     for: ["Ray_Gun"],
     pro: "Alt-Fire to charge up a minicrit shot",
     con: "Deals only 20% damage to buildings",
+  },
+  {
+    for: ["Ray_Gun"],
+    pro: "Explode on hit",
+    con: "Enemies are energized when hit and gain +20% movespeed",
+  },
+  {
+    for: ["Ray_Gun"],
+    pro: "Ignite enemy on hit",
+    con: "Emptying the clip ignites the user",
   },
 
   
