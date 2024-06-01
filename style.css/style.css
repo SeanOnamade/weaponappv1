@@ -1,0 +1,121 @@
+@import "tf2build.ttf";
+@import "TF2secondary.ttf";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #5e5e5e;
+}
+
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#generatedWeaponArea {
+  /* Ensure it takes the available space as needed */
+  display: flex;
+  justify-content: center;
+  width: 300px;
+}
+
+#generateBtn {
+  width: 300px;
+}
+
+
+#weapon {
+  margin-top: 0rem;
+  background-color: #24201B;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 300px;
+}
+
+#weaponImage {
+  background-color: #3C362F;
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+  margin: auto;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#weaponImage img {
+  /* width: 100%; */
+  height: 85%;
+  margin: auto;
+}
+
+#weaponName {
+  color: #FFD700;
+  font-size: 18px;
+  line-height: 16px;
+  text-shadow: 2px 1px 1px #24201B;
+  font-family: mySecondFont;
+  font-weight: normal;
+  margin-top: 1rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+#weaponStats {
+  color: #756B5E;
+  font-family: TF2 Secondary, Verdana, Geneva, sans-serif;
+  font-size: 15px
+}
+
+#weaponMandatoryStats {
+  line-height: 1.2em;
+  font-size: 95%;
+  width: 80%;
+  margin: auto;
+  color: #EBE2CA;
+}
+
+#weaponPros {
+  color: #99CCFF;
+}
+
+#weaponCons {
+  color: #FF4040;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(TF2secondary.ttf);
+}
+
+@font-face {
+  font-family: mySecondFont;
+  src: url(tf2build.ttf) format('truetype');
+  ;
+}
+
+p {
+  font-family: myFirstFont;
+}
+
+div {
+  font-family: myFirstFont;
+}
+
+.card {
+  background-color: #949494;
+}
+
+.bg-light {
+  background-color: #949494 !important;
+}
+
+.form-select:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}

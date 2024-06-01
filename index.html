@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<div class="text-center container">
+
+  <head>
+    <title>[TF2] Weapon Generator</title>
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="style.css\style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.svg" />
+  </head>
+
+  <main>
+    <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;;"
+      class="card my-2 py-2">
+      <!-- <img src="/tf2-weapon-generator/tf2.jpg" class="card-img-top" alt="tf2-heroes"> -->
+      <h1 style="font-weight: bold;" class="card-title">TF2 Weapon Generator</h1>
+      <p style="font-weight: bold;" class="card-text">
+        Created by Aleksandar Dinkov
+        <br>
+        Built upon by Sean Onamade
+      </p>
+    </div>
+
+    <div class="row justify-content-around">
+
+      <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+        class="col-8 px-3 py-1 bg-light d-flex justify-content-center container-fluid my-2 align-items-center">
+        <div style="margin-bottom: 50px; width: 350px; margin-top: 10px;">
+          <h3 style="font-weight: bold;" class="title mb-3">Settings:</h3>
+
+          <div style="transform: translateX(15px);">
+
+            <div class="row align-items-center mb-1">
+              <div style="font-weight: bold;" class="col-4">Power Level</div>
+              <div class="col-1 text-center">:</div>
+              <div class="col-5">
+                <select id="powerLevelSelect" class="form-select">
+                  <option value="-3">Trash</option>
+                  <option value="-1">Toy</option>
+                  <option style="font-weight: bold;" value="0" selected>Normal</option>
+                  <option value="1">OP</option>
+                  <option value="3">God</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row align-items-center mb-1">
+              <div style="font-weight: bold;" class="col-4">Class</div>
+              <div class="col-1 text-center">:</div>
+              <div class="col-5">
+                <select id="playerClassSelect" class="form-select">
+                  <option style="font-weight: bold;" value="0" selected>Any</option>
+                  <option value="1">Scout</option>
+                  <option value="2">Soldier</option>
+                  <option value="3">Pyro</option>
+                  <option value="4">Demoman</option>
+                  <option value="5">Heavy</option>
+                  <option value="6">Engi</option>
+                  <option value="7">Medic</option>
+                  <option value="8">Sniper</option>
+                  <option value="9">Spy</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row align-items-center">
+              <div style="font-weight: bold;" class="col-4">Slot</div>
+              <div class="col-1 text-center">:</div>
+              <div class="col-5">
+                <select id="weaponSlotSelect" class="form-select">
+                  <option style="font-weight: bold;" value="0" selected>Any</option>
+                  <option value="1">Primary</option>
+                  <option value="2">Secondary</option>
+                  <option value="3">Melee</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-5 px-3 py-1 bg-light d-flex flex-column-reverse justify-content-center">
+          <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;" type="button"
+            class="btn btn-lg btn-success btn-outline-dark my-1" id="generateBtn">
+            Generate (Space)
+          </button>
+
+          <div id="generatedWeaponArea" class="px-3 py-3 justify-center">
+            <div id="weapon" style="position: relative; padding: 10px; width: 300px">
+              <div id="weaponImage"> <img src="weapon-images/Melee.png" /> </div>
+              <div id="weaponName" class="my-2 text-uppercase">The Frying Pan</div>
+              <div id="weaponStats" class="my-3">
+                <div id="weaponLevel" style="margin-bottom: 0.4rem !important;">
+                  Level 5 Frying Pan
+                </div>
+                <div id="weaponMandatoryStats" class="my-3">
+                  &nbsp;
+                </div>
+                <div id="weaponPros" class="my-3">
+                  <!-- Blank for pros -->
+                </div>
+                <div id="weaponCons" class="my-3">
+                  <!-- Blank for cons -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <script src="base64.js"></script>
+      <script src="script.js"></script>
+  </main>
+
+</div>
+
+</html>
