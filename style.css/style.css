@@ -18,14 +18,26 @@ body {
   vertical-align: middle;
 }
 
-#generatedWeaponArea {
+#generatedWeaponAreaMobile {
   /* Ensure it takes the available space as needed */
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-#generateBtn {
+#generatedWeaponAreaDesktop {
+  /* Ensure it takes the available space as needed */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#generateBtnMobile {
+  /* width: 300px; */
+    max-width: 100%;
+}
+
+#generateBtnDesktop {
   /* width: 300px; */
     max-width: 100%;
 }
@@ -37,6 +49,7 @@ body {
   padding: 10px;
   border-radius: 10px;
   max-width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px
 }
 
 #weaponImage {

@@ -29,7 +29,7 @@
   </head>
 
   <body>
-    <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;;"
+    <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
       class="card my-2 py-2">
       <!-- <img src="/tf2-weapon-generator/tf2.jpg" class="card-img-top" alt="tf2-heroes"> -->
       <h1 style="font-weight: bold;" class="card-title">TF2 Weapon Generator</h1>
@@ -52,11 +52,11 @@
 
           <div style="transform: translateX(15px);">
 
-            <div class="row align-items-center mb-1">
+            <div class="row align-items-center mb-0">
                 <div style="font-weight: bold;" class="col-4">Power Level</div>
                 <div class="col-1 text-center">:</div>
                 <div class="col-5">
-                  <select id="powerLevelSelect" class="form-select">
+                  <select id="powerLevelSelectMobile" class="form-select">
                     <option value="-3">Trash</option>
                     <option value="-1">Toy</option>
                     <option value="0" selected>Normal</option>
@@ -66,11 +66,11 @@
                 </div>
               </div>
 
-            <div class="row align-items-center mb-1 mt-2">
+            <div class="row align-items-center mb-1 mt-0">
               <div style="font-weight: bold;" class="col-4">Extra Stats</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="extraStatsSelect" class="form-select">
+                <select id="extraStatsSelectMobile" class="form-select">
                   <option value="1">Few</option>
                   <option style="font-weight: bold;" value="2" selected>Couple</option>
                   <option value="3">Some</option>
@@ -80,11 +80,11 @@
               </div>
             </div>
 
-            <div class="row align-items-center mb-1 mt-2">
+            <div class="row align-items-center mb-1 mt-1">
               <div style="font-weight: bold;" class="col-4">Class</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="playerClassSelect" class="form-select">
+                <select id="playerClassSelectMobile" class="form-select">
                   <option style="font-weight: bold;" value="0" selected>Any</option>
                   <option value="1">Scout</option>
                   <option value="2">Soldier</option>
@@ -99,11 +99,11 @@
               </div>
             </div>
 
-            <div class="row align-items-center mt-2">
+            <div class="row align-items-center mb-1 mt-2">
               <div style="font-weight: bold;" class="col-4">Slot</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="weaponSlotSelect" class="form-select">
+                <select id="weaponSlotSelectMobile" class="form-select">
                   <option style="font-weight: bold;" value="0" selected>Any</option>
                   <option value="1">Primary</option>
                   <option value="2">Secondary</option>
@@ -111,6 +111,50 @@
                 </select>
               </div>
             </div>
+            <div class="row align-items-center mt-1">
+                <div style="font-weight: bold;" class="col-4">Weapon Type</div>
+                <div class="col-1 text-center">:</div>
+                <div class="col-5">
+                  <select id="weaponTypeSelectMobile" class="form-select">
+                    <option value="Backpack">Backpack</option>
+                    <option value="Banner">Banner</option>
+                    <option value="Boots">Boots</option>
+                    <option value="Bow">Bow</option>
+                    <option value="Crossbow">Crossbow</option>
+                    <option value="Demoknight_Boots">Demoknight Boots</option>
+                    <option value="Demoknight_Melee">Demoknight Melee</option>
+                    <option value="Demoknight_Shield">Demoknight Shield</option>
+                    <option value="Explosive_Melee">Explosive Melee</option>
+                    <option value="Flamethrower">Flamethrower</option>
+                    <option value="Flare_Gun">Flare Gun</option>
+                    <option value="Grenade_Launcher">Grenade Launcher</option>
+                    <option value="Heavy_Lunch_Box">Heavy Lunch Box</option>
+                    <option value="Indivisible_Particle_Smasher">Indivisible Particle Smasher</option>
+                    <option value="Invis_Watch">Invis Watch</option>
+                    <option value="Knife">Knife</option>
+                    <option value="Medi_Gun">Medi Gun</option>
+                    <option value="Medic_Melee">Medic Melee</option>
+                    <option value="Melee">Melee</option>
+                    <option value="Melee_with_Projectile">Melee with Projectile</option>
+                    <option value="Minigun">Minigun</option>
+                    <option value="Pistol">Pistol</option>
+                    <option value="Pybro_Melee">Pybro Melee</option>
+                    <option value="Revolver">Revolver</option>
+                    <option value="Rocket_Launcher">Rocket Launcher</option>
+                    <option value="Sapper">Sapper</option>
+                    <option value="Scattergun">Scattergun</option>
+                    <option value="Scout_Lunch_Box">Scout Lunch Box</option>
+                    <option value="Shotgun">Shotgun</option>
+                    <option value="Sniper_Rifle">Sniper Rifle</option>
+                    <option value="Stickybomb_Launcher">Stickybomb Launcher</option>
+                    <option value="Submachine_Gun">Submachine Gun</option>
+                    <option value="Syringe_Gun">Syringe Gun</option>
+                    <option value="Throwable_AoE">Throwable AoE</option>
+                    <option value="Throwable_Weapon">Throwable Weapon</option>
+                    <option value="Wrench">Wrench</option>
+                  </select>
+                </div>
+              </div>
 
           </div>
           </div>
@@ -169,7 +213,7 @@
                       <div style="font-weight: bold;" class="col-4">Power Level</div>
                       <div class="col-1 text-center">:</div>
                       <div class="col-5">
-                        <select id="powerLevelSelect" class="form-select">
+                        <select id="powerLevelSelectDesktop" class="form-select">
                           <option value="-3">Trash</option>
                           <option value="-1">Toy</option>
                           <option value="0" selected>Normal</option>
@@ -183,7 +227,7 @@
                     <div style="font-weight: bold;" class="col-4">Extra Stats</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="extraStatsSelect" class="form-select">
+                      <select id="extraStatsSelectDesktop" class="form-select">
                         <option value="1">Few</option>
                         <option style="font-weight: bold;" value="2" selected>Couple</option>
                         <option value="3">Some</option>
@@ -197,7 +241,7 @@
                     <div style="font-weight: bold;" class="col-4">Class</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="playerClassSelect" class="form-select">
+                      <select id="playerClassSelectDesktop" class="form-select">
                         <option style="font-weight: bold;" value="0" selected>Any</option>
                         <option value="1">Scout</option>
                         <option value="2">Soldier</option>
@@ -212,15 +256,60 @@
                     </div>
                   </div>
       
-                  <div class="row align-items-center mt-2">
+                  <div class="row align-items-center mb-1 mt-2">
                     <div style="font-weight: bold;" class="col-4">Slot</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="weaponSlotSelect" class="form-select">
+                      <select id="weaponSlotSelectDesktop" class="form-select">
                         <option style="font-weight: bold;" value="0" selected>Any</option>
                         <option value="1">Primary</option>
                         <option value="2">Secondary</option>
                         <option value="3">Melee</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row align-items-center mt-1"> <!-- used mt-1 instead of mb-2 because it works idk -->
+                    <div style="font-weight: bold;" class="col-4">Weapon Type</div>
+                    <div class="col-1 text-center">:</div>
+                    <div class="col-5">
+                      <select id="weaponTypeSelectDesktop" class="form-select">
+                        <option style="font-weight: bold;" value="0" selected>Any</option>
+                        <option value="Backpack">Backpack</option>
+                        <option value="Banner">Banner</option>
+                        <option value="Boots">Boots</option>
+                        <option value="Bow">Bow</option>
+                        <option value="Crossbow">Crossbow</option>
+                        <option value="Demoknight_Boots">Demoknight Boots</option>
+                        <option value="Demoknight_Melee">Demoknight Melee</option>
+                        <option value="Demoknight_Shield">Demoknight Shield</option>
+                        <option value="Explosive_Melee">Explosive Melee</option>
+                        <option value="Flamethrower">Flamethrower</option>
+                        <option value="Flare_Gun">Flare Gun</option>
+                        <option value="Grenade_Launcher">Grenade Launcher</option>
+                        <option value="Heavy_Lunch_Box">Heavy Lunch Box</option>
+                        <option value="Indivisible_Particle_Smasher">Indivisible Particle Smasher</option>
+                        <option value="Invis_Watch">Invis Watch</option>
+                        <option value="Knife">Knife</option>
+                        <option value="Medi_Gun">Medi Gun</option>
+                        <option value="Medic_Melee">Medic Melee</option>
+                        <option value="Melee">Melee</option>
+                        <option value="Melee_with_Projectile">Melee with Projectile</option>
+                        <option value="Minigun">Minigun</option>
+                        <option value="Pistol">Pistol</option>
+                        <option value="Pybro_Melee">Pybro Melee</option>
+                        <option value="Revolver">Revolver</option>
+                        <option value="Rocket_Launcher">Rocket Launcher</option>
+                        <option value="Sapper">Sapper</option>
+                        <option value="Scattergun">Scattergun</option>
+                        <option value="Scout_Lunch_Box">Scout Lunch Box</option>
+                        <option value="Shotgun">Shotgun</option>
+                        <option value="Sniper_Rifle">Sniper Rifle</option>
+                        <option value="Stickybomb_Launcher">Stickybomb Launcher</option>
+                        <option value="Submachine_Gun">Submachine Gun</option>
+                        <option value="Syringe_Gun">Syringe Gun</option>
+                        <option value="Throwable_AoE">Throwable AoE</option>
+                        <option value="Throwable_Weapon">Throwable Weapon</option>
+                        <option value="Wrench">Wrench</option>
                       </select>
                     </div>
                   </div>

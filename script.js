@@ -1,7 +1,18 @@
-const powerLevelSelect = document.getElementById("powerLevelSelect");
-const extraStatsSelect = document.getElementById("extraStatsSelect");
-const playerClassSelect = document.getElementById("playerClassSelect");
-const weaponSlotSelect = document.getElementById("weaponSlotSelect");
+const powerLevelSelectMobile = document.getElementById("powerLevelSelectMobile");
+const powerLevelSelectDesktop = document.getElementById("powerLevelSelectDesktop");
+
+const extraStatsSelectMobile = document.getElementById("extraStatsSelectMobile");
+const extraStatsSelectDesktop = document.getElementById("extraStatsSelectDesktop");
+
+const playerClassSelectMobile = document.getElementById("playerClassSelectMobile");
+const playerClassSelectDesktop = document.getElementById("playerClassSelectDesktop");
+
+const weaponSlotSelectMobile = document.getElementById("weaponSlotSelectMobile");
+const weaponSlotSelectDesktop = document.getElementById("weaponSlotSelectDesktop");
+
+const weaponTypeSelectMobile = document.getElementById("weaponTypeSelectMobile");
+const weaponTypeSelectDesktop = document.getElementById("weaponTypeSelectDesktop");
+
 const generateBtnMobile = document.getElementById("generateBtnMobile");
 const generateBtnDesktop = document.getElementById("generateBtnDesktop");
 const generatedWeaponAreaMobile = document.getElementById("generatedWeaponAreaMobile");
@@ -63,69 +74,7 @@ function addRandomnessToNumber(num, lowest = 10) { // 0 to num
 }
 
 // Space bar to generate
-document.body.onkeyup = function(e) {
-  if (e.key == " " ||
-    e.code == "Space" ||
-    e.keyCode == 32) {
-    const playerClass = playerClassSelect.value;
-    const weaponSlot = weaponSlotSelect.value;
-    const powerLevel = powerLevelSelect.value;
-    const extraStats = extraStatsSelect.value;
 
-    const weapon = generateWeapon(
-      parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
-      parseInt(weaponSlot) || getRandom(1, 3),
-      parseInt(powerLevel),
-      parseInt(extraStats))
-    window.location.hash = Base64.encode(JSON.stringify(weapon));
-  }
-}
-
-generateBtnMobile.addEventListener("click", () => {
-  console.log("Weapon Generating...");
-  const playerClass = playerClassSelect.value;
-  const weaponSlot = weaponSlotSelect.value;
-  const powerLevel = powerLevelSelect.value;
-  const extraStats = extraStatsSelect.value;
-
-  const weapon = generateWeapon(
-    parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
-    parseInt(weaponSlot) || getRandom(1, 3),
-    parseInt(powerLevel),
-    parseInt(extraStats)
-  );
-
-  window.location.hash = Base64.encode(JSON.stringify(weapon));
-  // first, stringify the weapon stats into a json string
-  // then, encode in base64
-  // finally, add it to the window I think, useful for preserving state
-  // if you provide someone the same hash, they can retrieve the weapon
-});
-
-generateBtnDesktop.addEventListener("click", () => {
-  console.log("Weapon Generating...");
-  const playerClass = playerClassSelect.value;
-  const weaponSlot = weaponSlotSelect.value;
-  const powerLevel = powerLevelSelect.value;
-  const extraStats = extraStatsSelect.value;
-
-  const weapon = generateWeapon(
-    parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
-    parseInt(weaponSlot) || getRandom(1, 3),
-    parseInt(powerLevel),
-    parseInt(extraStats)
-  );
-
-  window.location.hash = Base64.encode(JSON.stringify(weapon));
-  // first, stringify the weapon stats into a json string
-  // then, encode in base64
-  // finally, add it to the window I think, useful for preserving state
-  // if you provide someone the same hash, they can retrieve the weapon
-});
-
-window.onhashchange = function() {
-  tryLoadWeaponFromUrl();
-};
 
 function tryLoadWeaponFromUrl() {
   // basically, if we pass it a special hash link, it will try to load it
@@ -139,7 +88,6 @@ function tryLoadWeaponFromUrl() {
   generatedWeaponAreaDesktop.innerHTML = formatWeaponAsHtml(weapon);
   document.title = `${weapon.playerClassName} ${weapon.weaponSlotName}`;
 }
-tryLoadWeaponFromUrl(); //* tries like right away in the script
 
 // Basic Weapon Types
 const weaponTypes = { // come back to change up later
@@ -2236,11 +2184,139 @@ const weaponEffects = [
   
 ];
 
-function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats) {
-  const weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+document.body.onkeyup = function(e) {
+    if (e.key == " " ||
+      e.code == "Space" ||
+      e.keyCode == 32) {
+      const playerClass = playerClassSelectDesktop.value;
+      const weaponSlot = weaponSlotSelectDesktop.value;
+      const powerLevel = powerLevelSelectDesktop.value;
+      const extraStats = extraStatsSelectDesktop.value;
+      const weaponTypeChosen = weaponTypeSelectDesktop.value;
+  
+      const weapon = generateWeapon(
+        parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
+        parseInt(weaponSlot) || getRandom(1, 3),
+        parseInt(powerLevel),
+        parseInt(extraStats),
+        weaponTypeChosen || "Any")
+      window.location.hash = Base64.encode(JSON.stringify(weapon));
+    }
+  }
+  
+  generateBtnMobile.addEventListener("click", () => {
+    console.log("Weapon Generating...");
+    const playerClass = playerClassSelectMobile.value;
+    const weaponSlot = weaponSlotSelectMobile.value;
+    const powerLevel = powerLevelSelectMobile.value;
+    const extraStats = extraStatsSelectMobile.value;
+    const weaponTypeChosen = weaponTypeSelectMobile.value;
+  
+    const weapon = generateWeapon(
+      parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
+      parseInt(weaponSlot) || getRandom(1, 3),
+      parseInt(powerLevel),
+      parseInt(extraStats),
+      weaponTypeChosen || "Any"
+    );
+  
+    window.location.hash = Base64.encode(JSON.stringify(weapon));
+    // first, stringify the weapon stats into a json string
+    // then, encode in base64
+    // finally, add it to the window I think, useful for preserving state
+    // if you provide someone the same hash, they can retrieve the weapon
+  });
+  
+  generateBtnDesktop.addEventListener("click", () => {
+    console.log("Weapon Generating...");
+    const playerClass = playerClassSelectDesktop.value;
+    const weaponSlot = weaponSlotSelectDesktop.value;
+    const powerLevel = powerLevelSelectDesktop.value;
+    const extraStats = extraStatsSelectDesktop.value;
+    const weaponTypeChosen = weaponTypeSelectDesktop.value;
+    console.log(`extra stats is ${extraStatsSelectDesktop.value}`);
+  
+    const weapon = generateWeapon(
+      parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
+      parseInt(weaponSlot) || getRandom(1, 3),
+      parseInt(powerLevel),
+      parseInt(extraStats),
+      weaponTypeChosen || "Any"
+    );
+  
+    window.location.hash = Base64.encode(JSON.stringify(weapon));
+    // first, stringify the weapon stats into a json string
+    // then, encode in base64
+    // finally, add it to the window I think, useful for preserving state
+    // if you provide someone the same hash, they can retrieve the weapon
+  });
+  
+  window.onhashchange = function() {
+    tryLoadWeaponFromUrl();
+  };
+
+  tryLoadWeaponFromUrl(); //* tries like right away in the script
+
+
+function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponTypeChosen) {
+    console.log(weaponTypeChosen);
+
+    let weaponType;
+    let randomClass = null;
+    let matchingClassIndex;
+
+    if (weaponTypeChosen) {
+        // If a weapon type is chosen, find a matching class and slot
+        let matchingClasses = [];
+        weaponTypesByClass.forEach((classes, index) => {
+            if (classes.some(weapon => weapon.type.name === weaponTypeChosen)) {
+                matchingClasses.push(index);
+            }
+        });
+    
+        if (matchingClasses.length > 0) {
+            // Choose a random class from the matching classes
+            const randomClassIndex = Math.floor(Math.random() * matchingClasses.length);
+            matchingClassIndex = matchingClasses[randomClassIndex];
+            console.log(`chosen class has index ${matchingClassIndex}`);
+            const matchingClassWeapons = weaponTypesByClass[matchingClassIndex];
+            
+            // Search for the matching weapon type within the class
+            const matchingWeapon = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
+            console.log(`this is the mamtching weapon ${matchingWeapon}`);
+            // const matchingSlot = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
+            
+            if (matchingWeapon) {
+                // Assign weapon type and slot
+                weaponType = matchingWeapon.type;
+                console.log(`this is the mamtching type ${matchingWeapon.type.name}`);
+                weaponSlot = matchingWeapon.slot;
+                console.log(`this is the mamtching slot ${matchingWeapon.slot}`)
+                
+                // Modify the needsBoost property of the weapon type
+                weaponType.needsBoost = weaponType.needsBoost || 0;
+                weaponType.needsBoost += powerLevel;
+            }
+        } else {
+            // If no matching class found, fall back to selecting a weapon type based on player class, weapon slot, and power level
+            weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+        }
+    } else {
+        // If no weapon type is chosen, fall back to selecting a weapon type based on player class, weapon slot, and power level
+        weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+    }
+
+    // Check if weaponType is defined
+    if (!weaponType) {
+        console.error('Unable to generate weapon. Weapon type is undefined.');
+        return null;
+    }
+
+
 //   const modificationCounts = getRandom(1, 2); // Between 1 and 2 mods
     // console.log(powerLevel);
     let modificationCounts;
+    console.log(`${extraStats} MOD COUNTS FR`);
     if (extraStats === 1) {
         modificationCounts = 1;
     } else {
@@ -2256,8 +2332,8 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats) {
   const conBoost = Math.max(0, -weaponType.needsBoost); // won't this always choose 0?
 
   const weapon = {
-    playerClass: playerClass,
-    playerClassName: strings.classes[playerClass],
+    playerClass: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : playerClass,
+    playerClassName: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : strings.classes[playerClass],
     weaponSlot: weaponSlot,
     weaponSlotName: strings.slots[weaponSlot],
     type: weaponType.name,
