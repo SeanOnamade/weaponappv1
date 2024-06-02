@@ -534,11 +534,13 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
   Flare_Gun: [
     { pointCost: 0, text: "100% mini-crits vs burning players" },
     { pointCost: 0, text: "100% mini-crits vs wet players" },
+    { pointCost: 0, text: "This weapon will reload automatically when not active", },
   ],
 
   Heavy_Lunch_Box: [
     { pointCost: -1, text: "Eat to receive 35% damage resistance for 10 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
     { pointCost: -1, text: "Eat to receive 25% movespeed for 15 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
+    { pointCost: -1, text: "Eat to restore 150 health. Alt-Fire: Share with a friend (Medium Health Kit)", },
   ],
 
   Medi_Gun: [
@@ -602,6 +604,50 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 1, text: "Alt-Fire: Takes away metal from the ammo pool of your own sentry", },
   ],
   
+};
+
+const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
+    Knife:  [
+        { text: "Backstabbing stuns enemy for 3s, granting the user +40% movespeed and firing speed",}, 
+        { text: "Backstabbing stuns enemy for 3s, granting the user minicrits",}, 
+        { text: "Backstabbing an enemy causes them to bleed critically until healing or death, granting the user +40% move/firing speed",}, 
+    ],
+    Medi_Gun:  [
+        { text: "ÜberCharge is split into halves", 
+        classLimit: ["Medic"], }, // redundant
+        { text: "ÜberCharge is split into thirds", 
+        classLimit: ["Medic"], }, 
+        { text: "ÜberCharge is split into quarters", 
+        classLimit: ["Medic"], },
+        { text: "This Medi Gun fires a constant, ammo-less beam that requires aiming", 
+        classLimit: ["Medic"], },
+    ],
+    Melee:  [
+        { text: "Charges up from 0 damage to double damage over 2s",}, 
+        { text: "This Weapon has a large melee range and deploys and holsters slower",}, 
+        { text: "(Purely Cosmetic) Victims explode on kill",}, 
+    ],
+    Rocket_Launcher:  [
+        { text: "Hold fire to charge rockets' speed", 
+        classLimit: ["Soldier"], }, // redundant
+    ],
+    Shotgun: [
+        { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every pack being one smaller", 
+        classLimit: ["Engineer"]},
+    ],
+    Scattergun:  [
+        { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every pack being one smaller", 
+        classLimit: ["Scout"], },
+    ],
+    Sniper_Rifle:  [
+        { text: "This rifle fires high-speed projectile bullets", 
+        classLimit: ["Sniper"], }, // redundant
+    ],
+    Wrench:  [
+        { text: "This melee weapon has sustained fire", 
+        classLimit: ["Engineer"], }, // redundant
+    ],
+    
 };
 
 const weaponEffects = [
@@ -874,8 +920,8 @@ const weaponEffects = [
   },
   {
     for: ["Minigun"],
-    pro: "+<value>% increased walking speed while revved up",
-    con: "-<value>% decreased walking speed while revved up",
+    pro: "+<value>% increased revved up movespeed",
+    con: "-<value>% decreased revved up movespeed",
     valuePro: 30,
     valueCon: 20,
   },
@@ -1397,7 +1443,7 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.AllAutomatic,
-    pro: "Movement speed increases the longer it's been fired",
+    pro: "Movement speed increases the longer this weapon has been fired",
     con: "-1 HP/s while firing due to heat; heal during an extended pause or reload",
   },
    //// AllBullet ////
@@ -1476,7 +1522,7 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllCanHit,
     pro: "On Hit: +<value>% reload, attack, and firing speed for 10s",
-    con: "On Hit: Emeny gains +<value>% reload, attack, and firing speed for 5s",
+    con: "On Hit: Enemy gains +<value>% reload, attack, and firing speed for 5s",
     valuePro: 50,
     valueCon: 20,
   },
@@ -1841,6 +1887,24 @@ const weaponEffects = [
     for: [...weaponTypeGroups.All].filter(
       (i) => !weaponTypeGroups.Passive.includes(i)
     ),
+    pro: "Movespeed while active increases up to <value>% as the user becomes injured",
+    con: "Movespeed while active decreases down to -<value>% as the user becomes injured",
+    valuePro: 30,
+    valueCon: 20,
+  },
+  {
+    for: [...weaponTypeGroups.All].filter(
+      (i) => !weaponTypeGroups.Passive.includes(i)
+    ),
+    pro: "Deploy speed increases up to <value>% as the user becomes injured",
+    con: "Deploy speed decreases down to -<value>% as the user becomes injured",
+    valuePro: 100,
+    valueCon: 50,
+  },
+  {
+    for: [...weaponTypeGroups.All].filter(
+      (i) => !weaponTypeGroups.Passive.includes(i)
+    ),
     pro: "+<value> capture rate while active",
     con: "Inaccessible while capturing",
     valuePro: 1,
@@ -2158,11 +2222,13 @@ function generateWeapon(playerClass, weaponSlot, powerLevel) {
     type: weaponType.name,
     proPoints: modificationCounts + proBoost, // if it needs a boost, it adds that many points
     conPoints: modificationCounts + conBoost, // yeah I think this is always 0...?
+    neutralStats: [],
     mandatoryPros: [],
     pros: [],
     cons: [],
   };
 
+  addNeutralStat(weapon);
   addMandatoryPro(weapon);
   addWeaponProsAndCons(weapon);
   return weapon;
@@ -2181,6 +2247,30 @@ function addMandatoryPro(weapon) {
   if (weapon.proPoints < 0) { // if we're in the negatives now
     weapon.conPoints += -weapon.proPoints; // ensure to balance it out
     weapon.proPoints = 0;
+  }
+}
+
+function addNeutralStat(weapon) {
+  const neutralOptions = neutralStats[weapon.type]; 
+  if (!neutralOptions || !neutralOptions.length) return;
+
+  // class limit filtering
+  const applicableNeutralOptions = neutralOptions.filter(option => {
+    return !option.classLimit || option.classLimit.includes(weapon.playerClassName);
+  });
+
+  if (!applicableNeutralOptions.length) return;
+
+  const neutralStatRoll = Math.random(); // between 0 and 1
+  const chanceForNeutralStat = 0.2; // set chance for a neutral stat
+
+  if (neutralStatRoll < chanceForNeutralStat) {
+    console.log("entered");
+    const selectedNeutral = applicableNeutralOptions[getRandom(0, applicableNeutralOptions.length - 1)];
+    weapon.neutralStats.push(selectedNeutral.text); 
+  }
+  else {
+    weapon.neutralStats.push("");
   }
 }
 
@@ -2307,6 +2397,10 @@ function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     `    <div id="weaponLevel" style="margin-bottom: 0.4rem !important;" >`,
     `      Level ${addRandomnessToNumber(getRandom(10, 50))}`,
     `      ${weapon.type.replace(/_/g, " ")}`,
+    `    </div>`,
+    `    <div id="weaponMandatoryStatsNeutral" class="my-3">`,
+    (weapon.neutralStats || []).map((i) => `<div>${i}</div>`).join(""),
+    `    </div>`,
     `    </div>`,
     `    <div id="weaponMandatoryStats" class="my-3">`,
     (weapon.mandatoryPros || []).map((i) => `<div>${i}</div>`).join(""),

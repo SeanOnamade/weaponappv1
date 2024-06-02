@@ -72,6 +72,14 @@ body {
   font-size: 15px
 }
 
+#weaponMandatoryStatsNeutral {
+  line-height: 1.2em;
+  font-size: 95%;
+  width: 80%;
+  margin: auto;
+  color: #EBE2CA;
+}
+
 #weaponMandatoryStats {
   line-height: 1.2em;
   font-size: 95%;
