@@ -2,8 +2,10 @@ const powerLevelSelect = document.getElementById("powerLevelSelect");
 const extraStatsSelect = document.getElementById("extraStatsSelect");
 const playerClassSelect = document.getElementById("playerClassSelect");
 const weaponSlotSelect = document.getElementById("weaponSlotSelect");
-const generateBtn = document.getElementById("generateBtn");
-const generatedWeaponArea = document.getElementById("generatedWeaponArea");
+const generateBtnMobile = document.getElementById("generateBtnMobile");
+const generateBtnDesktop = document.getElementById("generateBtnDesktop");
+const generatedWeaponAreaMobile = document.getElementById("generatedWeaponAreaMobile");
+const generatedWeaponAreaDesktop = document.getElementById("generatedWeaponAreaDesktop");
 
 const strings = {
   classes: [
@@ -79,7 +81,28 @@ document.body.onkeyup = function(e) {
   }
 }
 
-generateBtn.addEventListener("click", () => {
+generateBtnMobile.addEventListener("click", () => {
+  console.log("Weapon Generating...");
+  const playerClass = playerClassSelect.value;
+  const weaponSlot = weaponSlotSelect.value;
+  const powerLevel = powerLevelSelect.value;
+  const extraStats = extraStatsSelect.value;
+
+  const weapon = generateWeapon(
+    parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
+    parseInt(weaponSlot) || getRandom(1, 3),
+    parseInt(powerLevel),
+    parseInt(extraStats)
+  );
+
+  window.location.hash = Base64.encode(JSON.stringify(weapon));
+  // first, stringify the weapon stats into a json string
+  // then, encode in base64
+  // finally, add it to the window I think, useful for preserving state
+  // if you provide someone the same hash, they can retrieve the weapon
+});
+
+generateBtnDesktop.addEventListener("click", () => {
   console.log("Weapon Generating...");
   const playerClass = playerClassSelect.value;
   const weaponSlot = weaponSlotSelect.value;
@@ -112,7 +135,8 @@ function tryLoadWeaponFromUrl() {
   const decoded = Base64.decode(hash.substring(1));
   const weapon = JSON.parse(decoded);
 
-  generatedWeaponArea.innerHTML = formatWeaponAsHtml(weapon);
+  generatedWeaponAreaMobile.innerHTML = formatWeaponAsHtml(weapon);
+  generatedWeaponAreaDesktop.innerHTML = formatWeaponAsHtml(weapon);
   document.title = `${weapon.playerClassName} ${weapon.weaponSlotName}`;
 }
 tryLoadWeaponFromUrl(); //* tries like right away in the script

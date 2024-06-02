@@ -22,11 +22,12 @@ body {
   /* Ensure it takes the available space as needed */
   display: flex;
   justify-content: center;
-  width: 300px;
+  width: 100%;
 }
 
 #generateBtn {
-  width: 300px;
+  /* width: 300px; */
+    max-width: 100%;
 }
 
 
@@ -127,3 +128,4 @@ div {
   background-color: whitesmoke;
   cursor: pointer;
 }
+
