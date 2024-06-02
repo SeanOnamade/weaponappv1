@@ -32,15 +32,29 @@
           <div style="transform: translateX(15px);">
 
             <div class="row align-items-center mb-1">
-              <div style="font-weight: bold;" class="col-4">Power Level</div>
+                <div style="font-weight: bold;" class="col-4">Power Level</div>
+                <div class="col-1 text-center">:</div>
+                <div class="col-5">
+                  <select id="powerLevelSelect" class="form-select">
+                    <option value="-3">Trash</option>
+                    <option value="-1">Toy</option>
+                    <option value="0" selected>Normal</option>
+                    <option value="1">OP</option>
+                    <option value="3">God</option>
+                  </select>
+                </div>
+              </div>
+
+            <div class="row align-items-center mb-1 mt-2">
+              <div style="font-weight: bold;" class="col-4">Extra Stats</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="powerLevelSelect" class="form-select">
-                  <option value="-3">Trash</option>
-                  <option value="-1">Toy</option>
-                  <option style="font-weight: bold;" value="0" selected>Normal</option>
-                  <option value="1">OP</option>
-                  <option value="3">God</option>
+                <select id="extraStatsSelect" class="form-select">
+                  <option value="1">Few</option>
+                  <option style="font-weight: bold;" value="2" selected>Couple</option>
+                  <option value="3">Some</option>
+                  <option value="4">Many</option>
+                  <option value="5">Lots</option>
                 </select>
               </div>
             </div>

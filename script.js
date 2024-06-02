@@ -1,4 +1,5 @@
 const powerLevelSelect = document.getElementById("powerLevelSelect");
+const extraStatsSelect = document.getElementById("extraStatsSelect");
 const playerClassSelect = document.getElementById("playerClassSelect");
 const weaponSlotSelect = document.getElementById("weaponSlotSelect");
 const generateBtn = document.getElementById("generateBtn");
@@ -67,11 +68,13 @@ document.body.onkeyup = function(e) {
     const playerClass = playerClassSelect.value;
     const weaponSlot = weaponSlotSelect.value;
     const powerLevel = powerLevelSelect.value;
+    const extraStats = extraStatsSelect.value;
 
     const weapon = generateWeapon(
       parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
       parseInt(weaponSlot) || getRandom(1, 3),
-      parseInt(powerLevel))
+      parseInt(powerLevel),
+      parseInt(extraStats))
     window.location.hash = Base64.encode(JSON.stringify(weapon));
   }
 }
@@ -81,11 +84,13 @@ generateBtn.addEventListener("click", () => {
   const playerClass = playerClassSelect.value;
   const weaponSlot = weaponSlotSelect.value;
   const powerLevel = powerLevelSelect.value;
+  const extraStats = extraStatsSelect.value;
 
   const weapon = generateWeapon(
     parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
     parseInt(weaponSlot) || getRandom(1, 3),
-    parseInt(powerLevel)
+    parseInt(powerLevel),
+    parseInt(extraStats)
   );
 
   window.location.hash = Base64.encode(JSON.stringify(weapon));
@@ -123,7 +128,7 @@ const weaponTypes = { // come back to change up later
   Minigun: { name: "Minigun" },
   Submachine_Gun: { name: "Submachine_Gun" },
   Flamethrower: { name: "Flamethrower" },
-  Flare_Gun: { name: "Flare_Gun", needsBoost: 2 }, // ?
+  Flare_Gun: { name: "Flare_Gun" }, // ?
   Bow: { name: "Bow" },
   Syringe_Gun: { name: "Syringe_Gun" },
   Throwable_Weapon: { name: "Throwable_Weapon" },
@@ -136,11 +141,11 @@ const weaponTypes = { // come back to change up later
   Scout_Lunch_Box: { name: "Scout_Lunch_Box" },
   Heavy_Lunch_Box: { name: "Heavy_Lunch_Box" },
   Banner: { name: "Banner" },
-  Demoknight_Shield: { name: "Demoknight_Shield", needsBoost: 2 },
+  Demoknight_Shield: { name: "Demoknight_Shield"},
   Invis_Watch: { name: "Invis_Watch" },
-  Backpack: { name: "Backpack", needsBoost: 2 },
-  Boots: { name: "Boots", needsBoost: 2 },
-  Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 4 },
+  Backpack: { name: "Backpack", needsBoost: 1 },
+  Boots: { name: "Boots", needsBoost: 1 },
+  Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1 },
   // Sniper_Shield: { name: "Sniper_Shield", needsBoost: 2 }, // get rid of?
   Melee: { name: "Melee" },
   Melee_with_Projectile: { name: "Melee_with_Projectile" },
@@ -2207,9 +2212,21 @@ const weaponEffects = [
   
 ];
 
-function generateWeapon(playerClass, weaponSlot, powerLevel) {
+function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats) {
   const weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
-  const modificationCounts = getRandom(1, 2); // Between 1 and 2 mods
+//   const modificationCounts = getRandom(1, 2); // Between 1 and 2 mods
+    // console.log(powerLevel);
+    let modificationCounts;
+    if (extraStats === 1) {
+        modificationCounts = 1;
+    } else {
+        modificationCounts = getRandom(extraStats - 1, extraStats);
+    }
+    if (weaponType.needsBoost && modificationCounts > 1) {
+        modificationCounts -= 1;
+    }
+
+  console.log(`There is/are ${modificationCounts} mod(s)`);
 
   const proBoost = Math.max(0, weaponType.needsBoost);
   const conBoost = Math.max(0, -weaponType.needsBoost); // won't this always choose 0?
@@ -2265,7 +2282,7 @@ function addNeutralStat(weapon) {
   const chanceForNeutralStat = 0.2; // set chance for a neutral stat
 
   if (neutralStatRoll < chanceForNeutralStat) {
-    console.log("entered");
+    console.log("Neutral Stat Rolled");
     const selectedNeutral = applicableNeutralOptions[getRandom(0, applicableNeutralOptions.length - 1)];
     weapon.neutralStats.push(selectedNeutral.text); 
   }
@@ -2328,7 +2345,7 @@ function cloneJson(obj) {
 }
 
 function getSelectedOptionsByIndices(possibleOptions, selectedIndices) {
-  console.log(selectedIndices);
+//   console.log(selectedIndices);
   const selectedOptions = [];
   for (let i = 0; i < selectedIndices.length; i++) { // go through selected indices
     const index = selectedIndices[i];
@@ -2345,6 +2362,7 @@ function getSelectedOptionsByIndices(possibleOptions, selectedIndices) {
       valueCon: option.valueCon * multiplier,
     });
   }
+  console.log(selectedOptions);
   return selectedOptions; // return options
 }
 
