@@ -97,7 +97,7 @@ const weaponTypes = { // come back to change up later
   Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 1 },
   Revolver: { name: "Revolver", imageCount: 1 },
   Pistol: { name: "Pistol", imageCount: 1 },
-  Minigun: { name: "Minigun" },
+  Minigun: { name: "Minigun", imageCount: 1 },
   Submachine_Gun: { name: "Submachine_Gun", imageCount: 1 },
   Flamethrower: { name: "Flamethrower", imageCount: 1 },
   Flare_Gun: { name: "Flare_Gun", imageCount: 1 }, // ?
