@@ -92,43 +92,43 @@ function tryLoadWeaponFromUrl() {
 // Basic Weapon Types
 const weaponTypes = { // come back to change up later
   // needsBoost typically indicates level of enhancement required for the weapon type to perform optimally.
-  Scattergun: { name: "Scattergun" },
-  Shotgun: { name: "Shotgun" },
-  Sniper_Rifle: { name: "Sniper_Rifle" },
-  Revolver: { name: "Revolver" },
-  Pistol: { name: "Pistol" },
+  Scattergun: { name: "Scattergun", imageCount: 1 },
+  Shotgun: { name: "Shotgun", imageCount: 1 },
+  Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 1 },
+  Revolver: { name: "Revolver", imageCount: 1 },
+  Pistol: { name: "Pistol", imageCount: 1 },
   Minigun: { name: "Minigun" },
-  Submachine_Gun: { name: "Submachine_Gun" },
-  Flamethrower: { name: "Flamethrower" },
-  Flare_Gun: { name: "Flare_Gun" }, // ?
-  Bow: { name: "Bow" },
-  Syringe_Gun: { name: "Syringe_Gun" },
-  Throwable_Weapon: { name: "Throwable_Weapon" },
-  Throwable_AoE: { name: "Throwable_AoE" },
-  Rocket_Launcher: { name: "Rocket_Launcher" },
-  Grenade_Launcher: { name: "Grenade_Launcher" },
-  Stickybomb_Launcher: { name: "Stickybomb_Launcher" },
-  Medi_Gun: { name: "Medi_Gun" },
-  Sapper: { name: "Sapper" },
-  Scout_Lunch_Box: { name: "Scout_Lunch_Box" },
-  Heavy_Lunch_Box: { name: "Heavy_Lunch_Box" },
-  Banner: { name: "Banner" },
-  Demoknight_Shield: { name: "Demoknight_Shield"},
-  Invis_Watch: { name: "Invis_Watch" },
-  Backpack: { name: "Backpack", needsBoost: 1 },
-  Boots: { name: "Boots", needsBoost: 1 },
-  Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1 },
-  // Sniper_Shield: { name: "Sniper_Shield", needsBoost: 2 }, // get rid of?
-  Melee: { name: "Melee" },
-  Melee_with_Projectile: { name: "Melee_with_Projectile" },
-  Pybro_Melee: { name: "Pybro_Melee" }, // ?
-  Demoknight_Melee: { name: "Demoknight_Melee" },
-  Explosive_Melee: { name: "Explosive_Melee" }, // ? just caber
-  Wrench: { name: "Wrench" },
-  Medic_Melee: { name: "Medic_Melee" },
-  Knife: { name: "Knife" }, // Spy Melee
-  Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher" },
-  Crossbow: { name: "Crossbow" },
+  Submachine_Gun: { name: "Submachine_Gun", imageCount: 1 },
+  Flamethrower: { name: "Flamethrower", imageCount: 1 },
+  Flare_Gun: { name: "Flare_Gun", imageCount: 1 }, // ?
+  Bow: { name: "Bow", imageCount: 1 },
+  Syringe_Gun: { name: "Syringe_Gun", imageCount: 1 },
+  Throwable_Weapon: { name: "Throwable_Weapon", imageCount: 1 },
+  Throwable_AoE: { name: "Throwable_AoE", imageCount: 1 },
+  Rocket_Launcher: { name: "Rocket_Launcher", imageCount: 1 },
+  Grenade_Launcher: { name: "Grenade_Launcher", imageCount: 2 },
+  Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 1 },
+  Medi_Gun: { name: "Medi_Gun", imageCount: 1 },
+  Sapper: { name: "Sapper", imageCount: 1 },
+  Scout_Lunch_Box: { name: "Scout_Lunch_Box", imageCount: 1 },
+  Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 1 },
+  Banner: { name: "Banner", imageCount: 1 },
+  Demoknight_Shield: { name: "Demoknight_Shield", imageCount: 1 },
+  Invis_Watch: { name: "Invis_Watch", imageCount: 1 },
+  Backpack: { name: "Backpack", needsBoost: 1, imageCount: 1 },
+  Boots: { name: "Boots", needsBoost: 1, imageCount: 1 },
+  Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1, imageCount: 1 },
+  // Sniper_Shield: { name: "Sniper_Shield", needsBoost: 2, imageCount: 1 }, // get rid of?
+  Melee: { name: "Melee", imageCount: 1 },
+  Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 1 },
+  Pybro_Melee: { name: "Pybro_Melee", imageCount: 1 }, // ?
+  Demoknight_Melee: { name: "Demoknight_Melee", imageCount: 1 },
+  Explosive_Melee: { name: "Explosive_Melee", imageCount: 1 }, // ? just caber
+  Wrench: { name: "Wrench", imageCount: 1 },
+  Medic_Melee: { name: "Medic_Melee", imageCount: 1 },
+  Knife: { name: "Knife", imageCount: 1 }, // Spy Melee
+  Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher", imageCount: 1 },
+  Crossbow: { name: "Crossbow", imageCount: 1 },
   // Surprise: { name: "Surprise" }, // mine
 };
 
@@ -2503,13 +2503,16 @@ function selectWeaponType(playerClass, weaponSlot, powerLevel) {
   return choice.type; // returns weapon type
 }
 
+
 function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
+    const randomImageIndex = Math.floor(Math.random() * weaponTypes[weapon.type].imageCount) + 1;
+    const imageUrl = `weapon-images/${weapon.type}_${randomImageIndex}.png`;
   return [
     `<div id="weapon" style="position: relative; padding: 10px;">`,
     `<div id="classIcon" style="position: absolute; top: 10px; left: 10px;">`,
     `<img src="class-icons/${weapon.playerClassName}.png" alt="${weapon.playerClassName} icon" style="width: 30px; height: 30px;" />`,
     `</div>`,
-    `  <div id="weaponImage"> <img src="weapon-images/${weapon.type}.png" /> </div>`,
+    `  <div id="weaponImage"> <img src="${imageUrl}" /> </div>`,
     `  <div id="weaponName" class="my-2 text-uppercase">${weapon.playerClassName} ${weapon.weaponSlotName}</div>`,
     `  <div id="weaponStats" class="my-3">`,
     `    <div id="weaponLevel" style="margin-bottom: 0.4rem !important;" >`,
