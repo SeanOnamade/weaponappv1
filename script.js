@@ -1918,7 +1918,7 @@ const weaponEffects = [
     for: weaponTypeGroups.Slot1.filter((i) =>
       weaponTypeGroups.AllCanHit.includes(i)),
     pro: "+<value>% max ammo",
-    con: "-<value>% secondary ammo capacity",
+    con: "-<value>% secondary ammo capacity (if applicable)",
     valuePro: 40,
     valueCon: 40,
   },
@@ -1926,7 +1926,7 @@ const weaponEffects = [
     for: weaponTypeGroups.Slot2.filter((i) =>
       weaponTypeGroups.AllCanHit.includes(i)),
     pro: "+<value>% max ammo",
-    con: "-<value>% primary ammo capacity",
+    con: "-<value>% primary ammo capacity (if applicable)",
     valuePro: 40,
     valueCon: 40,
   },
