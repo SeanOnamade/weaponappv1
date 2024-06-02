@@ -92,7 +92,7 @@ function tryLoadWeaponFromUrl() {
 // Basic Weapon Types
 const weaponTypes = { // come back to change up later
   // needsBoost typically indicates level of enhancement required for the weapon type to perform optimally.
-  Scattergun: { name: "Scattergun", imageCount: 1 },
+  Scattergun: { name: "Scattergun", imageCount: 5 },
   Shotgun: { name: "Shotgun", imageCount: 1 },
   Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 1 },
   Revolver: { name: "Revolver", imageCount: 1 },
