@@ -110,7 +110,7 @@ const weaponTypes = { // come back to change up later
   Knife: { name: "Knife", imageCount: 1 }, // Spy Melee
   Medi_Gun: { name: "Medi_Gun", imageCount: 1 },
   Medic_Melee: { name: "Medic_Melee", imageCount: 1 },
-  Melee: { name: "Melee", imageCount: 19 },
+  Melee: { name: "Melee", imageCount: 31 },
   Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 1 },
   Minigun: { name: "Minigun", imageCount: 1 },
   Pistol: { name: "Pistol", imageCount: 5 },
