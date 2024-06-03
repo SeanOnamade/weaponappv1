@@ -35,11 +35,13 @@ body {
 #generateBtnMobile {
   /* width: 300px; */
     max-width: 100%;
+    transition: all 0.3s ease;
 }
 
 #generateBtnDesktop {
   /* width: 300px; */
     max-width: 100%;
+    transition: all 0.3s ease;
 }
 
 
