@@ -109,12 +109,12 @@ const weaponTypes = { // come back to change up later
   Invis_Watch: { name: "Invis_Watch", imageCount: 5 },
   Knife: { name: "Knife", imageCount: 9 }, // Spy Melee
   Medi_Gun: { name: "Medi_Gun", imageCount: 4 },
-  Medic_Melee: { name: "Medic_Melee", imageCount: 5 },
-  Melee: { name: "Melee", imageCount: 56 },
+//   Medic_Melee: { name: "Medic_Melee", imageCount: 5 },
+  Melee: { name: "Melee", imageCount: 61 },
   Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 2 },
   Minigun: { name: "Minigun", imageCount: 6 },
   Pistol: { name: "Pistol", imageCount: 5 },
-  Pybro_Melee: { name: "Pybro_Melee", imageCount: 1 }, // ?
+//   Pybro_Melee: { name: "Pybro_Melee", imageCount: 1 }, // ?
   Revolver: { name: "Revolver", imageCount: 6 },
   Rocket_Launcher: { name: "Rocket_Launcher", imageCount: 9 },
   Sapper: { name: "Sapper", imageCount: 4 },
@@ -177,7 +177,7 @@ const weaponTypesByClass = [
     // { slot: 2, type: weaponTypes.Surprise },
 
     { slot: 3, type: weaponTypes.Melee },
-    { slot: 3, type: weaponTypes.Pybro_Melee },
+    // { slot: 3, type: weaponTypes.Pybro_Melee },
     // { slot: 3, type: weaponTypes.Surprise },
   ],
   [
@@ -236,7 +236,7 @@ const weaponTypesByClass = [
     // { slot: 2, type: weaponTypes.Surprise },
 
     { slot: 3, type: weaponTypes.Melee },
-    { slot: 3, type: weaponTypes.Medic_Melee },
+    // { slot: 3, type: weaponTypes.Medic_Melee },
     // { slot: 3, type: weaponTypes.Surprise },
   ],
   [
@@ -288,8 +288,8 @@ const weaponTypeGroups = {
     "Melee",
     "Demoknight_Melee",
     "Explosive_Melee",
-    "Medic_Melee",
-    "Pybro_Melee",
+    // "Medic_Melee",
+    // "Pybro_Melee",
     "Melee_with_Projectile",
     "Wrench",
   ],
@@ -536,11 +536,6 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 1, text: "Alt-Fire: Launches a projectile that disables sentries for 3 seconds", },
   ],
 
-  Pybro_Melee: [ // make this a regular stat with pyro class limit
-    { pointCost: 1, text: "Damage removes Sappers" },
-    { pointCost: 1, text: "Hitting friendly buildings helps them deploy faster", },
-  ],
-
   Indivisible_Particle_Smasher: [
     { pointCost: 0, text: "Does not require ammo and projectiles penetrate" },
   ],
@@ -776,6 +771,13 @@ const weaponEffects = [
     valuePro: 50,
     valueCon: 30,
   },
+  { // mine
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Pyro"],
+    pro: "Hitting friendly buildings helps them deploy faster",
+    con: "Your other weapons no longer damage Spies; you must use this melee",
+  },
+
   //// AllDemoman ////
   {
     for: weaponTypeGroups.AllDemoman,
@@ -1177,19 +1179,35 @@ const weaponEffects = [
     con: "Taking damage while ÜberCharged reduces its duration",
   },
   {
-    for: ["Medic_Melee"],
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Medic"],
     pro: "On Hit: <value> ÜberCharge added",
     con: "On Hit: <value> ÜberCharge lost",
     valuePro: 20,
     valueCon: 10,
   },
   {
-    for: ["Medic_Melee"],
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Medic"],
     pro: "Enemies near you get poisoned, taking <value> damage per second for 5 seconds",
     con: "Getting hit by a melee poisons you, <value> damage per second for 5 seconds",
     valuePro: 5,
     valueCon: 5,
   },
+//   {
+//     for: ["Medic_Melee"],
+//     pro: "On Hit: <value> ÜberCharge added",
+//     con: "On Hit: <value> ÜberCharge lost",
+//     valuePro: 20,
+//     valueCon: 10,
+//   },
+//   {
+//     for: ["Medic_Melee"],
+//     pro: "Enemies near you get poisoned, taking <value> damage per second for 5 seconds",
+//     con: "Getting hit by a melee poisons you, <value> damage per second for 5 seconds",
+//     valuePro: 5,
+//     valueCon: 5,
+//   },
   //// AllSniper ////
   {
     for: weaponTypeGroups.AllSniper,
