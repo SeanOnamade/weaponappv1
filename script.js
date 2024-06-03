@@ -95,41 +95,41 @@ const weaponTypes = { // come back to change up later
   Backpack: { name: "Backpack", needsBoost: 1, imageCount: 3 },
   Banner: { name: "Banner", imageCount: 3 },
   Boots: { name: "Boots", needsBoost: 1, imageCount: 2 },
-  Bow: { name: "Bow", imageCount: 1 },
-  Crossbow: { name: "Crossbow", imageCount: 1 },
-  Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1, imageCount: 1 },
-  Demoknight_Melee: { name: "Demoknight_Melee", imageCount: 3 },
-  Demoknight_Shield: { name: "Demoknight_Shield", imageCount: 1 },
+  Bow: { name: "Bow", imageCount: 2 },
+  Crossbow: { name: "Crossbow", imageCount: 2 },
+  Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1, imageCount: 2 },
+  Demoknight_Melee: { name: "Demoknight_Melee", imageCount: 9 },
+  Demoknight_Shield: { name: "Demoknight_Shield", imageCount: 3 },
   Explosive_Melee: { name: "Explosive_Melee", imageCount: 1 }, // ? just caber
   Flamethrower: { name: "Flamethrower", imageCount: 7 },
   Flare_Gun: { name: "Flare_Gun", imageCount: 3 }, // ?
-  Grenade_Launcher: { name: "Grenade_Launcher", imageCount: 2 },
-  Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 1 },
-  Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher", imageCount: 2 },
-  Invis_Watch: { name: "Invis_Watch", imageCount: 1 },
-  Knife: { name: "Knife", imageCount: 1 }, // Spy Melee
-  Medi_Gun: { name: "Medi_Gun", imageCount: 1 },
-  Medic_Melee: { name: "Medic_Melee", imageCount: 1 },
-  Melee: { name: "Melee", imageCount: 31 },
-  Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 1 },
-  Minigun: { name: "Minigun", imageCount: 1 },
+  Grenade_Launcher: { name: "Grenade_Launcher", imageCount: 4 },
+  Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 6 },
+  Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher", imageCount: 3 },
+  Invis_Watch: { name: "Invis_Watch", imageCount: 5 },
+  Knife: { name: "Knife", imageCount: 9 }, // Spy Melee
+  Medi_Gun: { name: "Medi_Gun", imageCount: 4 },
+  Medic_Melee: { name: "Medic_Melee", imageCount: 5 },
+  Melee: { name: "Melee", imageCount: 56 },
+  Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 2 },
+  Minigun: { name: "Minigun", imageCount: 6 },
   Pistol: { name: "Pistol", imageCount: 5 },
   Pybro_Melee: { name: "Pybro_Melee", imageCount: 1 }, // ?
-  Revolver: { name: "Revolver", imageCount: 1 },
+  Revolver: { name: "Revolver", imageCount: 6 },
   Rocket_Launcher: { name: "Rocket_Launcher", imageCount: 9 },
-  Sapper: { name: "Sapper", imageCount: 1 },
+  Sapper: { name: "Sapper", imageCount: 4 },
   Scattergun: { name: "Scattergun", imageCount: 5 },
-  Scout_Lunch_Box: { name: "Scout_Lunch_Box", imageCount: 3 },
-  Shotgun: { name: "Shotgun", imageCount: 3 },
-  Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 1 },
-  Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 1 },
-  Submachine_Gun: { name: "Submachine_Gun", imageCount: 1 },
-  Syringe_Gun: { name: "Syringe_Gun", imageCount: 1 },
-  Throwable_AoE: { name: "Throwable_AoE", imageCount: 2 },
+  Scout_Lunch_Box: { name: "Scout_Lunch_Box", imageCount: 5 },
+  Shotgun: { name: "Shotgun", imageCount: 7 },
+  Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 8 },
+  Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 4 },
+  Submachine_Gun: { name: "Submachine_Gun", imageCount: 2 },
+  Syringe_Gun: { name: "Syringe_Gun", imageCount: 3 },
+  Throwable_AoE: { name: "Throwable_AoE", imageCount: 3 },
   Throwable_Weapon: { name: "Throwable_Weapon", imageCount: 1 },
-  Wrench: { name: "Wrench", imageCount: 1 },
+  Wrench: { name: "Wrench", imageCount: 5 },
   // Sniper_Shield: { name: "Sniper_Shield", needsBoost: 2, imageCount: 1 }, // get rid of?
-  // Surprise: { name: "Surprise" }, // mine
+  // Surprise: { name: "Surprise", imageCount: 2 }, // mine
 };
 
 // Weapon Types in Arrays by Class :
@@ -2506,6 +2506,7 @@ function selectWeaponType(playerClass, weaponSlot, powerLevel) {
 
 function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     const randomImageIndex = Math.floor(Math.random() * weaponTypes[weapon.type].imageCount) + 1;
+    // can pass an override bool to set randomImageIndex to 1 if I want
     const imageUrl = `weapon-images/${weapon.type}_${randomImageIndex}.png`;
   return [
     `<div id="weapon" style="position: relative; padding: 10px;">`,
