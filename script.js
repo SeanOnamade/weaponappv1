@@ -95,14 +95,14 @@ const weaponTypes = { // come back to change up later
   Backpack: { name: "Backpack", needsBoost: 1, imageCount: 5 }, // 3 w/o custom
   Banner: { name: "Banner", imageCount: 3 }, // 3 w/o custom
   Boots: { name: "Boots", needsBoost: 1, imageCount: 6 }, // 2 w/o custom
-  Bow: { name: "Bow", imageCount: 2 }, // 2 w/o custom
+  Bow: { name: "Bow", imageCount: 3 }, // 2 w/o custom
   Crossbow: { name: "Crossbow", imageCount: 5 }, // 2 w/o custom
   Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1, imageCount: 3 }, // 2 w/o custom
   Demoknight_Melee: { name: "Demoknight_Melee", imageCount: 10 }, // 9 w/o custom
   Demoknight_Shield: { name: "Demoknight_Shield", imageCount: 3 }, // 3 w/o custom
   Explosive_Melee: { name: "Explosive_Melee", imageCount: 3 }, // 1 w/o custom
-  Flamethrower: { name: "Flamethrower", imageCount: 15 }, // 7 w/o custom
-  Flare_Gun: { name: "Flare_Gun", imageCount: 5 }, // 3 w/o custom
+  Flamethrower: { name: "Flamethrower", imageCount: 17 }, // 7 w/o custom
+  Flare_Gun: { name: "Flare_Gun", imageCount: 6 }, // 3 w/o custom
   Grenade_Launcher: { name: "Grenade_Launcher", imageCount: 6 }, // 4 w/o custom
   Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 8 }, // 6 w/o custom
   Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher", imageCount: 4 }, // 3 w/o custom
@@ -110,20 +110,20 @@ const weaponTypes = { // come back to change up later
   Knife: { name: "Knife", imageCount: 21 }, // Spy Melee; 9 w/o custom
   Medi_Gun: { name: "Medi_Gun", imageCount: 14 }, // 4 w/o custom
 //   Medic_Melee: { name: "Medic_Melee", imageCount: 5 },
-  Melee: { name: "Melee", imageCount: 77 }, // 61 w/o custom
+  Melee: { name: "Melee", imageCount: 79 }, // 61 w/o custom
   Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 3 }, // 2 w/o custom
   Minigun: { name: "Minigun", imageCount: 9 }, // 6 w/o custom
-  Pistol: { name: "Pistol", imageCount: 11 }, // 5 w/o custom
+  Pistol: { name: "Pistol", imageCount: 12 }, // 5 w/o custom
 //   Pybro_Melee: { name: "Pybro_Melee", imageCount: 1 }, // ?
   Revolver: { name: "Revolver", imageCount: 14 }, // 6 w/o custom
-  Rocket_Launcher: { name: "Rocket_Launcher", imageCount: 11 }, // 9 w/o custom
+  Rocket_Launcher: { name: "Rocket_Launcher", imageCount: 13 }, // 9 w/o custom
   Sapper: { name: "Sapper", imageCount: 8 }, // 4 w/o custom
-  Scattergun: { name: "Scattergun", imageCount: 7 }, // 5 w/o custom
+  Scattergun: { name: "Scattergun", imageCount: 8 }, // 5 w/o custom
   Scout_Lunch_Box: { name: "Scout_Lunch_Box", imageCount: 5 }, // 5 w/o custom
-  Shotgun: { name: "Shotgun", imageCount: 12 }, // 7 w/o custom
+  Shotgun: { name: "Shotgun", imageCount: 15 }, // 7 w/o custom
   Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 12 }, // 8 w/o custom
   Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 7 }, // 4 w/o custom
-  Submachine_Gun: { name: "Submachine_Gun", imageCount: 2 }, // 2 w/o custom
+  Submachine_Gun: { name: "Submachine_Gun", imageCount: 3 }, // 2 w/o custom
   Syringe_Gun: { name: "Syringe_Gun", imageCount: 3 }, // 3 w/o custom
   Throwable_AoE: { name: "Throwable_AoE", imageCount: 7 }, // 3 w/o custom
   Throwable_Weapon: { name: "Throwable_Weapon", imageCount: 5 }, // 1 w/o custom
