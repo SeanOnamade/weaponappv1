@@ -86,7 +86,7 @@ function tryLoadWeaponFromUrl() {
 
   generatedWeaponAreaMobile.innerHTML = formatWeaponAsHtml(weapon);
   generatedWeaponAreaDesktop.innerHTML = formatWeaponAsHtml(weapon);
-  document.title = `${weapon.playerClassName} ${weapon.weaponSlotName}`;
+//   document.title = `${weapon.playerClassName} ${weapon.weaponSlotName}`;
 }
 
 // Basic Weapon Types
@@ -1286,6 +1286,11 @@ const weaponEffects = [
     for: ["Medi_Gun"],
     pro: "Without full meter, Alt-Fire to double speed of healing by draining your own health",
     con: "No healing during ÜberCharge",
+  },
+  {
+    for: ["Medi_Gun"],
+    pro: "Can start ÜberCharge early, without full meter",
+    con: "Only the ÜberCharge target is actually ÜberCharged",
   },
   {
     for: ["Medi_Gun"],

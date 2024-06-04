@@ -18,6 +18,109 @@ body {
   vertical-align: middle;
 }
 
+.app-logo {
+    height: 35px;
+    width: 35px;
+    pointer-events: none;
+    animation: app-logo-spin 5s linear infinite;
+  }
+
+.cornered {
+    position: relative;
+}
+
+.app-logo-tr {
+    top: 5px;
+    right: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin-back 5s linear infinite;
+    position: absolute;
+}
+.app-logo-tl {
+    top: 5px;
+    left: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin 5s linear infinite;
+    position: absolute;
+}
+.app-logo-bl {
+    bottom: 5px;
+    left: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin-back 5s linear infinite;
+    position: absolute;
+}
+.app-logo-br {
+    bottom: 5px;
+    right: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin 5s linear infinite;
+    position: absolute;
+}
+
+.head-logo-tr {
+    top: 5px;
+    right: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin 5s linear infinite;
+    position: absolute;
+}
+.head-logo-tl {
+    top: 5px;
+    left: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin-back 5s linear infinite;
+    position: absolute;
+}
+.head-logo-bl {
+    bottom: 5px;
+    left: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin 5s linear infinite;
+    position: absolute;
+}
+.head-logo-br {
+    bottom: 5px;
+    right: 5px;
+    height: 25px;
+    width: 25px;
+    pointer-events: none;
+    animation: app-logo-spin-back 5s linear infinite;
+    position: absolute;
+}
+  
+  @keyframes app-logo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+  } 
+
+  @keyframes app-logo-spin-back {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg);
+      }
+  } 
+
 #generatedWeaponAreaMobile {
   /* Ensure it takes the available space as needed */
   display: flex;
