@@ -278,6 +278,10 @@ div {
   cursor: pointer;
 }
 
+.btn { /* rounded buttons I can't decide */
+    border-radius: 50px;
+}
+
 .btn:hover {
     animation: float 2s ease-in-out infinite;
 }
