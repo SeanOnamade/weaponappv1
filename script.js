@@ -2500,6 +2500,11 @@ document.body.onkeyup = function(e) {
     // if you provide someone the same hash, they can retrieve the weapon
   });
 
+  document.getElementById('changeBackgroundButton').addEventListener('click', function() {
+    const randomBackgroundIndex = Math.floor(Math.random() * 34) + 1;
+    document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;
+  });
+
   document.getElementById('captureButton').addEventListener('click', function() {
     const weaponArea = document.getElementById('generatedWeaponAreaDesktop');
     weaponArea.style.width = "300px";
