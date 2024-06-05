@@ -2500,8 +2500,37 @@ document.body.onkeyup = function(e) {
     // if you provide someone the same hash, they can retrieve the weapon
   });
 
-  document.getElementById('captureButton').addEventListener('click', function() {
+  document.getElementById('captureButtonDesktop').addEventListener('click', function() {
     const weaponArea = document.getElementById('generatedWeaponAreaDesktop');
+    weaponArea.style.width = "300px";
+    html2canvas(weaponArea).then(canvas => {
+        const imageUrl = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imageUrl;
+        downloadLink.download = 'weapon_image.png';
+
+        // downloadLink.click();
+
+        const newWindow = window.open();
+        newWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Weapon Image</title>
+                    </head>
+                    <body>
+                        <img src="${imageUrl}" alt="Weapon Image" width="300px !important"/>
+                    </body>
+                    </html>
+                `);
+
+    }).catch(err => {
+        console.error('Error capturing the image:', err);
+    });
+    weaponArea.style.width = "100%";
+  });
+
+  document.getElementById('captureButtonMobile').addEventListener('click', function() {
+    const weaponArea = document.getElementById('generatedWeaponAreaMobile');
     weaponArea.style.width = "300px";
     html2canvas(weaponArea).then(canvas => {
         const imageUrl = canvas.toDataURL('image/png');
