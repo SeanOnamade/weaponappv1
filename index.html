@@ -12,14 +12,14 @@
     
     <style>
         /* Mobile styles */
-        @media (max-width: 767px) {
+        @media (max-width: 1199px) {
           .desktop-view {
             display: none;
           }
         }
     
         /* Desktop styles */
-        @media (min-width: 768px) {
+        @media (min-width: 1200px) {
           .mobile-view {
             display: none;
           }
@@ -75,7 +75,7 @@
                 <div style="font-weight: bold;" class="col-4">Power Level</div>
                 <div class="col-1 text-center">:</div>
                 <div class="col-5">
-                  <select id="powerLevelSelectMobile" class="form-select">
+                  <select id="powerLevelSelectMobile" class="form-select" style="font-weight: bold;">
                     <option value="-3">Trash</option>
                     <option value="-1">Toy</option>
                     <option value="0" selected>Normal</option>
@@ -89,7 +89,7 @@
               <div style="font-weight: bold;" class="col-4">Extra Stats</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="extraStatsSelectMobile" class="form-select">
+                <select id="extraStatsSelectMobile" class="form-select" style="font-weight: bold;">
                   <option value="1">Few</option>
                   <option style="font-weight: bold;" value="2" selected>Couple</option>
                   <option value="3">Some</option>
@@ -103,7 +103,7 @@
               <div style="font-weight: bold;" class="col-4">Class</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="playerClassSelectMobile" class="form-select">
+                <select id="playerClassSelectMobile" class="form-select" style="font-weight: bold;">
                   <option style="font-weight: bold;" value="0" selected>Any</option>
                   <option value="1">Scout</option>
                   <option value="2">Soldier</option>
@@ -122,7 +122,7 @@
               <div style="font-weight: bold;" class="col-4">Slot</div>
               <div class="col-1 text-center">:</div>
               <div class="col-5">
-                <select id="weaponSlotSelectMobile" class="form-select">
+                <select id="weaponSlotSelectMobile" class="form-select" style="font-weight: bold;">
                   <option style="font-weight: bold;" value="0" selected>Any</option>
                   <option value="1">Primary</option>
                   <option value="2">Secondary</option>
@@ -134,7 +134,7 @@
                 <div style="font-weight: bold;" class="col-4">Weapon Type</div>
                 <div class="col-1 text-center">:</div>
                 <div class="col-5">
-                  <select id="weaponTypeSelectMobile" class="form-select">
+                  <select id="weaponTypeSelectMobile" class="form-select" style="font-weight: bold;">
                     <option style="font-weight: bold;" value="0" selected>Any</option>
                     <option value="Backpack">Backpack</option>
                     <option value="Banner">Banner</option>
@@ -184,7 +184,7 @@
         <div class="col-lg-8 col-md-8 col-sm-8 my-2">
             <div class="px-3 py-1 bg-light d-flex justify-content-center align-items-center">
         <div style="width:100%; justify-content: center !important;" class="col-5 px-3 py-1 bg-light d-flex flex-column justify-content-center">
-          <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;" type="button"
+          <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
             class="btn btn-lg btn-success btn-outline-dark my-1" id="generateBtnMobile">
             Generate! (Space)
           </button>
@@ -239,7 +239,7 @@
                       <div style="font-weight: bold;" class="col-4">Power Level</div>
                       <div class="col-1 text-center">:</div>
                       <div class="col-5">
-                        <select id="powerLevelSelectDesktop" class="form-select">
+                        <select id="powerLevelSelectDesktop" class="form-select" style="font-weight: bold;">
                           <option value="-3">Trash</option>
                           <option value="-1">Toy</option>
                           <option value="0" selected>Normal</option>
@@ -253,7 +253,7 @@
                     <div style="font-weight: bold;" class="col-4">Extra Stats</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="extraStatsSelectDesktop" class="form-select">
+                      <select id="extraStatsSelectDesktop" class="form-select" style="font-weight: bold;">
                         <option value="1">Few</option>
                         <option style="font-weight: bold;" value="2" selected>Couple</option>
                         <option value="3">Some</option>
@@ -267,7 +267,7 @@
                     <div style="font-weight: bold;" class="col-4">Class</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="playerClassSelectDesktop" class="form-select">
+                      <select id="playerClassSelectDesktop" class="form-select" style="font-weight: bold;">
                         <option style="font-weight: bold;" value="0" selected>Any</option>
                         <option value="1">Scout</option>
                         <option value="2">Soldier</option>
@@ -286,7 +286,7 @@
                     <div style="font-weight: bold;" class="col-4">Slot</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="weaponSlotSelectDesktop" class="form-select">
+                      <select id="weaponSlotSelectDesktop" class="form-select" style="font-weight: bold;">
                         <option style="font-weight: bold;" value="0" selected>Any</option>
                         <option value="1">Primary</option>
                         <option value="2">Secondary</option>
@@ -298,7 +298,7 @@
                     <div style="font-weight: bold;" class="col-4">Weapon Type</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
-                      <select id="weaponTypeSelectDesktop" class="form-select">
+                      <select id="weaponTypeSelectDesktop" class="form-select" style="font-weight: bold;">
                         <option style="font-weight: bold;" value="0" selected>Any</option>
                         <option value="Backpack">Backpack</option>
                         <option value="Banner">Banner</option>
@@ -346,8 +346,12 @@
       
               </div>
       
-              <div class="col-5 px-3 py-1 bg-light d-flex flex-column-reverse justify-content-center">
-                <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;" type="button"
+              <div style="justify-content: center !important;" class="col-5 px-3 py-1 bg-light d-flex flex-column-reverse justify-content-center">
+                <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
+                  class="btn btn-sm btn-success btn-outline-dark my-1" id="captureButton">
+                  Capture!
+                </button>
+                <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
                   class="btn btn-lg btn-success btn-outline-dark my-1" id="generateBtnDesktop">
                   Generate! (Space)
                 </button>
@@ -380,6 +384,7 @@
       </div>
 
       <script src="base64.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
       <script src="script.js"></script>
     </body>
 

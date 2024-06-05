@@ -132,8 +132,21 @@ body {
   /* Ensure it takes the available space as needed */
   display: flex;
   justify-content: center;
+  height: 100%;
   width: 100%;
 }
+
+/* @media (min-width: 1203px) {
+    #generatedWeaponAreaDesktop {
+      width: 300px;
+    }
+  } */
+
+/* @media (max-width: 1190px) {
+    #classIcon {
+      display: none;
+    }
+  } */
 
 #generateBtnMobile {
   /* width: 300px; */
@@ -153,7 +166,7 @@ body {
   background-color: #24201B;
   padding: 10px;
   border-radius: 10px;
-  max-width: 300px;
+  width: 300px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px
 }
 
