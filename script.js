@@ -2515,7 +2515,7 @@ document.body.onkeyup = function(e) {
     let randomBackgroundIndex;
     do {
         randomBackgroundIndex = Math.floor(Math.random() * 33) + 1; // amount of wallpapers available
-    } while (randomBackgroundIndex === lastIndex);
+    } while (randomBackgroundIndex === lastIndex); // prevent duplicates
     lastIndex = randomBackgroundIndex;
     console.log(`Background changed to wallpaper_${randomBackgroundIndex}`);
     // document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;

@@ -279,3 +279,23 @@ div {
   cursor: pointer;
 }
 
+.btn:hover {
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+        -webkit-filter: drop-shadow(0 3px 6px rgb(80, 80, 80));
+    }
+    50% {
+        transform: translateY(1px);
+        -webkit-filter: drop-shadow(0 5px 8px rgb(68, 136, 158));
+    }
+    100% {
+        transform: translateY(0px); 
+        -webkit-filter: drop-shadow(0 3px 6px rgb(80, 80, 80));
+    }
+}
+
+
