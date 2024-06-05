@@ -647,7 +647,7 @@ const weaponEffects = [
     for: weaponTypeGroups.AllScout,
     classLimit: ["Scout"],
     pro: "+<value>% sentry damage resistance on wearer",
-    con: "-<value>% sentry damage vulnerability on wearer",
+    con: "+<value>% sentry damage vulnerability on wearer",
     valuePro: 50,
     valueCon: 30,
   },
@@ -1913,7 +1913,7 @@ const weaponEffects = [
         i !== "Stickybomb_Launcher"
     ),
     pro: "Alt-Fire halves user's health for a guaranteed minicrit",
-    con: "Alt-Fire reduces user's health to 1 for a guaranteed minicrit",
+    con: "Cannot deal crits or minicrits below 25% health",
   },
   {
     for: weaponTypeGroups.AllSubstantialHit.filter(

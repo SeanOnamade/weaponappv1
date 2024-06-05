@@ -6,7 +6,7 @@ body {
   height: 100%;
   width: 100%;
   /* background-color: #5e5e5e; */
-  background: url('../images/wallpaper_8.jpg') no-repeat center center fixed; /* Best: 6 8 11-16 21 28 */
+  background: url('../images/wallpaper_8.jpg') no-repeat center center fixed; /* Best: 6 8 11-16 18 21 28 */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -55,7 +55,18 @@ body {
     pointer-events: none;
     animation: app-logo-spin-back 5s linear infinite;
     position: absolute;
+    /* filter: drop-shadow(2px 2px); */
 }
+
+/* .shadow {
+    top: 7px;
+    right: 3px;
+    animation-play-state: paused;
+    opacity: 0.3;
+    z-index: -1;
+    filter: brightness(0);
+} */
+
 .app-logo-tl {
     top: 5px;
     left: 5px;
