@@ -2500,9 +2500,32 @@ document.body.onkeyup = function(e) {
     // if you provide someone the same hash, they can retrieve the weapon
   });
 
-  document.getElementById('changeBackgroundButton').addEventListener('click', function() {
-    const randomBackgroundIndex = Math.floor(Math.random() * 34) + 1;
-    document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;
+  
+  
+  window.onhashchange = function() {
+    tryLoadWeaponFromUrl();
+  };
+
+  tryLoadWeaponFromUrl(); //* tries like right away in the script
+
+  let lastIndex = 28; // set to whatever I set wallpaper_{num} to
+  
+  document.getElementById('changeBackgroundButton').addEventListener('click', function(e) {
+    e.preventDefault();
+    let randomBackgroundIndex;
+    do {
+        randomBackgroundIndex = Math.floor(Math.random() * 33) + 1; // amount of wallpapers available
+    } while (randomBackgroundIndex === lastIndex);
+    lastIndex = randomBackgroundIndex;
+    console.log(`Background changed to wallpaper_${randomBackgroundIndex}`);
+    // document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;
+    const imgUrl = `../images/wallpaper_${randomBackgroundIndex}.jpg`;
+    const img = new Image();
+    img.onload = function() { // we must load the image; otherwise, simply setting it causes the original to flicker
+        document.body.style.backgroundImage = `url(${imgUrl})`;
+    }
+    img.src = imgUrl;
+    
   });
 
   document.getElementById('captureButton').addEventListener('click', function() {
@@ -2533,12 +2556,6 @@ document.body.onkeyup = function(e) {
     });
     weaponArea.style.width = "100%";
   });
-  
-  window.onhashchange = function() {
-    tryLoadWeaponFromUrl();
-  };
-
-  tryLoadWeaponFromUrl(); //* tries like right away in the script
 
 
 function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponTypeChosen) {
