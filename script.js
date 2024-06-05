@@ -110,9 +110,9 @@ const weaponTypes = { // come back to change up later
   Knife: { name: "Knife", imageCount: 21 }, // Spy Melee; 9 w/o custom
   Medi_Gun: { name: "Medi_Gun", imageCount: 14 }, // 4 w/o custom
 //   Medic_Melee: { name: "Medic_Melee", imageCount: 5 },
-  Melee: { name: "Melee", imageCount: 79 }, // 61 w/o custom
+  Melee: { name: "Melee", imageCount: 80 }, // 61 w/o custom
   Melee_with_Projectile: { name: "Melee_with_Projectile", imageCount: 3 }, // 2 w/o custom
-  Minigun: { name: "Minigun", imageCount: 9 }, // 6 w/o custom
+  Minigun: { name: "Minigun", imageCount: 11 }, // 6 w/o custom
   Pistol: { name: "Pistol", imageCount: 12 }, // 5 w/o custom
 //   Pybro_Melee: { name: "Pybro_Melee", imageCount: 1 }, // ?
   Revolver: { name: "Revolver", imageCount: 14 }, // 6 w/o custom
@@ -120,14 +120,14 @@ const weaponTypes = { // come back to change up later
   Sapper: { name: "Sapper", imageCount: 8 }, // 4 w/o custom
   Scattergun: { name: "Scattergun", imageCount: 8 }, // 5 w/o custom
   Scout_Lunch_Box: { name: "Scout_Lunch_Box", imageCount: 5 }, // 5 w/o custom
-  Shotgun: { name: "Shotgun", imageCount: 15 }, // 7 w/o custom
+  Shotgun: { name: "Shotgun", imageCount: 16 }, // 7 w/o custom
   Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 12 }, // 8 w/o custom
-  Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 7 }, // 4 w/o custom
+  Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 9 }, // 4 w/o custom
   Submachine_Gun: { name: "Submachine_Gun", imageCount: 3 }, // 2 w/o custom
   Syringe_Gun: { name: "Syringe_Gun", imageCount: 3 }, // 3 w/o custom
   Throwable_AoE: { name: "Throwable_AoE", imageCount: 7 }, // 3 w/o custom
   Throwable_Weapon: { name: "Throwable_Weapon", imageCount: 5 }, // 1 w/o custom
-  Wrench: { name: "Wrench", imageCount: 6 }, // 5 w/o custom
+  Wrench: { name: "Wrench", imageCount: 7 }, // 5 w/o custom
   // Sniper_Shield: { name: "Sniper_Shield", needsBoost: 2, imageCount: 1 }, // get rid of?
   // Surprise: { name: "Surprise", imageCount: 2 }, // mine
 };
