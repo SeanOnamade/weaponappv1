@@ -100,11 +100,11 @@ const weaponTypes = { // come back to change up later
   Demoknight_Boots: { name: "Demoknight_Boots", needsBoost: 1, imageCount: 3 }, // 2 w/o custom
   Demoknight_Melee: { name: "Demoknight_Melee", imageCount: 13 }, // 9 w/o custom
   Demoknight_Shield: { name: "Demoknight_Shield", imageCount: 4 }, // 3 w/o custom
-  Explosive_Melee: { name: "Explosive_Melee", imageCount: 3 }, // 1 w/o custom
+  Explosive_Melee: { name: "Explosive_Melee", imageCount: 4 }, // 1 w/o custom
   Flamethrower: { name: "Flamethrower", imageCount: 19 }, // 7 w/o custom
   Flare_Gun: { name: "Flare_Gun", imageCount: 7 }, // 3 w/o custom
   Grenade_Launcher: { name: "Grenade_Launcher", imageCount: 8 }, // 4 w/o custom
-  Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 8 }, // 6 w/o custom
+  Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 17 }, // 6 w/o custom
   Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher", imageCount: 4 }, // 3 w/o custom
   Invis_Watch: { name: "Invis_Watch", imageCount: 6 }, // 5 w/o custom
   Knife: { name: "Knife", imageCount: 24 }, // Spy Melee; 9 w/o custom

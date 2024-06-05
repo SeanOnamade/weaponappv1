@@ -5,8 +5,27 @@ html,
 body {
   height: 100%;
   width: 100%;
-  background-color: #5e5e5e;
+  /* background-color: #5e5e5e; */
+  background: url('../images/wallpaper_15.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
 }
+
+img .bg {
+    /* The image used */
+    background-image: url(images/wallpaper_one.jpg);
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
 html {
   display: table;

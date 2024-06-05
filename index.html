@@ -39,6 +39,7 @@
 <div class="text-center container">
 
   <body>
+    <!-- <img src="images\wallpaper_1.jpg" class="bg"> -->
     <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
       class="card my-2 py-2 cornered">
             <img src="/images/logotwo.png" class="head-logo-tr">
@@ -347,14 +348,17 @@
               </div>
       
               <div style="justify-content: center !important;" class="col-5 px-3 py-1 bg-light d-flex flex-column-reverse justify-content-center">
-                <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
-                  class="btn btn-sm btn-success btn-outline-dark my-1" id="captureButton">
-                  Capture!
-                </button>
-                <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
-                  class="btn btn-lg btn-success btn-outline-dark my-1" id="generateBtnDesktop">
-                  Generate! (Space)
-                </button>
+                <div class="d-flex justify-content-between">
+                  <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
+                    class="btn btn-sm btn-success btn-outline-dark my-1 flex-fill mx-1" id="generateBtnDesktop">
+                    Generate! (Space)
+                  </button>
+                  <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
+                    class="btn btn-sm btn-success btn-outline-dark my-1 flex-fill mx-1" id="captureButton">
+                    Capture!
+                  </button>
+                </div>
+              
       
                 <div id="generatedWeaponAreaDesktop" class="px-3 py-3 justify-center">
                   <div id="weapon" style="position: relative; padding: 10px; width: 300px">
