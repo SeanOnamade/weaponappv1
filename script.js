@@ -92,7 +92,7 @@ function tryLoadWeaponFromUrl() {
 // Basic Weapon Types
 const weaponTypes = { // come back to change up later
   // needsBoost typically indicates level of enhancement required for the weapon type to perform optimally.
-  Backpack: { name: "Backpack", needsBoost: 1, imageCount: 5 }, // 3 w/o custom
+  Backpack: { name: "Backpack", needsBoost: 1, imageCount: 31 }, // 3 w/o custom
   Banner: { name: "Banner", imageCount: 3 }, // 3 w/o custom
   Boots: { name: "Boots", needsBoost: 1, imageCount: 6 }, // 2 w/o custom
   Bow: { name: "Bow", imageCount: 3 }, // 2 w/o custom
