@@ -40,15 +40,15 @@
 
   <body>
     <!-- <img src="images\wallpaper_1.jpg" class="bg"> -->
-    <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+    <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; backdrop-filter: blur( 1.5px );"
       class="card my-2 py-2 cornered">
             <img src="/images/logotwo.png" class="head-logo-tr">
             <img src="/images/logotwo.png" class="head-logo-tl">
             <img src="/images/logotwo.png" class="head-logo-br">
             <img src="/images/logotwo.png" class="head-logo-bl">
       <!-- <img src="/tf2-weapon-generator/tf2.jpg" class="card-img-top" alt="tf2-heroes"> -->
-      <h1 style="font-weight: bold;" class="card-title">TF2 Weapon Generator</h1>
-      <p style="font-weight: bold; color: #d1d1d1;" class="card-text">
+      <h1 style="font-weight: bold; text-shadow: 1px 1px 2px rgb(168, 168, 168); color:rgb(30, 30, 30);" class="card-title">TF2 Weapon Generator</h1>
+      <p style="font-weight: bold; color: #ededed; text-shadow: 1px 1px 2px black;" class="card-text">
         Created by Aleksandar Dinkov
         <br>
         Built upon by Sean Onamade
@@ -77,11 +77,11 @@
                 <div class="col-1 text-center">:</div>
                 <div class="col-5">
                   <select id="powerLevelSelectMobile" class="form-select" style="font-weight: bold;">
-                    <option value="-3">Trash</option>
-                    <option value="-1">Toy</option>
-                    <option value="0" selected>Normal</option>
-                    <option value="1">OP</option>
-                    <option value="3">God</option>
+                    <option value="-3">Dying Spree</option>
+                    <option value="-1">Dominate</option>
+                    <option value="0" selected>Stoppable</option>
+                    <option value="1">Godlike</option>
+                    <option value="3">SAXTON HAAAALE</option>
                   </select>
                 </div>
               </div>
@@ -183,7 +183,7 @@
         </div>
 
         <div class="col-lg-8 col-md-8 col-sm-8 my-2">
-            <div class="px-3 py-1 bg-light d-flex justify-content-center align-items-center">
+            <div class="px-3 py-1 d-flex justify-content-center align-items-center">
         <div style="width:100%; justify-content: center !important;" class="col-5 px-3 py-1 bg-light d-flex flex-column justify-content-center">
           <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
             class="btn btn-lg btn-success btn-outline-dark my-1" id="generateBtnMobile">
@@ -223,7 +223,7 @@
 
         <div class="row justify-content-around">
 
-            <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+            <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; backdrop-filter: blur( 1.5px )"
               class="col-8 px-3 py-1 bg-light d-flex justify-content-center container-fluid my-2 align-items-center cornered">
               <img src="/images/logotwo.png" class="app-logo-tr">
               <img src="/images/logotwo.png" class="app-logo-tl">
@@ -232,26 +232,26 @@
 
               <div style="margin-bottom: 50px; width: 350px; margin-top: 10px;">
                 <!-- <img src="/images/logotwo.png" class="app-logo"> -->
-                <h3 style="font-weight: bold;" class="title mb-3">Settings:</h3>
+                <h3 style="font-weight: bold; text-shadow: 1px 1px 2px rgb(78, 78, 78);" class="title mb-3">Settings:</h3>
       
                 <div style="transform: translateX(15px);">
     
                   <div class="row align-items-center mb-1">
-                      <div style="font-weight: bold;" class="col-4">Power Level</div>
+                      <div style="font-weight: bold; text-shadow: 1px 1px 2px rgb(87, 87, 87);" class="col-4">Power Level</div>
                       <div class="col-1 text-center">:</div>
                       <div class="col-5">
                         <select id="powerLevelSelectDesktop" class="form-select" style="font-weight: bold;">
-                          <option value="-3">Trash</option>
-                          <option value="-1">Toy</option>
-                          <option value="0" selected>Normal</option>
-                          <option value="1">OP</option>
-                          <option value="3">God</option>
+                          <option value="-3">Dying Spree</option>
+                          <option value="-1">Dominated</option>
+                          <option value="0" selected>Stoppable</option>
+                          <option value="1">Godlike</option>
+                          <option value="3">SAXTON HAAAALE</option>
                         </select>
                       </div>
                     </div>
       
                   <div class="row align-items-center mb-1 mt-2">
-                    <div style="font-weight: bold;" class="col-4">Extra Stats</div>
+                    <div style="font-weight: bold; text-shadow: 1px 1px 2px rgb(87, 87, 87)" class="col-4">Extra Stats</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
                       <select id="extraStatsSelectDesktop" class="form-select" style="font-weight: bold;">
@@ -265,7 +265,7 @@
                   </div>
       
                   <div class="row align-items-center mb-1 mt-2">
-                    <div style="font-weight: bold;" class="col-4">Class</div>
+                    <div style="font-weight: bold; text-shadow: 1px 1px 2px rgb(87, 87, 87)" class="col-4">Class</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
                       <select id="playerClassSelectDesktop" class="form-select" style="font-weight: bold;">
@@ -284,7 +284,7 @@
                   </div>
       
                   <div class="row align-items-center mb-1 mt-2">
-                    <div style="font-weight: bold;" class="col-4">Slot</div>
+                    <div style="font-weight: bold; text-shadow: 1px 1px 2px rgb(87, 87, 87)" class="col-4">Slot</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
                       <select id="weaponSlotSelectDesktop" class="form-select" style="font-weight: bold;">
@@ -296,7 +296,7 @@
                     </div>
                   </div>
                   <div class="row align-items-center mt-1"> <!-- used mt-1 instead of mb-2 because it works idk -->
-                    <div style="font-weight: bold;" class="col-4">Weapon Type</div>
+                    <div style="font-weight: bold; text-shadow: 1px 1px 2px rgb(87, 87, 87)" class="col-4">Weapon Type</div>
                     <div class="col-1 text-center">:</div>
                     <div class="col-5">
                       <select id="weaponTypeSelectDesktop" class="form-select" style="font-weight: bold;">
@@ -347,11 +347,11 @@
       
               </div>
       
-              <div style="justify-content: center !important;" class="col-5 px-3 py-1 bg-light d-flex flex-column-reverse justify-content-center">
+              <div style="justify-content: center !important;" class="col-5 px-3 py-1 d-flex flex-column-reverse justify-content-center">
                 <div class="d-flex justify-content-between">
                     <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
                       class="btn btn-sm btn-success btn-outline-dark my-1 flex-fill mx-1" id="captureButton">
-                      Capture!
+                      Capture Image!
                     </button>
                     <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
                       class="btn btn-sm btn-success btn-outline-dark my-1 flex-fill mx-1" id="changeBackgroundButton">

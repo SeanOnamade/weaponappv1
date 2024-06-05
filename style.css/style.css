@@ -11,7 +11,6 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
 }
 
 img .bg {
@@ -267,11 +266,11 @@ div {
 }
 
 .card {
-  background-color: #949494;
+  background-color: #94949486;
 }
 
 .bg-light {
-  background-color: #949494 !important;
+  background-color: #949494a8 !important; /*#949494*/
 }
 
 .form-select:hover {

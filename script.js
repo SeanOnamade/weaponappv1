@@ -1840,7 +1840,7 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.AllProjectile,
-    pro: "Effects and damage scale up to +<value>% based on distance travelled",
+    pro: "Effects and damage scale up to +<value>% based on distance travelled", // wait this shouldn't be a thing LMFAO fix
     con: "Effects and damage decrease down to -<value>% based on distance travelled",
     valuePro: 50,
     valueCon: 50,
