@@ -2540,7 +2540,7 @@ document.body.onkeyup = function(e) {
 
         // downloadLink.click();
 
-        const newWindow = window.open();
+        const newWindow = window.open('', '_blank');
         newWindow.document.write(`
                     <html>
                     <head>
