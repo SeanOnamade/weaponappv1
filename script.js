@@ -2451,6 +2451,12 @@ document.body.onkeyup = function(e) {
         weaponTypeChosen || "Any")
       window.location.hash = Base64.encode(JSON.stringify(weapon));
     }
+    else if (e.key === "ArrowRight") {
+      changeBackgroundButton.click();
+    }
+    else if (e.key === "ArrowLeft") {
+      captureButton.click();
+    }
   }
   
   generateBtnMobile.addEventListener("click", () => {
@@ -2494,6 +2500,7 @@ document.body.onkeyup = function(e) {
     );
   
     window.location.hash = Base64.encode(JSON.stringify(weapon));
+    generateBtnDesktop.blur();
     // first, stringify the weapon stats into a json string
     // then, encode in base64
     // finally, add it to the window I think, useful for preserving state
@@ -2510,7 +2517,9 @@ document.body.onkeyup = function(e) {
 
   let lastIndex = 28; // set to whatever I set wallpaper_{num} to
   
-  document.getElementById('changeBackgroundButton').addEventListener('click', function(e) {
+  document.getElementById('changeBackgroundButton').addEventListener('click', backGroundChange);
+  
+  function backGroundChange(e) {
     e.preventDefault();
     let randomBackgroundIndex;
     do {
@@ -2525,8 +2534,8 @@ document.body.onkeyup = function(e) {
         document.body.style.backgroundImage = `url(${imgUrl})`;
     }
     img.src = imgUrl;
-    
-  });
+    changeBackgroundButton.blur();
+  };
 
   document.getElementById('captureButton').addEventListener('click', function() {
     const weaponArea = document.getElementById('generatedWeaponAreaDesktop');
@@ -2555,6 +2564,7 @@ document.body.onkeyup = function(e) {
         console.error('Error capturing the image:', err);
     });
     weaponArea.style.width = "100%";
+    captureButton.blur();
   });
 
 

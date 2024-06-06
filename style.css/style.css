@@ -181,13 +181,13 @@ body {
 #generateBtnMobile {
   /* width: 300px; */
     max-width: 100%;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
 }
 
 #generateBtnDesktop {
   /* width: 300px; */
     max-width: 100%;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
 }
 
 
@@ -292,6 +292,8 @@ div {
 
 .btn { /* rounded buttons I can't decide */
     border-radius: 50px;
+    transition: all 0.15s ease;
+    border: none;
 }
 
 .btn:hover {
