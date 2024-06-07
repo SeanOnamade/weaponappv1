@@ -167,6 +167,7 @@ Here are the significant changes I made from the original, which was created by 
     - [X] Removed Pybro Melee and Medic Melee, changing their stats to be class-specific 
 
 See the [open issues](https://github.com/SeanOnamade/repo_name/issues) for a full list of proposed features (and known issues).
+![Gif Demo](https://github.com/SeanOnamade/weaponappv1/blob/master/appdemo.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
