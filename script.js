@@ -123,7 +123,7 @@ const weaponTypes = { // come back to change up later
   Shotgun: { name: "Shotgun", imageCount: 16 }, // 7 w/o custom
   Sniper_Rifle: { name: "Sniper_Rifle", imageCount: 14 }, // 8 w/o custom
   Stickybomb_Launcher: { name: "Stickybomb_Launcher", imageCount: 9 }, // 4 w/o custom
-  Submachine_Gun: { name: "Submachine_Gun", imageCount: 3 }, // 2 w/o custom
+  Submachine_Gun: { name: "Submachine_Gun", imageCount: 2 }, // 2 w/o custom
   Syringe_Gun: { name: "Syringe_Gun", imageCount: 4 }, // 3 w/o custom
   Throwable_AoE: { name: "Throwable_AoE", imageCount: 7 }, // 3 w/o custom
   Throwable_Weapon: { name: "Throwable_Weapon", imageCount: 6 }, // 1 w/o custom
