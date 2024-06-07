@@ -1960,7 +1960,7 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.AllSubstantialHit,
-    pro: "On Kill: Reset health to what it was before the last 2 instances of damage, if higher than present health",
+    pro: "On Kill: Reset health to what it was before the last 3 instances of damage, if higher than present health",
     con: "On Kill: Any overheal is removed",
   },
   //// AllWithAmmo ////
@@ -2451,10 +2451,10 @@ document.body.onkeyup = function(e) {
         weaponTypeChosen || "Any")
       window.location.hash = Base64.encode(JSON.stringify(weapon));
     }
-    else if (e.key === "ArrowRight") {
+    else if (e.key === "ArrowUp") {
       changeBackgroundButton.click();
     }
-    else if (e.key === "ArrowLeft") {
+    else if (e.key === "ArrowDown") {
       captureButton.click();
     }
   }
