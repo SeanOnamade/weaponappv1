@@ -115,6 +115,8 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+![Screenshot](https://github.com/SeanOnamade/weaponappv1/blob/master/Screenshot_2.png)
+
 Use this app to generate custom weapon ideas for the first-person shooter Team Fortress 2!
 - Hit **_"Generate"_** to generate a weapon idea that matches the settings chosen
   - Alter the weapon's power level to whatever you see fit
@@ -167,6 +169,13 @@ Here are the significant changes I made from the original, which was created by 
 See the [open issues](https://github.com/SeanOnamade/repo_name/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+![Screenshot](https://github.com/SeanOnamade/weaponappv1/blob/master/Screenshot_3.png)
+![Screenshot](https://github.com/SeanOnamade/weaponappv1/blob/master/Screenshot_5.png)
+![Screenshot](https://github.com/SeanOnamade/weaponappv1/blob/master/Screenshot_6.png)
+<p align="center">
+<img src="https://github.com/SeanOnamade/weaponappv1/blob/master/Screenshot_4.png" width="350" />
+</p>
 
 
 <!-- CONTRIBUTING -->
