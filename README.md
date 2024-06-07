@@ -79,7 +79,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Screenshot](https://github.com/SeanOnamade/weather/blob/main/images/Screenshot_1.png)
+![Screenshot](https://github.com/SeanOnamade/weaponappv1/blob/master/Screenshot_1.png)
 
 This is a generator for Team Fortress 2 weapon concepts. Users can go to the page and generate ideas for in-game [weapons](https://wiki.teamfortress.com/wiki/Weapons), which are used for combat. The ideas themselves can be modded in by creators, or shared with friends.
 This base product was initially created by [Siko91](https://github.com/Siko91/tf2-weapon-generator).
