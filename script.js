@@ -107,7 +107,7 @@ const weaponTypes = { // come back to change up later
   Heavy_Lunch_Box: { name: "Heavy_Lunch_Box", imageCount: 17 }, // 6 w/o custom
   Indivisible_Particle_Smasher: { name: "Indivisible_Particle_Smasher", imageCount: 4 }, // 3 w/o custom
   Invis_Watch: { name: "Invis_Watch", imageCount: 6 }, // 5 w/o custom
-  Knife: { name: "Knife", imageCount: 24 }, // Spy Melee; 9 w/o custom
+  Knife: { name: "Knife", imageCount: 25 }, // Spy Melee; 9 w/o custom
   Medi_Gun: { name: "Medi_Gun", imageCount: 15 }, // 4 w/o custom
 //   Medic_Melee: { name: "Medic_Melee", imageCount: 5 },
   Melee: { name: "Melee", imageCount: 86 }, // 61 w/o custom
