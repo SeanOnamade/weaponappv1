@@ -2457,6 +2457,11 @@ document.body.onkeyup = function(e) {
     else if (e.key === "ArrowDown") {
       captureButton.click();
     }
+    // else if (e.key === "Enter") { // reload functionality to get rid of the hash; implement in a button click perhaps
+    //   window.location.hash = "";
+    //   history.replaceState(null, null, ' ');
+    //   location.reload();
+    // }
   }
   
   generateBtnMobile.addEventListener("click", () => {
