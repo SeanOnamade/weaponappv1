@@ -765,46 +765,39 @@ const weaponEffects = [
     valuePro: 50,
     valueCon: 50,
   },
-  { // mine
+  {
     for: weaponTypeGroups.Flamethrower,
     pro: "Twice the airblast force",
     con: "No compression blast",
   },
-  { // mine
+  {
     for: weaponTypeGroups.Flamethrower,
     pro: "Reflected projectiles can crit buildings",
     con: "Deals no damage against buildings",
   },
-//   { // mine
-//     for: weaponTypeGroups.Flamethrower,
-//     pro: "+<value>% more flame distance",
-//     con: "-<value>% less flame distance",
-//     valuePro: 50,
-//     valueCon: 30,
-//   },
-  { // mine
+  {
     for: weaponTypeGroups.Flamethrower,
     pro: "+2 ammo gained per point of damage/afterburn",
     con: "+50% ammo consumption rate",
   },
-  { // mine
+  {
     for: weaponTypeGroups.Flamethrower,
     pro: "Airblast can now be charged, which will push enemies further",
     con: "Airblast can no longer push enemies or projectiles",
   },
-  { // mine
+  {
     for: weaponTypeGroups.Flamethrower,
     pro: "Airblast can now be charged, causing a small exposion when fully charged", // these two are neutralish!!!
     con: "Airblast destroys projectiles at the cost of twice the ammo consumed",
   },
-  { // mine
+  {
     for: weaponTypeGroups.Flamethrower,
     pro: "-<value>% airblast cost",
     con: "+<value>% airblast cost",
     valuePro: 50,
     valueCon: 30,
   },
-  { // mine
+  {
     for: weaponTypeGroups.Melee,
     classLimit: ["Pyro"],
     pro: "Hitting friendly buildings helps them deploy faster",
@@ -1263,11 +1256,6 @@ const weaponEffects = [
     valuePro: 15,
     valueCon: 30,
   },
-  // {
-  //   for: ["Medi_Gun"],
-  //   pro: "ÜberCharge grants 100% mini-critical chance",
-  //   con: "+10% damage vulnerability while ÜberCharged",
-  // },
   {
     for: ["Medi_Gun"],
     pro: "Each kill your patient gets increases ÜberCharge by 10% (which can prolong Übers)",
@@ -1392,20 +1380,6 @@ const weaponEffects = [
     valuePro: 5,
     valueCon: 5,
   },
-//   {
-//     for: ["Medic_Melee"],
-//     pro: "On Hit: <value> ÜberCharge added",
-//     con: "On Hit: <value> ÜberCharge lost",
-//     valuePro: 20,
-//     valueCon: 10,
-//   },
-//   {
-//     for: ["Medic_Melee"],
-//     pro: "Enemies near you get poisoned, taking <value> damage per second for 5 seconds",
-//     con: "Getting hit by a melee poisons you, <value> damage per second for 5 seconds",
-//     valuePro: 5,
-//     valueCon: 5,
-//   },
   //// AllSniper ////
   {
     for: weaponTypeGroups.AllSniper,
@@ -2497,120 +2471,113 @@ document.body.onkeyup = function(e) {
     // }
   }
   
-  generateBtnMobile.addEventListener("click", () => {
-    // console.log("Weapon Generating...");
-    const playerClass = playerClassSelectMobile.value;
-    const weaponSlot = weaponSlotSelectMobile.value;
-    const powerLevel = powerLevelSelectMobile.value;
-    const extraStats = extraStatsSelectMobile.value;
-    const weaponTypeChosen = weaponTypeSelectMobile.value;
+generateBtnMobile.addEventListener("click", () => {
+  const playerClass = playerClassSelectMobile.value;
+  const weaponSlot = weaponSlotSelectMobile.value;
+  const powerLevel = powerLevelSelectMobile.value;
+  const extraStats = extraStatsSelectMobile.value;
+  const weaponTypeChosen = weaponTypeSelectMobile.value;
+
+  const weapon = generateWeapon(
+    parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
+    parseInt(weaponSlot) || getRandom(1, 3),
+    parseInt(powerLevel),
+    parseInt(extraStats),
+    weaponTypeChosen || "Any"
+  );
+
+  window.location.hash = Base64.encode(JSON.stringify(weapon));
+});
   
-    const weapon = generateWeapon(
-      parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
-      parseInt(weaponSlot) || getRandom(1, 3),
-      parseInt(powerLevel),
-      parseInt(extraStats),
-      weaponTypeChosen || "Any"
-    );
+generateBtnDesktop.addEventListener("click", () => {
+  // console.log("Weapon Generating...");
+  const playerClass = playerClassSelectDesktop.value;
+  const weaponSlot = weaponSlotSelectDesktop.value;
+  const powerLevel = powerLevelSelectDesktop.value;
+  const extraStats = extraStatsSelectDesktop.value;
+  const weaponTypeChosen = weaponTypeSelectDesktop.value;
+
+  const weapon = generateWeapon(
+    parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
+    parseInt(weaponSlot) || getRandom(1, 3),
+    parseInt(powerLevel),
+    parseInt(extraStats),
+    weaponTypeChosen || "Any"
+  );
+
+  window.location.hash = Base64.encode(JSON.stringify(weapon));
+  generateBtnDesktop.blur();
+  // first, stringify the weapon stats into a json string
+  // then, encode in base64
+  // finally, add it to the window I think, useful for preserving state
+  // if you provide someone the same hash, they can retrieve the weapon
+});
+
   
-    window.location.hash = Base64.encode(JSON.stringify(weapon));
-    // first, stringify the weapon stats into a json string
-    // then, encode in base64
-    // finally, add it to the window I think, useful for preserving state
-    // if you provide someone the same hash, they can retrieve the weapon
+window.onhashchange = function() {
+  tryLoadWeaponFromUrl();
+};
+
+tryLoadWeaponFromUrl(); //* tries like right away in the script
+
+let lastIndex = 28; // set to whatever I set wallpaper_{num} to
+
+document.getElementById('changeBackgroundButton').addEventListener('click', backGroundChange);
+
+function backGroundChange(e) {
+  e.preventDefault();
+  let randomBackgroundIndex;
+  do {
+      randomBackgroundIndex = Math.floor(Math.random() * 33) + 1; // amount of wallpapers available
+  } while (randomBackgroundIndex === lastIndex); // prevent duplicates
+  lastIndex = randomBackgroundIndex;
+  // console.log(`Background changed to wallpaper_${randomBackgroundIndex}`);
+  // document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;
+  const imgUrl = `../images/wallpaper_${randomBackgroundIndex}.jpg`;
+  const img = new Image();
+  img.onload = function() { // we must load the image; otherwise, simply setting it causes the original to flicker
+      document.body.style.backgroundImage = `url(${imgUrl})`;
+  }
+  img.src = imgUrl;
+  changeBackgroundButton.blur();
+};
+
+document.getElementById('captureButton').addEventListener('click', function() {
+  // console.log(`Capture requested`);
+  const weaponArea = document.getElementById('generatedWeaponAreaDesktop');
+  weaponArea.style.width = "300px";
+  html2canvas(weaponArea).then(canvas => {
+      const imageUrl = canvas.toDataURL('image/png');
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageUrl;
+      downloadLink.download = 'weapon_image.png';
+      // downloadLink.click();
+
+      const newWindow = window.open();
+      newWindow.document.write(`
+                  <html>
+                  <head>
+                      <title>Weapon Image</title>
+                  </head>
+                  <body>
+                      <img src="${imageUrl}" alt="Weapon Image" width="300px !important"/>
+                  </body>
+                  </html>
+              `);
+
+  }).catch(err => {
+      console.error('Error capturing the image:', err);
   });
-  
-  generateBtnDesktop.addEventListener("click", () => {
-    const playerClass = playerClassSelectDesktop.value;
-    const weaponSlot = weaponSlotSelectDesktop.value;
-    const powerLevel = powerLevelSelectDesktop.value;
-    const extraStats = extraStatsSelectDesktop.value;
-    const weaponTypeChosen = weaponTypeSelectDesktop.value;
-  
-    const weapon = generateWeapon(
-      parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
-      parseInt(weaponSlot) || getRandom(1, 3),
-      parseInt(powerLevel),
-      parseInt(extraStats),
-      weaponTypeChosen || "Any"
-    );
-  
-    window.location.hash = Base64.encode(JSON.stringify(weapon));
-    generateBtnDesktop.blur();
-    // first, stringify the weapon stats into a json string
-    // then, encode in base64
-    // finally, add it to the window I think, useful for preserving state
-    // if you provide someone the same hash, they can retrieve the weapon
-  });
-
-  
-  
-  window.onhashchange = function() {
-    tryLoadWeaponFromUrl();
-  };
-
-  tryLoadWeaponFromUrl(); //* tries like right away in the script
-
-  let lastIndex = 28; // set to whatever I set wallpaper_{num} to
-  
-  document.getElementById('changeBackgroundButton').addEventListener('click', backGroundChange);
-  
-  function backGroundChange(e) {
-    e.preventDefault();
-    let randomBackgroundIndex;
-    do {
-        randomBackgroundIndex = Math.floor(Math.random() * 33) + 1; // amount of wallpapers available
-    } while (randomBackgroundIndex === lastIndex); // prevent duplicates
-    lastIndex = randomBackgroundIndex;
-    // console.log(`Background changed to wallpaper_${randomBackgroundIndex}`);
-    // document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;
-    const imgUrl = `../images/wallpaper_${randomBackgroundIndex}.jpg`;
-    const img = new Image();
-    img.onload = function() { // we must load the image; otherwise, simply setting it causes the original to flicker
-        document.body.style.backgroundImage = `url(${imgUrl})`;
-    }
-    img.src = imgUrl;
-    changeBackgroundButton.blur();
-  };
-
-  document.getElementById('captureButton').addEventListener('click', function() {
-    // console.log(`Capture requested`);
-    const weaponArea = document.getElementById('generatedWeaponAreaDesktop');
-    weaponArea.style.width = "300px";
-    html2canvas(weaponArea).then(canvas => {
-        const imageUrl = canvas.toDataURL('image/png');
-        const downloadLink = document.createElement('a');
-        downloadLink.href = imageUrl;
-        downloadLink.download = 'weapon_image.png';
-
-        // downloadLink.click();
-
-        const newWindow = window.open();
-        newWindow.document.write(`
-                    <html>
-                    <head>
-                        <title>Weapon Image</title>
-                    </head>
-                    <body>
-                        <img src="${imageUrl}" alt="Weapon Image" width="300px !important"/>
-                    </body>
-                    </html>
-                `);
-
-    }).catch(err => {
-        console.error('Error capturing the image:', err);
-    });
-    weaponArea.style.width = "100%";
-    captureButton.blur();
-    // console.log(`Capture complete`);
-  });
+  weaponArea.style.width = "100%";
+  captureButton.blur();
+  // console.log(`Capture complete`);
+});
 
 
 function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponTypeChosen) {
     // console.log("Weapon Generating...");
 
     let weaponType;
-    let randomClass = null;
     let matchingClassIndex;
     let originalBoost;
 
@@ -2633,8 +2600,7 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
             matchingClassIndex = matchingClasses[randomClassIndex];
             // console.log(`Chosen class has index ${matchingClassIndex}, which is ${strings.classes[matchingClassIndex + 1]}`);
             const matchingClassWeapons = weaponTypesByClass[matchingClassIndex];
-            
-            // Search for the matching weapon type within the class
+            // Searching for the matching weapon type within the class
             const matchingWeapon = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
             // const matchingSlot = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
             
@@ -2643,17 +2609,17 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
                 weaponType = matchingWeapon.type;
                 weaponSlot = matchingWeapon.slot;
                 
-                // Modify the needsBoost property of the weapon type
+                // Modify the needsBoost property of this weapon type
                 weaponType.needsBoost = weaponType.needsBoost || 0;
-                originalBoost = weaponType.needsBoost; // added so that we don't infinitely stack needsBoost on weapons (yikes!)
-                weaponType.needsBoost += powerLevel; // I need to make it so it reverts eventually!!!
+                originalBoost = weaponType.needsBoost; // Added so that we don't infinitely stack needsBoost on weapons (yikes!)
+                weaponType.needsBoost += powerLevel;
             }
         } else {
-            // If no matching class found, fall back to selecting a weapon type based on player class, weapon slot, and power level
+            // If no matching class is found, fall back to selecting a weapon type based on player class, weapon slot, and power level
             weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
         }
     } else {
-        // If no weapon type is chosen, fall back to selecting a weapon type based on player class, weapon slot, and power level
+        // If no weapon type is chosen, fall back
         weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
     }
 
@@ -2663,8 +2629,6 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
         return null;
     }
 
-
-//   const modificationCounts = getRandom(1, 2); // Between 1 and 2 mods
     let modificationCounts;
     // console.log(`${extraStats} mod count(s) selected`);
     if (extraStats === 1) {
@@ -2679,7 +2643,7 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
   // console.log(`This weapon will have ${modificationCounts} mod(s)`);
 
   const proBoost = Math.max(0, weaponType.needsBoost);
-  const conBoost = Math.max(0, -weaponType.needsBoost); // won't this always choose 0?
+  const conBoost = Math.max(0, -weaponType.needsBoost);
 
   // console.log(`   proBoost of ${proBoost}`);
   // console.log(`   conBoost of ${conBoost}`);
@@ -2690,16 +2654,15 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
     weaponSlot: weaponSlot,
     weaponSlotName: strings.slots[weaponSlot],
     type: weaponType.name,
-    proPoints: modificationCounts + proBoost, // if it needs a boost, it adds that many points
-    conPoints: modificationCounts + conBoost, // yeah I think this is always 0...?
+    proPoints: modificationCounts + proBoost, // if it needs a boost, it adds this many points
+    conPoints: modificationCounts + conBoost, 
     neutralStats: [],
     mandatoryPros: [],
     pros: [],
     cons: [],
   };
 
-
-  if (weaponTypeChosen) { // this code resets boost so it doesn't stack indefinitely
+  if (weaponTypeChosen) { // this resets needsBoost so it doesn't stack indefinitely
     weaponType.needsBoost = originalBoost;
   }
 
@@ -2753,7 +2716,6 @@ function addWeaponProsAndCons(weapon) {
     
   const possibleOptions = cloneJson(
     weaponEffects
-      // .filter((i) => i.for.includes(weapon.type)) // if it's of the right type
       .filter((i) => Array.isArray(i.for) && i.for.includes(weapon.type)) // check if option is array including weapon type
       .filter(i => !i.classLimit || (Array.isArray(i.classLimit) && i.classLimit.includes(weapon.playerClassName))) // check if no class limit
       // or if `classLimit` is an array and includes class
@@ -2782,7 +2744,7 @@ function addWeaponProsAndCons(weapon) {
   const selectedPros = getSelectedOptionsByIndices(
     possibleOptions,
     selectedProIndices,
-    1 // added these to check if proOrCon in console; not super important
+    1 // added these to check if proOrCon in console; not really important
   );
   // console.log(`${selectedPros.length} pro(s) selected in total`);
   // console.log("Cons are the following:"); 
@@ -2875,9 +2837,9 @@ function selectWeaponType(playerClass, weaponSlot, powerLevel) {
 
 function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     const randomImageIndex = Math.floor(Math.random() * weaponTypes[weapon.type].imageCount) + 1;
-    // can pass an override bool to set randomImageIndex to 1 if I want
+    // can pass an override bool as a checkbox to set randomImageIndex to 1 if I want
     const imageUrl = `weapon-images/${weapon.type}_${randomImageIndex}.png`;
-    const fallbackUrl = `weapon-images/Unknown.png`; // shouldn't need this but better safe than sorry
+    const fallbackUrl = `weapon-images/Unknown.png`; // Useful for my mistakes LOL
 
   return [
     `<div id="weapon" style="position: relative; padding: 10px;">`,
@@ -2893,7 +2855,6 @@ function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     `    </div>`,
     `    <div id="weaponMandatoryStatsNeutral" class="my-3">`,
     (weapon.neutralStats || []).map((i) => `<div>${i}</div>`).join(""),
-    // `    </div>`, // hmmmmmmm
     `    </div>`,
     `    <div id="weaponMandatoryStats" class="my-3">`,
     (weapon.mandatoryPros || []).map((i) => `<div>${i}</div>`).join(""),
