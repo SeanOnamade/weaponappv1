@@ -83,6 +83,9 @@ function tryLoadWeaponFromUrl() {
 
   generatedWeaponAreaMobile.innerHTML = formatWeaponAsHtml(weapon);
   generatedWeaponAreaDesktop.innerHTML = formatWeaponAsHtml(weapon);
+  // console.log(`Finished generating the ${weapon.playerClassName} ${weapon.weaponSlotName}!`);
+  // console.log("~~~");
+  // console.log("");
 //   document.title = `${weapon.playerClassName} ${weapon.weaponSlotName}`;
 }
 
@@ -602,12 +605,15 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
 };
 
 const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
+    Grenade_Launcher:  [
+      { text: "Hold Fire to charge grenades' speed",},
+    ],
     Indivisible_Particle_Smasher:  [
         { text: "(Purely cosmetic) Victims explode on kill",}, 
     ],
     Knife:  [
         { text: "Backstabbing stuns enemy for 3s, granting the user +40% movespeed and firing speed",}, 
-        { text: "Backstabbing stuns enemy for 3s, granting the user minicrits",}, 
+        { text: "Backstabbing stuns enemy for 3s, granting the user minicrits during this period",}, 
         { text: "Backstabbing an enemy causes them to bleed critically until healing or death, granting the user +40% move/firing speed",}, 
     ],
     Medi_Gun:  [
@@ -617,28 +623,28 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "This Medi Gun fires a constant, ammo-less beam that requires aiming",},
     ],
     Melee:  [
-        { text: "Charges up from 0 damage to double damage over 2s",}, 
+        { text: "This melee charges from 0 damage up to double damage over 2 seconds",}, 
         { text: "This Weapon has a large melee range and deploys and holsters slower",}, 
         { text: "(Purely cosmetic) Victims explode on kill",}, 
         { text: "(Purely cosmetic) Victims disintegrate on kill",}, 
     ],
     Rocket_Launcher:  [
-        { text: "Hold fire to charge rockets' speed",},
+        { text: "Hold Fire to charge rockets' speed",},
     ],
     Shotgun: [
-        { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every pack being one smaller", 
+        { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every pack being one size smaller", 
         classLimit: ["Engineer"]},
     ],
     Scattergun:  [
-        { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every pack being one smaller",},
+        { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every pack being one size smaller",},
     ],
     Sniper_Rifle:  [
-        { text: "This rifle fires high-speed projectile bullets dealing +15% damage",}, 
+        { text: "This rifle fires high-speed projectile bullets that deal +15% more damage",}, 
         { text: "Fully charged headshots decapitate victims",}, 
         { text: "Fully charged headshots gib victims",}, 
     ],
     Wrench:  [
-        { text: "This melee weapon has sustained melee fire, via spinning, firing a beam, or something similar",}, 
+        { text: "This weapon has sustained fire, via spinning, firing a beam, or something similar.",}, 
     ],
     
 };
@@ -2492,7 +2498,7 @@ document.body.onkeyup = function(e) {
   }
   
   generateBtnMobile.addEventListener("click", () => {
-    console.log("Weapon Generating...");
+    // console.log("Weapon Generating...");
     const playerClass = playerClassSelectMobile.value;
     const weaponSlot = weaponSlotSelectMobile.value;
     const powerLevel = powerLevelSelectMobile.value;
@@ -2515,13 +2521,11 @@ document.body.onkeyup = function(e) {
   });
   
   generateBtnDesktop.addEventListener("click", () => {
-    console.log("Weapon Generating...");
     const playerClass = playerClassSelectDesktop.value;
     const weaponSlot = weaponSlotSelectDesktop.value;
     const powerLevel = powerLevelSelectDesktop.value;
     const extraStats = extraStatsSelectDesktop.value;
     const weaponTypeChosen = weaponTypeSelectDesktop.value;
-    console.log(`extra stats is ${extraStatsSelectDesktop.value}`);
   
     const weapon = generateWeapon(
       parseInt(playerClass) || getRandom(1, 9), // parseInt turns val to int
@@ -2558,7 +2562,7 @@ document.body.onkeyup = function(e) {
         randomBackgroundIndex = Math.floor(Math.random() * 33) + 1; // amount of wallpapers available
     } while (randomBackgroundIndex === lastIndex); // prevent duplicates
     lastIndex = randomBackgroundIndex;
-    console.log(`Background changed to wallpaper_${randomBackgroundIndex}`);
+    // console.log(`Background changed to wallpaper_${randomBackgroundIndex}`);
     // document.body.style.backgroundImage = `url('../images/wallpaper_${randomBackgroundIndex}.jpg')`;
     const imgUrl = `../images/wallpaper_${randomBackgroundIndex}.jpg`;
     const img = new Image();
@@ -2570,6 +2574,7 @@ document.body.onkeyup = function(e) {
   };
 
   document.getElementById('captureButton').addEventListener('click', function() {
+    // console.log(`Capture requested`);
     const weaponArea = document.getElementById('generatedWeaponAreaDesktop');
     weaponArea.style.width = "300px";
     html2canvas(weaponArea).then(canvas => {
@@ -2597,15 +2602,21 @@ document.body.onkeyup = function(e) {
     });
     weaponArea.style.width = "100%";
     captureButton.blur();
+    // console.log(`Capture complete`);
   });
 
 
 function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponTypeChosen) {
-    console.log(weaponTypeChosen);
+    // console.log("Weapon Generating...");
 
     let weaponType;
     let randomClass = null;
     let matchingClassIndex;
+    let originalBoost;
+
+    if (weaponTypeChosen != 0) {
+      // console.log(`Weapon Type Specified: ${weaponTypeChosen}`);
+    }
 
     if (weaponTypeChosen) {
         // If a weapon type is chosen, find a matching class and slot
@@ -2620,24 +2631,22 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
             // Choose a random class from the matching classes
             const randomClassIndex = Math.floor(Math.random() * matchingClasses.length);
             matchingClassIndex = matchingClasses[randomClassIndex];
-            console.log(`chosen class has index ${matchingClassIndex}`);
+            // console.log(`Chosen class has index ${matchingClassIndex}, which is ${strings.classes[matchingClassIndex + 1]}`);
             const matchingClassWeapons = weaponTypesByClass[matchingClassIndex];
             
             // Search for the matching weapon type within the class
             const matchingWeapon = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
-            console.log(`this is the mamtching weapon ${matchingWeapon}`);
             // const matchingSlot = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
             
             if (matchingWeapon) {
                 // Assign weapon type and slot
                 weaponType = matchingWeapon.type;
-                console.log(`this is the mamtching type ${matchingWeapon.type.name}`);
                 weaponSlot = matchingWeapon.slot;
-                console.log(`this is the mamtching slot ${matchingWeapon.slot}`)
                 
                 // Modify the needsBoost property of the weapon type
                 weaponType.needsBoost = weaponType.needsBoost || 0;
-                weaponType.needsBoost += powerLevel;
+                originalBoost = weaponType.needsBoost; // added so that we don't infinitely stack needsBoost on weapons (yikes!)
+                weaponType.needsBoost += powerLevel; // I need to make it so it reverts eventually!!!
             }
         } else {
             // If no matching class found, fall back to selecting a weapon type based on player class, weapon slot, and power level
@@ -2656,9 +2665,8 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
 
 
 //   const modificationCounts = getRandom(1, 2); // Between 1 and 2 mods
-    // console.log(powerLevel);
     let modificationCounts;
-    console.log(`${extraStats} MOD COUNTS FR`);
+    // console.log(`${extraStats} mod count(s) selected`);
     if (extraStats === 1) {
         modificationCounts = 1;
     } else {
@@ -2668,10 +2676,13 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
         modificationCounts -= 1;
     }
 
-  console.log(`There is/are ${modificationCounts} mod(s)`);
+  // console.log(`This weapon will have ${modificationCounts} mod(s)`);
 
   const proBoost = Math.max(0, weaponType.needsBoost);
   const conBoost = Math.max(0, -weaponType.needsBoost); // won't this always choose 0?
+
+  // console.log(`   proBoost of ${proBoost}`);
+  // console.log(`   conBoost of ${conBoost}`);
 
   const weapon = {
     playerClass: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : playerClass,
@@ -2686,6 +2697,11 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
     pros: [],
     cons: [],
   };
+
+
+  if (weaponTypeChosen) { // this code resets boost so it doesn't stack indefinitely
+    weaponType.needsBoost = originalBoost;
+  }
 
   addNeutralStat(weapon);
   addMandatoryPro(weapon);
@@ -2724,7 +2740,7 @@ function addNeutralStat(weapon) {
   const chanceForNeutralStat = 0.2; // set chance for a neutral stat
 
   if (neutralStatRoll < chanceForNeutralStat) {
-    console.log("Neutral Stat Rolled");
+    // console.log(`Neutral stat rolled with chance of ${chanceForNeutralStat}`);
     const selectedNeutral = applicableNeutralOptions[getRandom(0, applicableNeutralOptions.length - 1)];
     weapon.neutralStats.push(selectedNeutral.text); 
   }
@@ -2762,14 +2778,20 @@ function addWeaponProsAndCons(weapon) {
     (i) => possibleOptions[i].valueCon !== undefined
   );
 
+  // console.log("Pros are the following:"); 
   const selectedPros = getSelectedOptionsByIndices(
     possibleOptions,
-    selectedProIndices
+    selectedProIndices,
+    1 // added these to check if proOrCon in console; not super important
   );
+  // console.log(`${selectedPros.length} pro(s) selected in total`);
+  // console.log("Cons are the following:"); 
   const selectedCons = getSelectedOptionsByIndices(
     possibleOptions,
-    selectedConIndices
+    selectedConIndices,
+    0
   );
+  // console.log(`${selectedCons.length} con(s) selected in total`);
 
   weapon.pros.push(
     ...selectedPros.map((i) => i.pro.replace("<value>", i.valuePro))
@@ -2786,8 +2808,7 @@ function cloneJson(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-function getSelectedOptionsByIndices(possibleOptions, selectedIndices) {
-//   console.log(selectedIndices);
+function getSelectedOptionsByIndices(possibleOptions, selectedIndices, proOrCon) {
   const selectedOptions = [];
   for (let i = 0; i < selectedIndices.length; i++) { // go through selected indices
     const index = selectedIndices[i];
@@ -2803,8 +2824,14 @@ function getSelectedOptionsByIndices(possibleOptions, selectedIndices) {
       valuePro: option.valuePro * multiplier, // can double a stat
       valueCon: option.valueCon * multiplier,
     });
+    if (proOrCon == 1) {
+      // console.log(`   ${option.pro}`);   
+    }
+    else {
+      // console.log(`   ${option.con}`);   
+    }
   }
-  console.log(selectedOptions);
+  
   return selectedOptions; // return options
 }
 
