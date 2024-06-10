@@ -699,6 +699,28 @@ const weaponEffects = [
     valueCon: 50,
   },
   {
+    for: ["Scattergun"],
+    pro: "The first shot minicrits enemies recently hit by one of the user's projectile weapons",
+    con: "On Hit: Removes any debuffs you've inflicted",
+  },
+  {
+    for: ["Scattergun"],
+    pro: "+10% firing speed per consecutive hit, to a max of +50%",
+    con: "On Hit: Target moves at your speed for 3s",
+  },
+  {
+    for: ["Pistol"],
+    classLimit: ["Scout"],
+    pro: "User cannot be targeted by a sentry with this active if they keep moving and don't attack",
+    con: "+25% sentry damage vulnerability while active",
+  },
+  {
+    for: ["Pistol"],
+    classLimit: ["Scout"],
+    pro: "Inflict 1s of bleed on hit",
+    con: "User bleeds for 3s after inflicting bleed with any weapon",
+  },
+  {
     for: ["Scout_Lunch_Box"],
     pro: "For 10s, +<value>% movespeed per second until you stop moving",
     con: "-<value>% movespeed per jump while weapon effect is active",
@@ -711,7 +733,57 @@ const weaponEffects = [
     pro: "On Kill: Your next attack will douse an enemy in Mad Milk",
     con: "On Miss: User is covered with Mad Milk for 5s",
   },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Scout"],
+    pro: "Time a swing to reflect a projectile!",
+    con: "+60% slower swing speed (regular speed)",
+  },
   //// AllSoldier ////
+  {
+    for: ["Rocket_Launcher"],
+    pro: "Launches Bread Monsters: Direct hits inflict 3s of bleed",
+    con: "Every third rocket is a loaf of bread that deals 1 damage",
+  },
+  {
+    for: ["Rocket_Launcher"],
+    pro: "Consecutive direct hits minicrit",
+    con: "-<value>% splash damage",
+    valueCon: 25,
+  },
+  {
+    for: ["Rocket_Launcher"],
+    pro: "Gain 5% movespeed on hit, to a max of +20%. Resets on miss.",
+    con: "Rockets fired on the ground are <value>% slower",
+    valueCon: 20,
+  },
+  {
+    for: ["Rocket_Launcher"],
+    pro: "Fires fireworks that ignite airborne targets",
+    con: "Marked for death while blast jumping",
+  },
+  {
+    for: ["Banner"],
+    pro: "Damage dealt by user and allies prolongs the buff",
+    con: "Dropping below 30% health empties the buff altogether",
+  },
+  {
+    for: ["Boots"],
+    pro: "Alt-Fire: Drop straight down and deal stomp damage",
+    con: "-10% movespeed for 10s after taking fall damage",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Soldier"],
+    pro: "On Hit Taken While Active: damage of next attack increases by 8% to a max of +40%",
+    con: "On Hit Taken While Active: movespeed decreases by 5% to a min of +15%",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Soldier"],
+    pro: "Every third consecutive hit is a NECK SNAP™ that crits",
+    con: "Hit yourself every three misses. Idiot.",
+  },
   //// AllPyro ////
   {
     for: weaponTypeGroups.AllPyro.filter(
@@ -791,6 +863,11 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Flamethrower,
+    pro: "Reflected projectiles always crit",
+    con: "Nearby projectiles home in",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
     pro: "+2 ammo gained per tick of damage/afterburn",
     con: "+50% ammo consumption rate",
   },
@@ -806,6 +883,31 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Flamethrower,
+    pro: "Afterburn flames deal no damage but can't be extinguished by healing",
+    con: "Taking any other damage extinguishes the target",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
+    pro: "+2% movespeed for each consecutive second any target is burning, to a max of +20%",
+    con: "Cannot extinguish allies",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
+    pro: "Leave behind a short-lived trail of fire while firing",
+    con: "Airblast cannot reflect projectiles",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
+    pro: "Leave behind a gasoline trail while firing that boosts allies and slips foes",
+    con: "Leave behind a gasoline trail while firing that you can slip on",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
+    pro: "Can airblast jump",
+    con: "Airblast cannot reflect projectiles or extinguish allies",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
     pro: "-<value>% airblast cost",
     con: "+<value>% airblast cost",
     valuePro: 50,
@@ -816,6 +918,18 @@ const weaponEffects = [
     classLimit: ["Pyro"],
     pro: "Hitting friendly buildings helps them deploy faster",
     con: "Your other weapons no longer damage Spies; you must use this melee",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Pyro"],
+    pro: "Creates a fiery explosion on every third hit",
+    con: "User is ignited while wielding this weapon",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Pyro"],
+    pro: "On Hit: Target is doused in gasoline for 10s",
+    con: "On Hit: Splash slippery gasoline around",
   },
 
   //// AllDemoman ////
@@ -846,6 +960,11 @@ const weaponEffects = [
     for: ["Grenade_Launcher"],
     pro: "Grenades explode on surfaces",
     con: "Grenades only explode on hit",
+  },
+  {
+    for: ["Grenade_Launcher"],
+    pro: "Hold to charge a grenade to deal up to +100% the knockback",
+    con: "Deals no knockback on hit",
   },
   {
     for: ["Stickybomb_Launcher"],
@@ -898,6 +1017,16 @@ const weaponEffects = [
     for: ["Stickybomb_Launcher"],
     pro: "Stickybombs explode on hit",
     con: "Stickybombs take 100% more knockback when pushed",
+  },
+  {
+    for: ["Stickybomb_Launcher"],
+    pro: "Ardent Spirits: Stickybombs wet targets, causing them to take minicrits from fire",
+    con: "Ardent Spirits: Liquor-filled bombs leave puddles that slip up the user",
+  },
+  {
+    for: ["Stickybomb_Launcher"],
+    pro: "Stickybomb knockback increases with charge up to +200%",
+    con: "Stickybombs deal negligble knockback to enemies",
   },
   {
     for: weaponTypeGroups.Melee,
@@ -990,6 +1119,11 @@ const weaponEffects = [
     pro: "Charge doesn't stop after hitting an enemy, knocking them straight into the air",
     con: "Taking damage while shield charging reduces remaining charge time",
   },
+  {
+    for: ["Demoknight_Melee"],
+    pro: "Hit a teammate to knight them, using your charge meter to heal half their health",
+    con: "Enemies heal half the melee damage they deal to you",
+  },
   //// AllHeavy ////
   {
     for: weaponTypeGroups.AllHeavy.filter((i) =>
@@ -1012,6 +1146,11 @@ const weaponEffects = [
   },
   {
     for: ["Minigun"],
+    pro: "Sustained fire ignites enemies",
+    con: "Sustained fire ignites user",
+  },
+  {
+    for: ["Minigun"],
     pro: "+<value>% increased revved-up movespeed",
     con: "-<value>% decreased revved-up movespeed",
     valuePro: 40,
@@ -1023,6 +1162,20 @@ const weaponEffects = [
     con: "-1% movespeed per consecutive hit, to a min of -<value>",
     valuePro: 30,
     valueCon: 20,
+  },
+  {
+    for: ["Shotgun"],
+    classLimit: ["Heavy"],
+    pro: "Alt-Fire: Fire a shot that empties the clip but heals for 100% of damage dealt",
+    con: "-<value>% max health while active",
+    valueCon: 30,
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Heavy"],
+    pro: "Heavyweight: +<value> firing speed",
+    con: "Swinging requires a length, uninterruptible windup",
+    valueCon: 50,
   },
   //// AllEngineer ////
   {
@@ -1290,6 +1443,19 @@ const weaponEffects = [
     valueCon: 30,
   },
   {
+    for: ["Crossbow"],
+    classLimit: ["Medic"],
+    pro: "On Hit: For 8s, user gains a +<value>% damage resistance to everyone but target",
+    con: "On Hit: Target moves at or above your movespeed for 8s",
+    valuePro: 20,
+  },
+  {
+    for: ["Crossbow"],
+    classLimit: ["Medic"],
+    pro: "On Hit: For 8s, allies heal for 60% of damage dealt to target",
+    con: "On Hit: User's healing rate is halved for 8s",
+  },
+  {
     for: ["Medi_Gun"],
     pro: "Each kill your patient gets increases ÜberCharge by 10% (which can prolong Übers)",
     con: "This Medi Gun solely charges with patient damage and kills, rather than by healing",
@@ -1409,6 +1575,12 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.Melee,
     classLimit: ["Medic"],
+    pro: "On Hit: Inflict 5s of bleed",
+    con: "Every third swing uses 10% ÜberCharge",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Medic"],
     pro: "While Active: Enemies who get near you are poisoned, taking <value> damage per second for 5s",
     con: "Medical Malpractice: You drop a poison flask when hit by a melee, taking <value> damage per second for 5s",
     valuePro: 5,
@@ -1442,6 +1614,11 @@ const weaponEffects = [
     for: ["Sniper_Rifle"],
     pro: "Can headshot while unscoped",
     con: "Cannot shoot while unscoped",
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "Headshot kills cause target’s head to explode into poison cloud",
+    con: "Rifle fires once full charge is reached",
   },
   {
     for: ["Bow"],
@@ -1800,15 +1977,17 @@ const weaponEffects = [
     valueCon: 50,
   },
   {
-    for: weaponTypeGroups.AllDoesDamage,
+    for: weaponTypeGroups.AllDoesDamage.filter((i) => 
+      i !== "Sniper_Rifle"
+    ),
     pro: "On Kill: +<value> max health for 20 seconds; health raises to compensate if full",
     con: "On Kill: The next attack received within 10s is a guaranteed minicrit", // idk about this one
     valuePro: 35,
   },
   {
     for: weaponTypeGroups.AllDoesDamage,
-    pro: "On Kill: Max health is set to victim's max health if higher than user's current HP",
-    con: "On Kill: Gain +50% health, but get marked for death for 8s", // idk about this one
+    pro: "On Kill: Health is set to victim's max health if higher",
+    con: "On Kill: Gain +50% of max HP, but get marked for death for 8s", // idk about this one
   },
   {
     for: weaponTypeGroups.AllDoesDamage,
@@ -1922,11 +2101,11 @@ const weaponEffects = [
     valueCon: 50,
   },
   //// AllSubstantialHit ////
-  {
-    for: weaponTypeGroups.AllSubstantialHit,
-    pro: "On Hit: Causes enemy to bleed for 5s",
-    con: "On Miss: Causes user to bleed for 3s",
-  },
+  // {
+  //   for: weaponTypeGroups.AllSubstantialHit,
+  //   pro: "On Hit: Causes enemy to bleed for 5s",
+  //   con: "Shame! On Miss: Causes user to bleed for 3s",
+  // },
   {
     for: weaponTypeGroups.AllSubstantialHit,
     pro: "Up to +<value>% damage dealt the lower your healer's health is",
@@ -1945,7 +2124,7 @@ const weaponEffects = [
         i !== "Grenade_Launcher" &&
         i !== "Stickybomb_Launcher"
     ),
-    pro: "Alt-Fire halves user's health for a guaranteed minicrit",
+    pro: "Alt-Fire halves user's health for a guaranteed minicrit. 30s cooldown.",
     con: "Cannot deal crits or minicrits below 25% health",
   },
   {
@@ -2374,6 +2553,18 @@ const weaponEffects = [
     pro: "Smart Cookie: Enemies who you hit or who hit you are visible through walls for 8s",
     con: "After getting hit by an enemy, they can see you through walls for 3s",
   },
+  {
+    for: weaponTypeGroups.AllCanHit,
+    classLimit: ["Engineer", "Medic"],
+    pro: "Smart Cookie: See target's health for 5s on hit",
+    con: "On Hit: Enemies can see your HP for 3s",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Engineer", "Medic"],
+    pro: "Temporarily reduces target's max health by damage amount instead of dealing damage",
+    con: "Deals halved damage to enemies with more health than you",
+  },
   
   //// Misc., Weapon-Specific ////
   {
@@ -2393,9 +2584,8 @@ const weaponEffects = [
       ...weaponTypeGroups.BurstBullet
     ],
     pro: "Can hold to charge next shot to deal up to +<value>% damage",
-    con: "Attempting to fire when in the midst of reloading can cause a misfire, dealing user <value> damage",
+    con: "Firing speed is halved below 20% HP", // I hate this
     valuePro: 20,
-    valueCon: 20,
   },
   
   {
