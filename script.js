@@ -615,6 +615,7 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "Backstabbing stuns enemy for 3s, granting the user +40% movespeed and firing speed",}, 
         { text: "Backstabbing stuns enemy for 3s, granting the user minicrits during this period",}, 
         { text: "Backstabbing an enemy causes them to bleed critically until healing or death, granting the user +40% move/firing speed",}, 
+        { text: "This knife can be thrown a short distance, and recharges over 10s. Recharge time is halved on a backstab.",}, 
     ],
     Medi_Gun:  [
         { text: "ÜberCharge is split into halves",},
@@ -1724,7 +1725,8 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllCanHit.filter(
         (i) =>
-            i !== "Knife"
+            i !== "Knife" &&
+            i !== "Throwable_AOE"
     ),
     pro: "Crits against user only deal regular damage",
     con: "Cannot deal crits with this weapon",
@@ -1732,14 +1734,18 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllCanHit.filter(
         (i) =>
-            i !== "Knife"
+            i !== "Knife" &&
+            i !== "Throwable_AOE"
     ),
     pro: "Minicrits overhealed enemies",
     con: "-<value>% damage against overhealed enemies ",
     valueCon: 30,
   },
   {
-    for: weaponTypeGroups.AllCanHit,
+    for: weaponTypeGroups.AllCanHit.filter(
+      (i) =>
+          i !== "Throwable_AOE"
+  ),
     pro: "+<value>% movespeed while deployed",
     con: "-<value>% movespeed while deployed",
     valuePro: 20,
