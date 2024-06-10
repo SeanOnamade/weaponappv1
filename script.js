@@ -1125,6 +1125,20 @@ const weaponEffects = [
   },
   {
     for: ["Wrench"],
+    pro: "Dispensers cost <value>% less",
+    con: "Dispensers cost <value>% more",
+    valuePro: 50,
+    valueCon: 50,
+  },
+  {
+    for: ["Wrench"],
+    pro: "Teleporters cost <value>% less",
+    con: "Teleporters cost <value>% more",
+    valuePro: 50,
+    valueCon: 50,
+  },
+  {
+    for: ["Wrench"],
     pro: "Teleporters can be used in both directions",
     con: "Teleporters give 5s +40% speed boosts, +10% per additional level",
   },
