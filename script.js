@@ -1220,9 +1220,9 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.Melee,
     classLimit: ["Heavy"],
-    pro: "Heavyweight: +<value> firing speed",
+    pro: "Heavyweight Champ: +<value> firing speed",
     con: "Swinging requires a length, uninterruptible windup",
-    valueCon: 50,
+    valuePro: 50,
   },
   {
     for: weaponTypeGroups.Melee,
