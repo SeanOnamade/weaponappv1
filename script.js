@@ -821,16 +821,16 @@ const weaponEffects = [
     valuePro: 30,
     valueCon: 30,
   },
-  {
-    for: weaponTypeGroups.AllPyro.filter(
-      (i) => weaponTypeGroups.AllDoesDamage.includes(i)
-    ),
-    classLimit: ["Pyro"],
-    pro: "+<value>% damage vs nonburning players",
-    con: "-<value>% damage vs nonburning players",
-    valuePro: 50,
-    valueCon: 30,
-  },
+  // {
+  //   for: weaponTypeGroups.AllPyro.filter(
+  //     (i) => weaponTypeGroups.AllDoesDamage.includes(i)
+  //   ),
+  //   classLimit: ["Pyro"],
+  //   pro: "+<value>% damage vs nonburning players",
+  //   con: "-<value>% damage vs nonburning players",
+  //   valuePro: 50,
+  //   valueCon: 30,
+  // },
   {
     for: weaponTypeGroups.AllPyro.filter(
       (i) => weaponTypeGroups.AllDoesDamage.includes(i)
@@ -1329,7 +1329,7 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllEngineer,
     classLimit: ["Engineer"],
-    pro: "Start off 10% slower. +<value>% movespeed for each building active",
+    pro: "Start off 20% slower. +<value>% movespeed for each building active",
     con: "-<value> max metal capacity for each building active",
     valuePro: 10,
     valueCon: 20,
@@ -2717,7 +2717,7 @@ const weaponEffects = [
       ...weaponTypeGroups.BurstBullet
     ],
     pro: "Can hold to charge next shot to deal up to +<value>% damage",
-    con: "Firing speed is halved below 20% HP", // I hate this
+    con: "Firing speed is halved below 50% HP", // I hate this
     valuePro: 20,
   },
   
