@@ -101,6 +101,7 @@ The project is deployed at [https://tf2weapongenerator.netlify.app](https://tf2w
 <!-- GETTING STARTED -->
 ## Getting Started
 
+> [!TIP]
 To get a local copy up and running follow these simple example steps.
 
 ### Installation
