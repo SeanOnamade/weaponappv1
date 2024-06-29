@@ -2265,7 +2265,7 @@ const weaponEffects = [
         (i) => !weaponTypeGroups.Melee.includes(i),
       ),
     pro: "Firing speed increases as health decreases",
-    con: "+50% reload/firing speed below 30% max health",
+    con: "50% slower reload/firing speed below 30% max health",
   },
   {
     for: weaponTypeGroups.AllSubstantialHit.filter(
