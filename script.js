@@ -1006,6 +1006,11 @@ const weaponEffects = [
   },
   {
     for: ["Stickybomb_Launcher"],
+    pro: "All active stickybombs explode on death",
+    con: "Active stickybombs are destroyed when health drops below 25%",
+  },
+  {
+    for: ["Stickybomb_Launcher"],
     pro: "+50% sticky charge distance",
     con: "Cannot charge sticky distance",
   },
