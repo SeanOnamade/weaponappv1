@@ -1,9 +1,9 @@
 [[headers]]
-  for = "/"
-  [headers.values]
-    X-Robots-Tag = "index, follow"
-
-[[headers]]
   for = "/*"
   [headers.values]
     X-Robots-Tag = "noindex, follow"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    X-Robots-Tag = "index, follow"
