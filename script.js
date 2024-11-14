@@ -1196,7 +1196,7 @@ const weaponEffects = [
   {
     for: ["Minigun"],
     pro: "+2% movespeed per consecutive hit, to a max of +<value>%",
-    con: "-1% movespeed per consecutive hit, to a min of -<value>",
+    con: "-1% movespeed per consecutive hit, to a min of -<value>%",
     valuePro: 30,
     valueCon: 20,
   },
