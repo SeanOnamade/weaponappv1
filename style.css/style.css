@@ -133,23 +133,23 @@ body {
     position: absolute;
 }
   
-  @keyframes app-logo-spin {
+  /* @keyframes app-logo-spin {
       from {
         transform: rotate(0deg);
       }
       to {
         transform: rotate(360deg);
       }
-  } 
+  }  */
 
-  @keyframes app-logo-spin-back {
+  /* @keyframes app-logo-spin-back {
       from {
         transform: rotate(0deg);
       }
       to {
         transform: rotate(-360deg);
       }
-  } 
+  }  */
 
 #generatedWeaponAreaMobile {
   /* Ensure it takes the available space as needed */
