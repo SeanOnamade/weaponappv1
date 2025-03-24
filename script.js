@@ -701,6 +701,14 @@ const weaponEffects = [
     valueCon: 50,
   },
   {
+    for: weaponTypeGroups.AllScout.filter(
+        (i) => !weaponTypeGroups.AllPassive.includes(i)
+      ),
+    classLimit: ["Scout"],
+    pro: "+1 extra jump while active",
+    con: "No double jump while active",
+  },
+  {
     for: ["Scout_Lunch_Box"],
     pro: "While effect is active: +<value>% jump height",
     con: "While effect is active: -<value>% decreased jump height",
@@ -869,6 +877,13 @@ const weaponEffects = [
     con: "Flames linger in the air for <value> second(s), but passing through them deals mini-crit damage to you",
     valuePro: 3,
     valueCon: 3,
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
+    pro: "Can 'ignite' allies to heal for +<value>HP/sec",
+    con: "+<value>% damage vulnerability while enemies are burning",
+    valuePro: 3,
+    valueCon: 20,
   },
   {
     for: weaponTypeGroups.Flamethrower,
@@ -1382,6 +1397,20 @@ const weaponEffects = [
   },
   {
     for: ["Wrench"],
+    pro: "Alt-Fire to toggle conversion of -5 metal/sec -> +<value> HP/sec",
+    con: "Full Metal: -<value> HP/sec while out of metal",
+    valuePro: 5,
+    valueCon: 10,
+  },
+  {
+    for: ["Wrench"],
+    pro: "Alt-Fire to toggle conversion of -5 HP/sec -> +<value> metal/sec",
+    con: "Loose Pockets: Taking any single instance of <value>+ damage halves your metal count",
+    valuePro: 5,
+    valueCon: 50,
+  },
+  {
+    for: ["Wrench"],
     pro: "Teleporters can be used in both directions",
     con: "Teleporters give 5s +40% speed boosts, +10% per additional level",
   },
@@ -1833,6 +1862,12 @@ const weaponEffects = [
   {
     for: ["Revolver"],
     classLimit: ["Spy"],
+    pro: "Alt-Fire while active and crouching to empty all ammo in the revolver and gain +25 HP instantly",
+    con: "Gentleman's Honor: Failing to secure a kill with a clip deals 25 damage to the user",
+  },
+  {
+    for: ["Revolver"],
+    classLimit: ["Spy"],
     pro: "+<value>% damage bonus against buildings",
     con: "Deals no damage to buildings being sapped",
     valuePro: 50,
@@ -1864,6 +1899,13 @@ const weaponEffects = [
     con: "+<value>% cloak drain rate",
     valuePro: 40,
     valueCon: 30,
+  },
+  {
+    for: ["Invis_Watch"],
+    pro: "+<value> HP/sec while cloaked",
+    con: "+<value> HP/sec while cloaked",
+    valuePro: 5,
+    valueCon: 5,
   },
   {
     for: ["Sapper"],
