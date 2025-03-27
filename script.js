@@ -616,7 +616,7 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
     Knife:  [
         { text: "Backstabbing stuns enemy for 3s, granting the user +40% movespeed and firing speed",}, 
         { text: "Backstabbing stuns enemy for 3s, granting the user minicrits during this period",}, 
-        { text: "Backstabbing an enemy causes them to bleed critically until healing or death, granting the user +40% move/firing speed",}, 
+        { text: "Backstabbing causes victim to bleed critically until healing or death, granting user +40% move/firing speed for the duration",}, 
         { text: "This knife can be thrown a short distance, and recharges over 10s. Recharge time is halved on a backstab.",}, 
         { text: "Backstabs reduce enemies to 1 HP and grant the user an instant primary deploy",}, 
     ],
@@ -729,13 +729,20 @@ const weaponEffects = [
   {
     for: ["Scattergun"],
     pro: "+10% firing speed per consecutive hit, to a max of +50%",
-    con: "On Hit: Target moves at your speed for 3s",
+    con: "On Hit: Target moves at or above your speed for 3s",
   },
   {
     for: ["Scattergun"],
     pro: "Can air jump <value> more time(s) for 10s after a kill",
     con: "Marked for death for 3s after air jumping",
     valuePro: 2,
+  },
+  {
+    for: ["Scattergun"],
+    pro: "Store an additional air jump for each kill (max <value>)",
+    con: "Double jumping disabled for <value>s after a kill",
+    valuePro: 5,
+    valueCon: 5,
   },
   {
     for: ["Pistol"],
@@ -769,6 +776,14 @@ const weaponEffects = [
     con: "+60% slower swing speed (swing speed of the other classes)",
   },
   //// AllSoldier ////
+  {
+    for: weaponTypeGroups.AllSoldier,
+    classLimit: ["Soldier"],
+    pro: "+<value>% damage resistance while airborne",
+    con: "+<value>% damage vulnerability while airborne",
+    valuePro: 20,
+    valueCon: 20,
+  },
   {
     for: ["Rocket_Launcher"],
     pro: "Launches Bread Monsters: Direct hits inflict 3s of bleed",
@@ -1062,7 +1077,7 @@ const weaponEffects = [
   {
     for: ["Stickybomb_Launcher"],
     pro: "Stickybombs explode on hit",
-    con: "Stickybombs take 100% more knockback when pushed",
+    con: "Stickybombs take 200% more knockback when pushed",
   },
   {
     for: ["Stickybomb_Launcher"],
@@ -1073,6 +1088,11 @@ const weaponEffects = [
     for: ["Stickybomb_Launcher"],
     pro: "Stickybomb knockback increases with charge up to +200%",
     con: "Stickybombs deal negligble knockback to enemies",
+  },
+  {
+    for: ["Stickybomb_Launcher"],
+    pro: "Stickybombs can stick to enemies and are indestructible while stuck",
+    con: "Stickybombs roll instead of sticking to surfaces",
   },
   {
     for: weaponTypeGroups.Melee,
@@ -1536,7 +1556,7 @@ const weaponEffects = [
   },
   {
     for: ["Syringe_Gun"],
-    pro: "On Kill: Heal all nearby allies by 25 HP",
+    pro: "On Kill: Heal all nearby allies by 40 HP",
     con: "Marked for death when an ally dies while you have this deployed",
   },
   {
@@ -1581,6 +1601,12 @@ const weaponEffects = [
     classLimit: ["Medic"],
     pro: "On Hit: For 8s, allies heal for 60% of damage dealt to target",
     con: "On Hit: User's healing rate is halved for 8s",
+  },
+  {
+    for: ["Crossbow"],
+    classLimit: ["Medic"],
+    pro: "Fire at the ground to perform a damageless blast jump!",
+    con: "Adrenaline Rush: Enemies you damage gain +10% movespeed for 5s",
   },
   {
     for: ["Medi_Gun"],
@@ -1682,6 +1708,11 @@ const weaponEffects = [
   },
   {
     for: ["Medi_Gun"],
+    pro: "Instantly remove debuffs, which are stored and applied to your own next attack",
+    con: "Healing a debuffed ally reduces ÜberCharge",
+  },
+  {
+    for: ["Medi_Gun"],
     pro: "Damage taken while ÜberCharged is converted into up to <value>% extra leftover ÜberCharge once the Über is over",
     con: "Taking damage while ÜberCharged reduces charge's duration",
     valuePro: 50,
@@ -1690,6 +1721,11 @@ const weaponEffects = [
     for: ["Medi_Gun"],
     pro: "Critical damage on the heal target is completely nullified",
     con: "Healing the same target for longer than 8s marks user for death",
+  },
+  {
+    for: ["Medi_Gun"],
+    pro: "Healing an ally from <20% HP to full will instantly overheal the user",
+    con: "Guilt-Ridden: Having a heal target or ally die near/in front of you marks you for death",
   },
   {
     for: weaponTypeGroups.Melee,
@@ -1873,6 +1909,12 @@ const weaponEffects = [
     valuePro: 50,
   },
   {
+    for: ["Revolver"],
+    classLimit: ["Spy"],
+    pro: "Fire at the ground to perform a blast jump!",
+    con: "Shaky Hands: Accuracy is halved while airborne",
+  },
+  {
     for: ["Invis_Watch"],
     pro: "Cloaking automatically selects a random disguise, smoke-free",
     con: "Cannot disguise while invisible",
@@ -2053,7 +2095,14 @@ const weaponEffects = [
     for: weaponTypeGroups.AllCanHeadshot.filter((i) =>
       i !== "Sniper_Rifle"),
     pro: "On Headshot: Deal +<value>% damage",
-    con: "On Headshot: Turn enemy around LOL", // LOL
+    con: "Lobotomy: On headshot, enemy can see your health for 5s",
+    valuePro: 100,
+  },
+  {
+    for: weaponTypeGroups.AllCanHeadshot.filter((i) =>
+      i !== "Sniper_Rifle"),
+    pro: "On Headshot: Turn enemy around 180°!", // LOL
+    con: "On Headshot: If they survive, enemy gains minicrits for 3s",
     valuePro: 100,
   },
   {
@@ -2277,6 +2326,11 @@ const weaponEffects = [
     pro: "On Hit: One target at a time is Marked-For-Death, causing all damage taken to be mini-crits",
     con: "On Hit: User is Marked-For-Death for the last person they damaged for 3s",
   },
+  // {
+  //   for: weaponTypeGroups.AllSubstantialHit,
+  //   pro: "Minicrits wet targets",
+  //   con: "Water Weight: -25% damage vs wet targets",
+  // },
   {
     for: weaponTypeGroups.AllSubstantialHit.filter(
       (i) =>
@@ -2323,7 +2377,7 @@ const weaponEffects = [
       (i) => !weaponTypeGroups.Melee.includes(i),
     ),
     pro: "On Hit: Gain up to +<value> health",
-    con: "Securing a kill below 10% health with your last shot fully heals you. Missing makes you drop dead.", // IDK WHAT TO PUT HERE
+    con: "Securing a kill below 15% health with your last shot fully heals you. Missing makes you drop dead.", // IDK WHAT TO PUT HERE
     valuePro: 25,
   },
   {
@@ -2735,7 +2789,7 @@ const weaponEffects = [
     pro: "Up to +<value>% damage dealt the lower your healer's health is",
     con: "Down to -<value>% damage dealt the lower your healer's health is",
     valuePro: 50,
-    valueCon: 30,
+    valueCon: 40,
   },
   {
     for: weaponTypeGroups.All,
@@ -2776,7 +2830,7 @@ const weaponEffects = [
   {
     for: ["Bow", "Crossbow"],
     pro: "Arrows ignite on hit",
-    con: "Reflected arrows are ignited and explode on hit",
+    con: "Reflected arrows are ignited and explosive",
   },
   {
     for: ["Rocket_Launcher", "Stickybomb_Launcher"],
@@ -2968,64 +3022,173 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
     let matchingClassIndex;
     let originalBoost;
 
-    if (weaponTypeChosen != 0) {
-      // console.log(`Weapon Type Specified: ${weaponTypeChosen}`);
-    }
+    // if (weaponTypeChosen != 0) {
+    //   // console.log(`Weapon Type Specified: ${weaponTypeChosen}`);
+    // }
 
-    if (weaponTypeChosen) {
-        // If a weapon type is chosen, find a matching class and slot
+  //   if (weaponTypeChosen) {
+  //       // If a weapon type is chosen, find a matching class and slot
+  //       let matchingClasses = [];
+  //       weaponTypesByClass.forEach((classes, index) => {
+  //           if (classes.some(weapon => weapon.type.name === weaponTypeChosen)) {
+  //               matchingClasses.push(index);
+  //           }
+  //       });
+    
+  //       if (matchingClasses.length > 0) {
+  //           // Choose a random class from the matching classes
+  //           const randomClassIndex = Math.floor(Math.random() * matchingClasses.length);
+  //           matchingClassIndex = matchingClasses[randomClassIndex];
+  //           // console.log(`Chosen class has index ${matchingClassIndex}, which is ${strings.classes[matchingClassIndex + 1]}`);
+  //           const matchingClassWeapons = weaponTypesByClass[matchingClassIndex];
+  //           // Searching for the matching weapon type within the class
+  //           const matchingWeapon = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
+  //           // const matchingSlot = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
+            
+  //           if (matchingWeapon) {
+  //               // Assign weapon type and slot
+  //               weaponType = matchingWeapon.type;
+  //               weaponSlot = matchingWeapon.slot;
+                
+  //               // Modify the needsBoost property of this weapon type
+  //               weaponType.needsBoost = weaponType.needsBoost || 0;
+  //               originalBoost = weaponType.needsBoost; // Added so that we don't infinitely stack needsBoost on weapons (yikes!)
+  //               weaponType.needsBoost += powerLevel;
+  //           }
+  //       } else {
+  //           // If no matching class is found, fall back to selecting a weapon type based on player class, weapon slot, and power level
+  //           weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+  //       }
+  //   } else {
+  //       // If no weapon type is chosen, fall back
+  //       weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+  //   }
+
+  //   // Check if weaponType is defined
+  //   if (!weaponType) {
+  //       console.error('Unable to generate weapon. Weapon type is undefined.');
+  //       return null;
+  //   }
+
+  //   let modificationCounts;
+  //   // console.log(`${extraStats} mod count(s) selected`);
+  //   if (extraStats === 1) {
+  //       modificationCounts = 1;
+  //   } else {
+  //       modificationCounts = getRandom(extraStats - 1, extraStats);
+  //   }
+  //   if (weaponType.needsBoost && modificationCounts > 1) {
+  //       modificationCounts -= 1;
+  //   }
+
+  // // console.log(`This weapon will have ${modificationCounts} mod(s)`);
+
+  // const proBoost = Math.max(0, weaponType.needsBoost);
+  // const conBoost = Math.max(0, -weaponType.needsBoost);
+
+  // // console.log(`   proBoost of ${proBoost}`);
+  // // console.log(`   conBoost of ${conBoost}`);
+
+  // const weapon = {
+  //   playerClass: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : playerClass,
+  //   playerClassName: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : strings.classes[playerClass],
+  //   weaponSlot: weaponSlot,
+  //   weaponSlotName: strings.slots[weaponSlot],
+  //   type: weaponType.name,
+  //   proPoints: modificationCounts + proBoost, // if it needs a boost, it adds this many points
+  //   conPoints: modificationCounts + conBoost, 
+  //   neutralStats: [],
+  //   mandatoryPros: [],
+  //   pros: [],
+  //   cons: [],
+  // };
+
+  if (weaponTypeChosen !== "Any") {  // if a specific weapon type is chosen, e.g. Crossbow
+    if (typeof playerClass === "number" && playerClass > 0) {
+        // Look only in the selected class's list of available weapons.
+        const classIndex = playerClass - 1;
+        const classWeapons = weaponTypesByClass[classIndex];
+        const matchingWeapon = classWeapons.find(w => w.type.name === weaponTypeChosen);
+        if (matchingWeapon) { // if it's in the class, then we can use it
+            matchingClassIndex = classIndex;
+            weaponType = matchingWeapon.type;
+            weaponSlot = matchingWeapon.slot;
+            weaponType.needsBoost = weaponType.needsBoost || 0;
+            originalBoost = weaponType.needsBoost;
+            weaponType.needsBoost += powerLevel;
+        } else {
+            // Fallback: search all classes for the specified type.
+            let matchingClasses = [];
+            weaponTypesByClass.forEach((classes, index) => {
+                if (classes.some(weapon => weapon.type.name === weaponTypeChosen)) {
+                    matchingClasses.push(index);
+                }
+            });
+            if (matchingClasses.length > 0) {
+                const randomClassIndex = Math.floor(Math.random() * matchingClasses.length);
+                matchingClassIndex = matchingClasses[randomClassIndex];
+                const matchingClassWeapons = weaponTypesByClass[matchingClassIndex];
+                const matchingWeapon = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
+                if (matchingWeapon) {
+                    weaponType = matchingWeapon.type;
+                    weaponSlot = matchingWeapon.slot;
+                    weaponType.needsBoost = weaponType.needsBoost || 0;
+                    originalBoost = weaponType.needsBoost;
+                    weaponType.needsBoost += powerLevel;
+                } else {
+                    weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+                }
+            } else {
+                weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+            }
+        }
+    } else {
+        // If playerClass is "Any", search across all classes.
         let matchingClasses = [];
         weaponTypesByClass.forEach((classes, index) => {
             if (classes.some(weapon => weapon.type.name === weaponTypeChosen)) {
                 matchingClasses.push(index);
             }
         });
-    
         if (matchingClasses.length > 0) {
-            // Choose a random class from the matching classes
             const randomClassIndex = Math.floor(Math.random() * matchingClasses.length);
             matchingClassIndex = matchingClasses[randomClassIndex];
-            // console.log(`Chosen class has index ${matchingClassIndex}, which is ${strings.classes[matchingClassIndex + 1]}`);
             const matchingClassWeapons = weaponTypesByClass[matchingClassIndex];
-            // Searching for the matching weapon type within the class
             const matchingWeapon = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
-            // const matchingSlot = matchingClassWeapons.find(w => w.type.name === weaponTypeChosen);
-            
             if (matchingWeapon) {
-                // Assign weapon type and slot
                 weaponType = matchingWeapon.type;
                 weaponSlot = matchingWeapon.slot;
-                
-                // Modify the needsBoost property of this weapon type
                 weaponType.needsBoost = weaponType.needsBoost || 0;
-                originalBoost = weaponType.needsBoost; // Added so that we don't infinitely stack needsBoost on weapons (yikes!)
+                originalBoost = weaponType.needsBoost;
                 weaponType.needsBoost += powerLevel;
+            } else {
+                weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
             }
         } else {
-            // If no matching class is found, fall back to selecting a weapon type based on player class, weapon slot, and power level
             weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
         }
-    } else {
-        // If no weapon type is chosen, fall back
-        weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
     }
+  } else {
+      // If no weapon type is chosen, fall back to default selection.
+      weaponType = selectWeaponType(playerClass, weaponSlot, powerLevel);
+  }
 
-    // Check if weaponType is defined
-    if (!weaponType) {
-        console.error('Unable to generate weapon. Weapon type is undefined.');
-        return null;
-    }
+  // Check if weaponType is defined
+  if (!weaponType) {
+      console.error('Unable to generate weapon. Weapon type is undefined.');
+      return null;
+  }
 
-    let modificationCounts;
-    // console.log(`${extraStats} mod count(s) selected`);
-    if (extraStats === 1) {
-        modificationCounts = 1;
-    } else {
-        modificationCounts = getRandom(extraStats - 1, extraStats);
-    }
-    if (weaponType.needsBoost && modificationCounts > 1) {
-        modificationCounts -= 1;
-    }
+  let modificationCounts;
+  // console.log(`${extraStats} mod count(s) selected`);
+  if (extraStats === 1) {
+      modificationCounts = 1;
+  } else {
+      modificationCounts = getRandom(extraStats - 1, extraStats);
+  }
+  if (weaponType.needsBoost && modificationCounts > 1) {
+      modificationCounts -= 1;
+  }
 
   // console.log(`This weapon will have ${modificationCounts} mod(s)`);
 
@@ -3036,17 +3199,17 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
   // console.log(`   conBoost of ${conBoost}`);
 
   const weapon = {
-    playerClass: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : playerClass,
-    playerClassName: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : strings.classes[playerClass],
-    weaponSlot: weaponSlot,
-    weaponSlotName: strings.slots[weaponSlot],
-    type: weaponType.name,
-    proPoints: modificationCounts + proBoost, // if it needs a boost, it adds this many points
-    conPoints: modificationCounts + conBoost, 
-    neutralStats: [],
-    mandatoryPros: [],
-    pros: [],
-    cons: [],
+      playerClass: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : playerClass,
+      playerClassName: matchingClassIndex !== undefined ? strings.classes[matchingClassIndex + 1] : strings.classes[playerClass],
+      weaponSlot: weaponSlot,
+      weaponSlotName: strings.slots[weaponSlot],
+      type: weaponType.name,
+      proPoints: modificationCounts + proBoost, // if it needs a boost, it adds this many points
+      conPoints: modificationCounts + conBoost,
+      neutralStats: [],
+      mandatoryPros: [],
+      pros: [],
+      cons: [],
   };
 
   if (weaponTypeChosen) { // this resets needsBoost so it doesn't stack indefinitely
