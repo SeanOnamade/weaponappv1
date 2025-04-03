@@ -566,7 +566,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "While effect is active: User can air-jump twice as many times", },
     { pointCost: 0, text: "While effect is active: +5% movespeed per hit, to a max of +50%", },
     { pointCost: 0, text: "While effect is active: +1 capture rate and +35% damage resistance", },
-    { pointCost: 0, text: "Drink to slowly regain up to 125 health. Can't be shared", },
+    { pointCost: 0, text: "Drink to slowly regain up to 125 health.", },
     { pointCost: 0, text: "Drink to become cloaked for 6s. Cannot attack during this time", },
   ],
 
@@ -601,6 +601,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "Replaces the Sentry with a Railgun", },
     { pointCost: 0, text: "Replaces the Sentry with a Tesla Coil", },
     { pointCost: 1, text: "Teleporters are two-way", },
+    // { pointCost: 1, text: "Sentry Gun repairs for 33% after a kill", },
     { pointCost: 0, text: "", },
   ],
   
@@ -631,6 +632,7 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "This Weapon has a large melee range and deploys and holsters slower",}, 
         { text: "(Purely cosmetic) Victims explode on kill",}, 
         { text: "(Purely cosmetic) Victims disintegrate on kill",}, 
+        { text: "(Purely cosmetic) Victims explode into silly gibs",}, 
     ],
     Rocket_Launcher:  [
         { text: "Hold Fire to charge rockets' speed",},
@@ -716,6 +718,11 @@ const weaponEffects = [
     valueCon: 50,
   },
   {
+    for: ["Scout_Lunch_Box"],
+    pro: "Right click on an ally to give them the lunchbox, if applicable",
+    con: "Taking 50+ damage while effect is active cancels it",
+  },
+  {
     for: weaponTypeGroups.AllSubstantialHit,
     classLimit: ["Scout"],
     pro: "Can Goomba Stomp enemies while active",
@@ -742,6 +749,13 @@ const weaponEffects = [
     pro: "Store an additional air jump for each kill (max <value>)",
     con: "Double jumping disabled for <value>s after a kill",
     valuePro: 5,
+    valueCon: 5,
+  },
+  {
+    for: ["Scattergun"],
+    pro: "+<value>% movespeed for every shot missing from your clip",
+    con: "-<value>% movespeed for every shot missing from your clip",
+    valuePro: 3,
     valueCon: 5,
   },
   {
@@ -885,6 +899,11 @@ const weaponEffects = [
     for: ["Flamethrower", "Flare_Gun"],
     pro: "Can ignite buildings with this weapon",
     con: "Deals halved damage to buildings",
+  },
+  {
+    for: ["Flare_Gun"],
+    pro: "Hits on a burning target create a small explosion",
+    con: "Extinguish target on hit",
   },
   {
     for: weaponTypeGroups.Flamethrower,
@@ -1278,6 +1297,13 @@ const weaponEffects = [
     con: "Scrap Shooter: -15 metal lost every 3 shots",
   },
   {
+    for: ["Shotgun"],
+    classLimit: ["Engineer"],
+    pro: "Buildings heal by up to <value>% of damage dealt",
+    con: "Buildings are Marked-for-Death while this weapon is not active",
+    valuePro: 50,
+  },
+  {
     for: ["Revolver"],
     classLimit: ["Engineer"],
     pro: "+50 metal gained on headshot",
@@ -1484,10 +1510,16 @@ const weaponEffects = [
   },
   {
     for: ["Wrench"],
-    pro: "Sentry fires <value> more rocket(s)",
-    con: "Sentry fires <value> less rocket(s)",
+    pro: "Sentry fires <value> more rocket(s) per salvo",
+    con: "Sentry fires <value> less rocket(s) per salvo",
     valuePro: 2,
     valueCon: 2,
+  },
+  {
+    for: ["Wrench"],
+    pro: "Sentry repairs for <value>% after a kill",
+    con: "Sentry is irreperable for 3s after a kill",
+    valuePro: 35,
   },
   //// AllMedic ////
   {
@@ -1734,6 +1766,14 @@ const weaponEffects = [
     con: "On Hit: <value>% ÜberCharge lost",
     valuePro: 20,
     valueCon: 10,
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Medic"],
+    pro: "On Hit: Gain up to <value>% of your max health",
+    con: "-<value>% damage penalty the lower user's health is",
+    valuePro: 20,
+    valueCon: 20,
   },
   {
     for: weaponTypeGroups.Melee,
@@ -2348,6 +2388,15 @@ const weaponEffects = [
     ),
     pro: "Guaranteed minicrits while capturing points or pushing the cart",
     con: "-20% damage penalty while capturing points or pushing the cart",
+  },
+  {
+    for: weaponTypeGroups.AllSubstantialHit.filter(
+      (i) =>
+        i !== "Grenade_Launcher" &&
+        i !== "Stickybomb_Launcher"
+    ),
+    pro: "After attacking with a crit, the next attack within 3s is also guaranteed to be a crit while the third will not be",
+    con: "Bounty: User is marked for death for 3s after dealing a crit",
   },
   {
     for: weaponTypeGroups.AllSubstantialHit,
