@@ -1,5 +1,5 @@
 <div align="center">
-  <p>Currently deployed at <a href="https://tf2weapongenerator.netlify.app/">tf2weapongenerator.netlify.app</a>!</p>
+  <p>Currently deployed at <a href="https://tf2weapongenerator.com/">tf2weapongenerator.com</a>!</p>
 </div>
 
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
