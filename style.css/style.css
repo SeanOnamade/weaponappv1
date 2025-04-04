@@ -315,4 +315,34 @@ div {
     }
 }
 
+.generated-name-field {
+  /* Basic layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem; 
+  margin-top: 10px;
+
+  /* Match #weapon styling */
+  background-color: #24201B; 
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px; /* Adjust as needed */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+              rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border: none; /* Remove dotted border */
+
+  /* Text styling (gold font, etc.) */
+  color: #FFD700;
+  font-size: 18px;
+  line-height: 16px;
+  text-shadow: 2px 1px 1px #24201B;
+  font-family: mySecondFont; /* or whichever TF2 font you prefer */
+  font-weight: normal;
+}
+
+/* Hide element by default */
+.hidden {
+  display: none;
+}
 

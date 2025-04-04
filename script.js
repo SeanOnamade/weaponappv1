@@ -2478,8 +2478,8 @@ const weaponEffects = [
   //// AllAll ////
   {
     for: weaponTypeGroups.All,
-    pro: "+<value>% faster movespeed on wearer",
-    con: "-<value>% slower movespeed on wearer",
+    pro: "<value>% faster movespeed on wearer",
+    con: "<value>% slower movespeed on wearer",
     valuePro: 15,
     valueCon: 15,
   },
@@ -3063,6 +3063,7 @@ document.getElementById('captureButton').addEventListener('click', function() {
   // console.log(`Capture complete`);
 });
 
+let currentWeapon = null; // Global variable to hold the generated weapon
 
 function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponTypeChosen) {
     // console.log("Weapon Generating...");
@@ -3268,6 +3269,7 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
   addNeutralStat(weapon);
   addMandatoryPro(weapon);
   addWeaponProsAndCons(weapon);
+  currentWeapon = weapon;
   return weapon;
 }
 
@@ -3467,4 +3469,108 @@ function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     `  </div>`,
     `</div>`,
   ].join(" ");
+}
+
+function getWeaponFromHash() {
+  if (window.location.hash) {
+    // Remove the leading '#' and decode the Base64 string
+    const decoded = Base64.decode(window.location.hash.substring(1));
+    try {
+      // console.log(decoded);
+      // console.log(JSON.parse(decoded));
+      return JSON.parse(decoded);
+    } catch (e) {
+      console.error("Error parsing weapon from hash:", e);
+      return null;
+    }
+  }
+  return null;
+}
+
+function getWeaponStatsDescription() {
+  const weapon = getWeaponFromHash();
+  if (weapon) {
+    // Build a multi-line description
+    let description = "";
+    // First line: Class and Slot
+    description += `${weapon.playerClassName} ${weapon.weaponSlotName}\n`;
+    // Second line: Level and Weapon Type (assuming you have a level property; if not, default to "15")
+    const level = weapon.level || "15";
+    // Replace underscores in type with spaces
+    const weaponType = weapon.type ? weapon.type.replace(/_/g, " ") : "Unknown";
+    description += `Level ${level} ${weaponType}\n`;
+    
+    // Then add any additional descriptive text that was generated:
+    // For example, if your weapon object includes arrays like neutralStats, mandatoryPros, pros, cons:
+    if (weapon.neutralStats && weapon.neutralStats.length) {
+      description += weapon.neutralStats.join("\n") + "\n";
+    }
+    if (weapon.mandatoryPros && weapon.mandatoryPros.length) {
+      description += weapon.mandatoryPros.join("\n") + "\n";
+    }
+    if (weapon.pros && weapon.pros.length) {
+      description += weapon.pros.join("\n") + "\n";
+    }
+    if (weapon.cons && weapon.cons.length) {
+      description += weapon.cons.join("\n") + "\n";
+    }
+    
+    return description.trim();
+  } else {
+    return "No weapon generated yet.";
+  }
+}
+
+
+function canGenerateName() {
+  const key = 'weaponNameGeneration';
+  const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+  let data = JSON.parse(localStorage.getItem(key));
+  
+  // If no data or it's a new day, reset
+  if (!data || data.date !== today) {
+    data = { date: today, count: 0 };
+  }
+  
+  if (data.count < 10) {
+    data.count++;
+    localStorage.setItem(key, JSON.stringify(data));
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Assuming you have a button with id "generateNameButton"
+document.getElementById('generateNameButton').addEventListener('click', () => {
+  if (canGenerateName()) {
+    // Call your name generation function/API here
+    generateWeaponName();
+  } else {
+    alert("You've reached the daily limit of 10 names. Thanks for understanding!");
+  }
+});
+
+function generateWeaponName() {
+
+  const promptText = `Generate one best-fitting TF2 weapon name for a weapon with these stats: ${getWeaponStatsDescription()}`;
+  // console.log("Prompt to send", promptText); // for debugging
+
+  fetch("/.netlify/functions/generateName", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt: promptText })
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Display the generated name in the designated field
+      document.getElementById("weaponNameField").innerText = data.name;
+      weaponNameField.innerText = data.name;
+      // Remove the hidden class to reveal the field
+      weaponNameField.classList.remove("hidden");
+    })
+    .catch(error => {
+      console.error("Error generating weapon name:", error);
+      alert("Failed to generate name. Please try again.");
+    });
 }
