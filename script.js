@@ -1224,6 +1224,15 @@ const weaponEffects = [
     con: "No healing can be received within 3 seconds of taking damage", // LMAO
   },
   {
+    for: weaponTypeGroups.AllHeavy.filter((i) =>
+      weaponTypeGroups.AllCanHit.includes(i)),
+    classLimit: ["Heavy"],
+    pro: "On Kill: +<value>% to all healing received within 8 seconds",
+    con: "On Hit: -<value>% to all healing received within 8 seconds",
+    valuePro: 50,
+    valueCon: 50,
+  },
+  {
     for: ["Minigun"],
     pro: "<value>% faster spin up time",
     con: "<value>% slower spin up time",
@@ -2493,7 +2502,7 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.All,
     pro: "Battle Fever: Heal up to <value> HP per second while in combat",
-    con: "All healing received is decreased down to -<value>% while recently in combat",
+    con: "All healing received is decreased by <value>% while recently in combat",
     valuePro: 5,
     valueCon: 50,
   },
