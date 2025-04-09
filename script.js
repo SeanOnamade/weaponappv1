@@ -3540,8 +3540,10 @@ function canGenerateName() {
   if (!data || data.date !== today) {
     data = { date: today, count: 0 };
   }
+
+  const MAX_NAMES = 100;
   
-  if (data.count < 10) {
+  if (data.count < MAX_NAMES) {
     data.count++;
     localStorage.setItem(key, JSON.stringify(data));
     return true;
@@ -3556,7 +3558,7 @@ document.getElementById('generateNameButton').addEventListener('click', () => {
     // Call your name generation function/API here
     generateWeaponName();
   } else {
-    alert("You've reached the daily limit of 10 names. Thanks for understanding!");
+    alert("You've reached the daily limit of 100 names. Thanks for understanding!");
   }
 });
 
