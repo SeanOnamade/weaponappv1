@@ -2250,7 +2250,7 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.AllDoesDamage,
-    pro: "On Kill: Health is set to victim's max health if higher",
+    pro: "On Kill: Health is set to victim's max health if higher than user's current health",
     con: "On Kill: Gain +50% of max HP, but get marked for death for 8s", // idk about this one
   },
   {
