@@ -3450,6 +3450,7 @@ function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     // can pass an override bool as a checkbox to set randomImageIndex to 1 if I want
     const imageUrl = `weapon-images/${weapon.type}_${randomImageIndex}.png`;
     const fallbackUrl = `weapon-images/Unknown.png`; // Useful for my mistakes LOL
+    const displayedName = weapon.generatedName || `${weapon.playerClassName} ${weapon.weaponSlotName}`;
 
   return [
     `<div id="weapon" style="position: relative; padding: 10px;">`,
@@ -3457,7 +3458,7 @@ function formatWeaponAsHtml(weapon) { // edited bootstrap my-3
     `<img src="class-icons/${weapon.playerClassName}.png" alt="${weapon.playerClassName} icon" style="width: 30px; height: 30px;" />`,
     `</div>`,
     `  <div id="weaponImage"> <img src="${imageUrl}" onerror="this.onerror=null;this.src='${fallbackUrl}'" /> </div>`,
-    `  <div id="weaponName" class="my-2 text-uppercase">${weapon.playerClassName} ${weapon.weaponSlotName}</div>`,
+    `  <div id="weaponName" class="my-2 text-uppercase">${displayedName}</div>`,
     `  <div id="weaponStats" class="my-3">`,
     `    <div id="weaponLevel" style="margin-bottom: 0.4rem !important;" >`,
     `      Level ${addRandomnessToNumber(getRandom(10, 50))}`,
@@ -3562,6 +3563,15 @@ document.getElementById('generateNameButton').addEventListener('click', () => {
   }
 });
 
+function reloadWeaponCard() {
+  const weapon = getWeaponFromHash();
+  if (weapon) {
+    // Update the display areas with the new weapon card
+    generatedWeaponAreaMobile.innerHTML = formatWeaponAsHtml(weapon);
+    generatedWeaponAreaDesktop.innerHTML = formatWeaponAsHtml(weapon);
+  }
+}
+
 function generateWeaponName() {
 
   const promptText = `Generate one best-fitting TF2 weapon name for a weapon with these stats: ${getWeaponStatsDescription()}`;
@@ -3574,11 +3584,17 @@ function generateWeaponName() {
   })
     .then(response => response.json())
     .then(data => {
+      
       // Display the generated name in the designated field
       document.getElementById("weaponNameField").innerText = data.name;
       weaponNameField.innerText = data.name;
       // Remove the hidden class to reveal the field
       weaponNameField.classList.remove("hidden");
+      // if (window.currentWeapon) {
+      //   window.currentWeapon.generatedName = generatedName;
+      //   // Optionally update the hash so future reloads have the new name:
+      //   window.location.hash = Base64.encode(JSON.stringify(window.currentWeapon));
+      // }
     })
     .catch(error => {
       console.error("Error generating weapon name:", error);
