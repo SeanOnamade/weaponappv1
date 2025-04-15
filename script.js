@@ -983,6 +983,11 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Flamethrower,
+    pro: "Mini-crits targets launched airborne by explosions, grapple hooks or rocket packs",
+    con: "Marked for death for 2s after an airblast",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
     pro: "-<value>% airblast cost",
     con: "+<value>% airblast cost",
     valuePro: 50,
@@ -1040,6 +1045,12 @@ const weaponEffects = [
     for: ["Grenade_Launcher"],
     pro: "Hold to charge a grenade to deal up to +100% the knockback",
     con: "Deals no knockback on hit",
+  },
+  {
+    for: ["Grenade_Launcher"],
+    pro: "Ignites targets launched airborne by explosions, grapple hooks or rocket packs",
+    con: "Self-damage ignites user for <value>s",
+    valueCon: 5,
   },
   {
     for: ["Stickybomb_Launcher"],
@@ -1214,6 +1225,11 @@ const weaponEffects = [
     for: ["Demoknight_Melee"],
     pro: "Hit a teammate to knight them, using your charge meter to heal half their health",
     con: "Enemies heal half the melee damage they deal to you",
+  },
+  {
+    for: ["Demoknight_Melee"],
+    pro: "Press Reload key to parry a melee attack with precise timing, granting your next attack a minicrit",
+    con: "Possesses the same range as a regular melee weapon",
   },
   //// AllHeavy ////
   {
@@ -1699,7 +1715,7 @@ const weaponEffects = [
   {
     for: ["Medi_Gun"],
     pro: "Alt-Fire without a full meter to double the speed of healing by draining your own health",
-    con: "No healing during ÜberCharge",
+    con: "Cannot heal self during ÜberCharge",
   },
   {
     for: ["Medi_Gun"],
@@ -1722,8 +1738,8 @@ const weaponEffects = [
   },
   {
     for: ["Medi_Gun"],
-    pro: "On significant damage dealt by target: +<value>% ÜberCharge",
-    con: "On significant damage taken: lose <value>% ÜberCharge",
+    pro: "On significant instance of damage received from enemy: +<value>% ÜberCharge",
+    con: "On significant instance of damage taken: lose <value>% ÜberCharge",
     valuePro: 9,
     valueCon: 5,
   },
@@ -1767,6 +1783,13 @@ const weaponEffects = [
     for: ["Medi_Gun"],
     pro: "Healing an ally from <20% HP to full will instantly overheal the user",
     con: "Guilt-Ridden: Having a heal target or ally die near/in front of you marks you for death",
+  },
+  {
+    for: ["Medi_Gun"],
+    pro: "Up to +<value>% ÜberCharge build rate the lower user's health is",
+    con: "Down to -<value>% ÜberCharge build rate the lower user's health is",
+    valuePro: 30,
+    valueCon: 20,
   },
   {
     for: weaponTypeGroups.Melee,
@@ -2584,8 +2607,8 @@ const weaponEffects = [
   //   valueCon: 50,
   // },
   {
-    for: [...weaponTypeGroups.All].filter(
-      (i) => !weaponTypeGroups.AllPassive.includes(i)
+    for: [...weaponTypeGroups.All].filter((i) => 
+      !weaponTypeGroups.AllPassive.includes(i) && i !== "Demoknight_Melee"
     ),
     pro: "+<value> capture rate while active",
     con: "Inaccessible while capturing",
