@@ -99,6 +99,7 @@ The project is deployed at [https://tf2weapongenerator.netlify.app](https://tf2w
 * [![CSS][CSS-shield]][CSS-url]
 * [![JavaScript][JavaScript-shield]][JavaScript-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![OpenAI][OpenAI-shield]][OpenAI-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -166,6 +167,7 @@ Here are the significant changes I made from the original, which was created by 
 - [X] Added weapon card capture
     - [X] Implemented capture button
 - [X] Fixed classLimit bug not working
+- [X] Added AI weapon name generation with OpenAI API
 - [X] Misc
     - [X] Gave Engineer the revolver
     - [X] Removed everyone's backpacks and shoes lol
@@ -257,3 +259,5 @@ As aforementioned, this project was initially created by Siko91 who did an amazi
 [CSS-url]: https://www.w3schools.com/css/
 [JavaScript-shield]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
 [JavaScript-url]: https://www.w3schools.com/js/
+[OpenAI-shield]: https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=fff&style=flat
+[OpenAI-url]: https://openai.com/
