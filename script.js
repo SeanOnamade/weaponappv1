@@ -621,7 +621,7 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "(Purely cosmetic) Victims explode on kill",}, 
     ],
     Knife:  [
-        { text: "Backstabbing stuns enemy for 3s, granting the user +40% movespeed and firing speed",}, 
+        { text: "Backstabbing stuns enemy for 3s, granting the user +40% movespeed and primary firing speed",}, 
         { text: "Backstabbing stuns enemy for 3s, granting the user minicrits during this period",}, 
         { text: "Backstabbing causes victim to bleed critically until healing or death, granting user +40% move/firing speed for the duration",}, 
         { text: "This knife can be thrown a short distance, and recharges over 10s. Recharge time is halved on a backstab.",}, 
@@ -895,6 +895,11 @@ const weaponEffects = [
     for: ["Rocket_Launcher"],
     pro: "Hold Alt-Fire to have a fired rocket follow your crosshair",
     con: "Shrapnel: Bleed for 2s upon blast jumping",
+  },
+  {
+    for: ["Rocket_Launcher"],
+    pro: "Alt-Fire to turn all forward momentum + upward momentum into downward momentum, performing a ground pound with a wide radius",
+    con: "Fall damage while blast jumping is tripled",
   },
   {
     for: ["Shotgun"],
@@ -1496,6 +1501,14 @@ const weaponEffects = [
     valueCon: 20,
   },
   {
+    for: ["Shotgun", "Revolver", "Pistol"],
+    classLimit: ["Engineer"],
+    pro: "+<value>% firing speed for each building up",
+    con: "-<value>% firing speed for each building up",
+    valuePro: 10,
+    valueCon: 10,
+  },
+  {
     for: weaponTypeGroups.AllEngineer,
     classLimit: ["Engineer"],
     pro: "All buildings cost -<value>% less metal to repair",
@@ -1557,10 +1570,18 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllEngineer,
     classLimit: ["Engineer"],
-    pro: "Start off 20% slower. +<value>% movespeed for each building active",
+    pro: "Start off 5% slower. +<value>% movespeed for each building active",
     con: "-<value> max metal capacity for each building active",
     valuePro: 10,
     valueCon: 20,
+  },
+  {
+    for: weaponTypeGroups.AllEngineer,
+    classLimit: ["Engineer"],
+    pro: "+<value>% damage resistance for each building active",
+    con: "+<value>% damage vulnerability for each building active",
+    valuePro: 10,
+    valueCon: 10,
   },
   {
     for: weaponTypeGroups.AllCanHit,
@@ -1732,6 +1753,16 @@ const weaponEffects = [
     pro: "Alt-Fire to remotely remove a sapper in line of sight at the cost of dropping to 1HP",
     con: "Sappers on buildings also drain user's health at a similar rate",
   },
+  {
+    for: ["Wrench"],
+    pro: "Spark of Innovation: If all buildings are up, ignite on hit",
+    con: "Overcharged: If all buildings are up, ignites user on hit",
+  },
+  {
+    for: ["Wrench"],
+    pro: "Spare Metal: If all buildings are up, cause bleed on hit",
+    con: "Too Much Metal: If all buildings are up, bleed on hit",
+  },
   //// AllMedic ////
   {
     for: weaponTypeGroups.AllMedic.filter(
@@ -1781,6 +1812,14 @@ const weaponEffects = [
     classLimit: ["Medic"],
     pro: "On Kill: Opportunity to taunt in order to gain 25% ÜberCharge",
     con: "On Death: Drop a medium health pack",
+  },
+  {
+    for: weaponTypeGroups.AllMedic.filter((i) =>
+        weaponTypeGroups.AllDoesDamage.includes(i)),
+    classLimit: ["Medic"],
+    pro: "On Kill: Allies near the deceased target heal for 50% HP",
+    con: "On Death: -<value>% healing rate on all healing done for the next 8s",
+    valueCon: 30,
   },
   {
     for: weaponTypeGroups.AllMedic.filter((i) =>
@@ -2331,26 +2370,34 @@ const weaponEffects = [
   // },
 
   {
-    for: [...weaponTypeGroups.All].filter(
+    for: [...weaponTypeGroups.All].filter( // all but Spy
       (i) => !weaponTypeGroups.AllPassive.includes(i)),
     classLimit: ["Scout", "Soldier", "Pyro", "Demo", "Heavy", "Engineer", "Medic", "Sniper"],
     pro: "Can see enemies' HP while active",
     con: "Enemies can see your HP while active",
   },
   {
-    for: [...weaponTypeGroups.All].filter(
+    for: [...weaponTypeGroups.All].filter( // all but Spy
       (i) => !weaponTypeGroups.AllPassive.includes(i)),
     classLimit: ["Scout", "Soldier", "Pyro", "Demo", "Heavy", "Engineer", "Medic", "Sniper"],
     pro: "Can see the HP of enemies",
     con: "Enemies can see your HP",
   },
   { 
-    for: weaponTypeGroups.All,
+    for: weaponTypeGroups.All, // all but Scout
     classLimit: ["Soldier", "Pyro", "Demo", "Heavy", "Engineer", "Medic", "Sniper", "Spy"],
     pro: "+<value> capture rate on user",
     con: Math.random() < 0.5 ? "User cannot attack while capturing" : "User cannot capture objectives",
     valuePro: 1,
   },
+  // { 
+  //   for: weaponTypeGroups.Melee, // all but Spy (already exists...)
+  //   classLimit: ["Scout", "Soldier", "Pyro", "Demo", "Heavy", "Engineer", "Medic", "Sniper"],
+  //   pro: "+<value>% melee damage resistance while active",
+  //   con: "+<value>% melee damage vulnerability while active",
+  //   valuePro: 50,
+  //   valueCon: 50,
+  // },
 
   //// ---------- ////
 
@@ -2680,8 +2727,8 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.AllSubstantialHit,
-    pro: "Motivated: +<value>% holster, deploy, and reload speed while being healed by a Medic",
-    con: "On One's Laurels: -<value>% holster, deploy, and reload speed while being healed by a Medic", // ??? //
+    pro: "Motivated: +<value>% holster, deploy, and/or reload speed while being healed by a Medic",
+    con: "On One's Laurels: -<value>% holster, deploy, and/or reload speed while being healed by a Medic", // ??? //
     valuePro: 100,
     valueCon: 100,
   },
@@ -2840,6 +2887,12 @@ const weaponEffects = [
     con: "-<value>% health from packs on wearer",
     valuePro: 75,
     valueCon: 50,
+  },
+  {
+    for: weaponTypeGroups.All,
+    pro: "Overheal on wearer does not decay",
+    con: "Overheal on user decays <value>% faster",
+    valueCon: 100,
   },
   /// AllActive
   // {
@@ -3046,8 +3099,8 @@ const weaponEffects = [
     for: weaponTypeGroups.Melee,
     pro: "-<value>% damage from melee sources while active",
     con: "+<value>% damage from melee sources while active",
-    valuePro: 30,
-    valueCon: 30,
+    valuePro: 50,
+    valueCon: 50,
   },
   {
     for: weaponTypeGroups.Melee,
@@ -3185,6 +3238,12 @@ const weaponEffects = [
     classLimit: ["Soldier", "Demoman", "Heavy"], // Uber-able
     pro: "Don't Touch My Pocket: On healing Medic's death, gain 4s of mini-crits",
     con: "Not My Pocket!: On healing Medic's death, user is marked-for-death for 4s",
+  },
+  {
+    for: weaponTypeGroups.AllSubstantialHit,
+    classLimit: ["Soldier", "Demoman", "Heavy"], // Uber-able
+    pro: "Move at your healer's movespeed",
+    con: "Healer is forced to move at user's movespeed",
   },
   {
     for: weaponTypeGroups.All,
@@ -3976,3 +4035,91 @@ function generateWeaponName() {
       alert("Failed to generate name. Please try again.");
     });
 }
+
+// Background selection functionality
+document.getElementById('selectBackgroundButton').addEventListener('click', showBackgroundModal);
+document.getElementById('closeBackgroundModal').addEventListener('click', hideBackgroundModal);
+
+// Add hover effect to close button
+document.getElementById('closeBackgroundModal').addEventListener('mouseover', function() {
+  this.style.transform = 'scale(1.2)';
+});
+
+document.getElementById('closeBackgroundModal').addEventListener('mouseout', function() {
+  this.style.transform = 'scale(1)';
+});
+
+function showBackgroundModal() {
+  const modal = document.getElementById('backgroundModal');
+  const grid = document.getElementById('backgroundGrid');
+  
+  // Clear existing content
+  grid.innerHTML = '';
+  
+  // Generate thumbnails for all 33 backgrounds
+  for (let i = 1; i <= 33; i++) {
+    const thumbnail = document.createElement('div');
+    thumbnail.style.cssText = `
+      background-image: url('../images/wallpaper_${i}.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      background-color: transparent;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+    `;
+    
+    thumbnail.addEventListener('mouseover', function() {
+      this.style.border = '2px solid white';
+      this.style.borderRadius = '10px';
+      this.style.transform = 'scale(1.05)';
+    });
+    
+    thumbnail.addEventListener('mouseout', function() {
+      this.style.border = '2px solid rgba(255, 255, 255, 0.2)';
+      this.style.borderRadius = '10px';
+      this.style.transform = 'scale(1)';
+    });
+    
+    thumbnail.addEventListener('click', function() {
+      selectBackground(i);
+      hideBackgroundModal();
+    });
+    
+    grid.appendChild(thumbnail);
+  }
+  
+  modal.style.display = 'block';
+  document.getElementById('selectBackgroundButton').blur();
+}
+
+function hideBackgroundModal() {
+  document.getElementById('backgroundModal').style.display = 'none';
+}
+
+function selectBackground(backgroundIndex) {
+  const imgUrl = `../images/wallpaper_${backgroundIndex}.jpg`;
+  const img = new Image();
+  img.onload = function() {
+    document.body.style.backgroundImage = `url(${imgUrl})`;
+  };
+  img.onerror = function() {
+    // Fallback to random background function if image fails
+    backGroundChange(new Event('click'));
+  };
+  img.src = imgUrl;
+  
+  // Update lastIndex to prevent the random button from immediately showing the same background
+  lastIndex = backgroundIndex;
+}
+
+// Close modal when clicking outside of it
+document.getElementById('backgroundModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    hideBackgroundModal();
+  }
+});

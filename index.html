@@ -375,7 +375,13 @@
                     </button>
                     <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold;" type="button"
                       class="btn btn-sm btn-success btn-outline-dark my-1 flex-fill mx-1" id="changeBackgroundButton">
-                      Switch Background! ↑
+                      Random Background! ↑
+                    </button>
+                  </div>
+                  <div style="justify-content: center;">
+                    <button style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; font-weight: bold; width: 100%;" type="button"
+                      class="btn btn-sm btn-success btn-outline-dark my-1" id="selectBackgroundButton">
+                      Select Background
                     </button>
                   </div>
                   <div style="justify-content: center;">
@@ -412,6 +418,26 @@
             </div>
       
       </div>
+
+    <!-- Background Selection Modal -->
+    <div id="backgroundModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+         background: rgba(0, 0, 0, 0.5); z-index: 1000; overflow-y: auto;">
+      <div style="border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; 
+           background-color: #9494945a; backdrop-filter: blur( 3px ); 
+           margin: 50px auto; padding: 20px; max-width: 80%; width: 800px;" 
+           class="cornered">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="color: white; margin: 0; text-shadow: 1px 1px 2px black; font-weight: bold;">Select Background</h3>
+          <button id="closeBackgroundModal" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer; font-weight: bold;">&times;</button>
+        </div>
+        
+        <div id="backgroundGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+             gap: 15px; max-height: 60vh; overflow-y: auto;">
+          <!-- Background thumbnails will be generated here -->
+        </div>
+      </div>
+    </div>
 
       <script src="base64.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
