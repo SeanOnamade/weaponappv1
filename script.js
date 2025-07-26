@@ -475,9 +475,11 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: -1, text: "Provides a group buff that slowly heals nearby team members. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a group buff that increases the firing and reload rates of nearby teammates. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a group buff that prevents nearby teammates from having to reload. Rage increases through damage done.", },
-    { pointCost: -1, text: "Provides a group buff where all healing received is doubled. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a group buff where all healing received is tripled. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a group buff where allies can heal each other for 35% with attacks on each other. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a buff where enemies hit by user are marked for death. Rage increases through damage done.", },
+    { pointCost: -1, text: "Seeing Red: Provides a buff where enemies in the user's line of sight are marked for death for him. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a buff where the user's next four attacks are guaranteed crits. Rage increases through damage done.", },
     ],
 
   Crossbow: [
@@ -515,7 +517,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
 
   Heavy_Lunch_Box: [
     // { pointCost: -1, text: "Eat to receive 35% damage resistance for 10 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
-    { pointCost: -1, text: "Mann of Steel: Eat to receive 50% bullet damage resistance for 10 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
+    { pointCost: -1, text: "Mann of Steel: Alt-Fire to cycle between bullet/explosive/fire resistance. Eat for +50% selected resistance (10s). Cannot be shared", },
     { pointCost: -1, text: "Eat to gain 25% movespeed for 15 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
     { pointCost: -1, text: "Eat to prevent all debuffs for 15 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
     { pointCost: -1, text: "Eat to prevent overheal decay for 15 seconds. Alt-Fire: Share with a friend (Small Health Kit)", },
@@ -533,10 +535,11 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: -1, text: "ÜberCharge grants 100% minicritical chance" },
     { pointCost: -1, text: "ÜberCharge creates a frontal projectile shield and heals all nearby allies" },
     { pointCost: -1, text: "ÜberCharge prevents user and patient from dropping below 1 HP" },
-    { pointCost: -1, text: "ÜberCharge allows 300% of damage the patient deals to return to the pair as healing" },
+    { pointCost: -1, text: "ÜberCharge converts 300% of the patient's damage dealt into healing for both Medic and patient" },
     { pointCost: -1, text: "ÜberCharge heals in a massive radius rather than just healing one target" },
-    { pointCost: 0, text: "Quickest Fix: ÜberCharge will heal up to three targets switched to during its duration, up to full HP instantaneously upon beam switch" },
+    { pointCost: 0, text: "Quickest Fix: On ÜberCharge, switching heal targets instantly heals the new target to full HP (max 3 switches per Über)" },
     { pointCost: 0, text: "ÜberCharge grants 6s of invulnerability" },
+    { pointCost: 1, text: "Healing ramps up to +100% the closer the user is to the patient. ÜberCharge grants doubled healing rate." },
   ],
 
   Melee_with_Projectile: [
@@ -584,7 +587,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
 
   Throwable_Weapon: [
     { pointCost: 0, text: "Throw at your enemies to deal damage and make them bleed for 5s", },
-    { pointCost: 0, text: "Initial damage is halved; the other half + an additional 50% is dealt in bleed", },
+    { pointCost: 0, text: "Deals 50% damage on hit, then 100% of the original damage as bleed over time", },
     { pointCost: 0, text: "Throw at your enemies to deal damage and mark them for death for 5s", },
     { pointCost: 0, text: "Throw at your enemies to deal damage and ignite them for 5s", },
     { pointCost: 0, text: "Throw at your enemies to deal low damage and remove all buffs. Two throwables instead of one!", },
@@ -598,7 +601,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "Hitting an enemy building twice reverts it to a lower level version of itself", },
     { pointCost: 1, text: "Removes sappers in a single hit", },
     { pointCost: 1, text: "Team Player: You spend -50% less metal when upgrading allies' buildings", },
-    { pointCost: 1, text: "Hold Alt-Fire to drain metal from the ammo pool of your sentry into your pocket", },
+    { pointCost: 1, text: "Hold Alt-Fire to drain sentry ammo into personal metal reserves", },
     { pointCost: -1, text: "Exchanges teleporters for boost pads", },
     { pointCost: -1, text: "Exchanges teleporters for jump pads", },
     { pointCost: 0, text: "Replaces the Sentry with a Railgun", },
@@ -613,6 +616,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
 const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
     Flamethrower:  [
       { text: "Hold Alt-Fire to charge up a piercing fireball at the cost of 100 ammo. Can still reflect.",},
+      { text: "Douses enemies in hot gasoline. Targets burn but are considered wet.",},
     ],
     Grenade_Launcher:  [
       { text: "Hold Fire to charge grenades' speed",},
@@ -1146,7 +1150,7 @@ const weaponEffects = [
   },
   {
     for: ["Grenade_Launcher"],
-    pro: "Hold to charge a grenade to deal up to +100% the knockback",
+    pro: "Hold to charge a grenade to deal up to double the knockback",
     con: "Deals no knockback on hit",
   },
   {
@@ -1230,7 +1234,7 @@ const weaponEffects = [
   {
     for: ["Stickybomb_Launcher"],
     pro: "Stickybomb knockback increases with charge up to +200%",
-    con: "Stickybombs deal negligble knockback to enemies",
+    con: "Stickybombs deal negligible knockback to enemies",
   },
   {
     for: ["Stickybomb_Launcher"],
@@ -1422,17 +1426,22 @@ const weaponEffects = [
     valueCon: 100,
   },
   {
+    for: ["Minigun"],
+    pro: "While revved, nearby allies take no knockback",
+    con: "While revved, knockback received is quadrupled",
+  },
+  {
     for: ["Shotgun"],
     classLimit: ["Heavy"],
-    pro: "Alt-Fire: Fire a shot that empties the clip, deals regular damage, but heals for 100% of the damage dealt. The following reload takes five times as long.",
+    pro: "Alt-Fire: Empty clip in one shot that deals regular damage and heals you for damage dealt. 5x longer reload after this",
     con: "-<value>% max health while active",
     valueCon: 30,
   },
   {
     for: ["Shotgun"],
     classLimit: ["Heavy"],
-    pro: "Per Any Shot: +<value> HP",
-    con: "Per Shot: -<value> HP",
+    pro: "Per Hit: +<value> HP",
+    con: "Per Hit: -<value> HP. HP restores after a kill.",
     valuePro: 8,
     valueCon: 10,
   },
@@ -1440,14 +1449,14 @@ const weaponEffects = [
     for: weaponTypeGroups.Melee,
     classLimit: ["Heavy"],
     pro: "Heavyweight Champ: +<value> firing speed",
-    con: "Swinging requires a length, uninterruptible windup",
+    con: "Swinging requires a lengthy, uninterruptible windup",
     valuePro: 50,
   },
   {
     for: weaponTypeGroups.Melee,
     classLimit: ["Heavy"],
     pro: "Time a swing to reflect a projectile!",
-    con: "+50% knockback received while active", // regular class knockback
+    con: "Knockback received while active is doubled", // regular class knockback
   },
   //// AllEngineer ////
   {
@@ -1462,6 +1471,12 @@ const weaponEffects = [
     pro: "Buildings heal by up to <value>% of damage dealt",
     con: "Buildings are Marked-for-Death while this weapon is not active",
     valuePro: 50,
+  },
+  {
+    for: ["Shotgun"],
+    classLimit: ["Engineer"],
+    pro: "On Kill: Spawn a Level 1 Dispenser where the enemy died. Once built, its health drains as if being sapped.",
+    con: "On Death: Drop health pack (size based on remaining metal)",
   },
   {
     for: ["Revolver"],
@@ -1891,6 +1906,12 @@ const weaponEffects = [
     con: "Adrenaline Rush: Enemies you damage gain +10% movespeed for 5s",
   },
   {
+    for: ["Crossbow"],
+    classLimit: ["Medic"],
+    pro: "On Hit: Create a bleed-inducing poison cloud for 3s",
+    con: "Hippocratic Oaf: On Hit, user is marked-for-death for target for 2s",
+  },
+  {
     for: ["Medi_Gun"],
     pro: "Each kill your patient gets increases ÜberCharge by 10% (which can prolong Übers)",
     con: "This Medi Gun solely charges with patient damage and kills, rather than by healing",
@@ -1899,15 +1920,15 @@ const weaponEffects = [
     for: ["Medi_Gun"],
     pro: "+<value>% ÜberCharge build rate",
     con: "-<value>% ÜberCharge build rate",
-    valuePro: 30,
-    valueCon: 30,
+    valuePro: 40,
+    valueCon: 40,
   },
   {
     for: ["Medi_Gun"],
     pro: "+<value>% heal rate",
     con: "-<value>% heal rate",
-    valuePro: 40,
-    valueCon: 40,
+    valuePro: 50,
+    valueCon: 50,
   },
   {
     for: ["Medi_Gun"],
@@ -1940,7 +1961,7 @@ const weaponEffects = [
   {
     for: ["Medi_Gun"],
     pro: "Alt-Fire without a full meter to double the speed of healing by draining your own health",
-    con: "Cannot heal self during ÜberCharge",
+    con: "No self-healing or received healing during ÜberCharge",
   },
   {
     for: ["Medi_Gun"],
@@ -1965,12 +1986,12 @@ const weaponEffects = [
     for: ["Medi_Gun"],
     pro: "On significant instance of damage received from enemy: +<value>% ÜberCharge",
     con: "On significant instance of damage taken: lose <value>% ÜberCharge",
-    valuePro: 9,
-    valueCon: 5,
+    valuePro: 10,
+    valueCon: 10,
   },
   {
     for: ["Medi_Gun"],
-    pro: "When healing an ally below 50% health, user is also healed at half the rate",
+    pro: "When healing an ally below 50% health, user is also healed at half the rate into overheal",
     con: "Overheats when used for longer than 10 seconds, igniting the user",
   },
   {
@@ -2007,7 +2028,7 @@ const weaponEffects = [
   {
     for: ["Medi_Gun"],
     pro: "Healing an ally from <20% HP to full will instantly overheal the user",
-    con: "Guilt-Ridden: Having a heal target or ally die near/in front of you marks you for death",
+    con: "Guilt-Ridden: Having an ally die near/in front of you marks you for death for a short period",
   },
   {
     for: ["Medi_Gun"],
@@ -2092,6 +2113,17 @@ const weaponEffects = [
     for: ["Sniper_Rifle"],
     pro: "+50% damage bonus on targets being healed",
     con: "Medical Intervention: Headshots on targets being healed do not crit",
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "Each consecutive hit deals 10% more damage, to a max of +50%",
+    con: "Each consecutive miss reduces the damage of the next hit by 20%",
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "Gain +<value>% damage on next headshot per second spent tracking an enemy's head before firing (max +100%). Laser dot flashes intensely.",
+    con: "Accuracy decreases the longer the user stays scoped",
+    valuePro: 25,
   },
   {
     for: ["Bow"],
@@ -2300,7 +2332,7 @@ const weaponEffects = [
   {
     for: ["Sapper"],
     pro: "Alt-Fire: Throw sapper from a distance, with a 15s cooldown",
-    con: "After applying a sapper, user cannot apply another for 3 seconds",
+    con: "After applying a sapper, user cannot apply another for 5 seconds",
   },
   {
     for: ["Sapper"],
@@ -2330,6 +2362,16 @@ const weaponEffects = [
     con: "Cannot disguise for <value> seconds after sapping",
     valuePro: 20,
     valueCon: 10,
+  },
+  {
+    for: ["Sapper"],
+    pro: "Can see Engineer through walls while sapping",
+    con: "Engineer can see user through walls while sapping, past cloak and disguise",
+  },
+  {
+    for: ["Sapper"],
+    pro: "Sapping also drains metal from the Engineer",
+    con: "As the building is sapped, metal returns to the Engineer",
   },
   {
     for: ["Knife"],
@@ -2632,14 +2674,14 @@ const weaponEffects = [
     pro: "<value>% stronger explosion knockback",
     con: "<value>% weaker explosion knockback",
     valuePro: 100,
-    valueCon: 50,
+    valueCon: 100,
   },
   {
     for: weaponTypeGroups.AllExplosive,
     pro: "+<value>% explosion knockback on self",
     con: "+<value>% self damage taken",
     valuePro: 100,
-    valueCon: 30,
+    valueCon: 75,
   },
   {
     for: weaponTypeGroups.AllExplosive,
@@ -2768,8 +2810,8 @@ const weaponEffects = [
     for: weaponTypeGroups.AllSubstantialHit,
     pro: "While Active: -<value>% knockback from all sources while capturing points, intelligence, or the cart",
     con: "+<value>% knockback from all sources while capturing points, intelligence, or the cart",
-    valuePro: 50,
-    valueCon: 50,
+    valuePro: 100,
+    valueCon: 100,
   },
   {
     for: weaponTypeGroups.AllSubstantialHit.filter(
@@ -2814,8 +2856,12 @@ const weaponEffects = [
     con: "Massive knockback on the target and user at close range",
   },
   {
-    for: weaponTypeGroups.AllSubstantialHit.filter(
-      (i) => !weaponTypeGroups.Melee.includes(i),
+    for: [...weaponTypeGroups.AllReloading].filter(
+      (i) =>
+        i !== "Flamethrower" &&
+        i !== "Sniper_Rifle" &&
+        i !== "Flare_Gun" &&
+        i !== "Bow"
     ),
     pro: "+1 ammo instantly reloaded (into clip) on hit",
     con: "Missing subtracts 2 ammo instead of 1",
@@ -2873,6 +2919,11 @@ const weaponEffects = [
     for: weaponTypeGroups.All,
     pro: "All received debuffs (e.g. bleed, marked-for-death, afterburn, etc.) flip into buffs",
     con: "All received debuffs last twice as long",
+  },
+  {
+    for: weaponTypeGroups.All,
+    pro: "Healing received below 50% health is doubled",
+    con: "Healing received below 50% health is halved",
   },
   {
     for: weaponTypeGroups.All,
@@ -3360,6 +3411,11 @@ const weaponEffects = [
     for: ["Scattergun", "Shotgun"],
     pro: "Electricity In The Air: Gain a stored mini-crit for every hit you land on a crit/mini-crit boosted target. Activate with Alt-Fire.",
     con: "Damage dealt to crit/mini-crit boosted targets is reduced to 33%",
+  },
+  {
+    for: ["Scattergun", "Shotgun", "Rocket_Launcher"],
+    pro: "Alt-Fire to spend all remaining ammo in weapon for a guaranteed minicrit",
+    con: "Total Shock: Getting hit by a crit/mini-crit empties your clip",
   },
   {
     for: ["Scattergun", "Stickybomb_Launcher", "Grenade_Launcher", "Rocket_Launcher", "Flamethrower"],
