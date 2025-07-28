@@ -798,9 +798,9 @@ const weaponEffects = [
   },
   {
     for: ["Scattergun"],
-    pro: "Frustration: +<value>% damage bonus on the next shot you land, for each consecutive shot completely missed. Max of 30%",
+    pro: "Frustration: +<value>% damage bonus on the next shot you land, for each consecutive shot completely missed. Max of +40%",
     con: "Frustration: -<value>% damage penalty on the next shot you land, for each consecutive shot completely missed. Min of -50%",
-    valuePro: 7,
+    valuePro: 8,
     valueCon: 10,
   },
   {
@@ -860,6 +860,12 @@ const weaponEffects = [
     classLimit: ["Soldier"],
     pro: "Adaptable: After being hit by a crit, all following crits received during the fight deal half of the non-boosted damage",
     con: "Full Send: Crits received deal 5x the damage instead of 3x",
+  },
+  {
+    for: weaponTypeGroups.AllSoldier,
+    classLimit: ["Soldier"],
+    pro: "Anger Point: After getting hit by a crit, your next attack will crit",
+    con: "After getting hit by a crit, your next attack deals halved damage",
   },
   {
     for: weaponTypeGroups.AllCanHit,
@@ -976,20 +982,32 @@ const weaponEffects = [
     for: weaponTypeGroups.AllPyro,
     classLimit: ["Pyro"],
     pro: "Upon death: Ignite all enemies around you in a ball of fire",
-    con: "All afterburn times are halved",
+    con: "All afterburn durations are halved",
   },
   {
     for: weaponTypeGroups.AllPyro.filter((i) =>
       weaponTypeGroups.Melee.includes(i)),
     classLimit: ["Pyro"],
     pro: "Damage removes sappers in two hits",
-    con: "Wearer cannot ignite disguised spies",
+    con: "User cannot ignite disguised spies",
   },
   {
     for: weaponTypeGroups.AllPyro,
     classLimit: ["Pyro"],
     pro: "Fire Retardant: Fire does no damage to you at all",
     con: "You are no longer immune to afterburn",
+  },
+  {
+    for: weaponTypeGroups.AllPyro,
+    classLimit: ["Pyro"],
+    pro: "Fiery Spirit: When marked for death, the user's attacks minicrit",
+    con: "User is marked for death for a short period after taking fire damage",
+  },
+  {
+    for: weaponTypeGroups.AllCanHit,
+    classLimit: ["Pyro"],
+    pro: "Enemies who melee you with this weapon active are ignited",
+    con: "Being meleed with this weapon active ignites the user into afterburn",
   },
   {
     for: ["Flamethrower", "Flare_Gun"],
@@ -1050,12 +1068,12 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.Flamethrower,
     pro: "Airblast can now be charged, causing a small explosion when fully charged",
-    con: "Airblast destroys projectiles at the cost of twice the ammo consumed",
+    con: "Airblast destroys projectiles and consumes twice the ammo",
   },
   {
     for: weaponTypeGroups.Flamethrower,
-    pro: "Afterburn flames deal no damage but can't be extinguished by healing",
-    con: "Taking any other damage extinguishes the target",
+    pro: "Afterburn flames deal no damage but can't be extinguished by healing or liquids, and last twice as long",
+    con: "Taking any other damage while burning extinguishes the target",
   },
   {
     for: weaponTypeGroups.Flamethrower,
@@ -1079,7 +1097,7 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Flamethrower,
-    pro: "Mini-crits targets launched airborne by explosions, grapple hooks or rocket packs",
+    pro: "Mini-crits targets launched airborne by explosions, grapple hooks, rocket packs, or airblasts",
     con: "Marked for death for 2s after an airblast",
   },
   {
@@ -1097,8 +1115,8 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.Melee,
     classLimit: ["Pyro"],
-    pro: "Hitting friendly buildings helps them deploy faster",
-    con: "Your other weapons no longer damage Spies; you must use this melee",
+    pro: "Hitting friendly buildings helps them deploy/upgrade instantly",
+    con: "Hands-On: Your other weapons no longer damage Spies; you must use this melee",
   },
   {
     for: weaponTypeGroups.Melee,
@@ -1350,8 +1368,13 @@ const weaponEffects = [
   },
   {
     for: ["Demoknight_Melee"],
-    pro: "Press Reload key to parry a melee attack with precise timing, granting your next attack a minicrit",
+    pro: "Press Reload key to parry a melee attack with precise timing, avoiding damage and granting your next swing a minicrit",
     con: "Possesses the same range as a regular melee weapon",
+  },
+  {
+    for: ["Demoknight_Melee"],
+    pro: "On Hit: Lock target to melee for 2s",
+    con: "On Hit: If user switches to a different weapon before securing a kill, they are marked for death for 10s",
   },
   //// AllHeavy ////
   {
@@ -1369,6 +1392,12 @@ const weaponEffects = [
     con: "On Hit: -<value>% to all healing received within 8 seconds",
     valuePro: 50,
     valueCon: 50,
+  },
+  {
+    for: weaponTypeGroups.AllHeavy,
+    classLimit: ["Heavy"],
+    pro: "Stalwart: User cannot be debuffed in any way",
+    con: "Big Brother: Standing near an ally transfers their debuff over to you at half the remaining duration",
   },
   {
     for: ["Minigun"],
@@ -1431,6 +1460,20 @@ const weaponEffects = [
     con: "While revved, knockback received is quadrupled",
   },
   {
+    for: ["Minigun"],
+    pro: "While revved, instances of damage below <value> are ignored",
+    con: "While revved, instances of damage above 80 deals +<value>% more damage",
+    valuePro: 40,
+    valuePro: 20,
+  },
+  {
+    for: ["Minigun"],
+    pro: "While revved but not firing: Gain <value> HP/s",
+    con: "While revved but not firing: Lose <value> HP/s",
+    valuePro: 4,
+    valuePro: 15,
+  },
+  {
     for: ["Shotgun"],
     classLimit: ["Heavy"],
     pro: "Alt-Fire: Empty clip in one shot that deals regular damage and heals you for damage dealt. 5x longer reload after this",
@@ -1455,8 +1498,8 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.Melee,
     classLimit: ["Heavy"],
-    pro: "Time a swing to reflect a projectile!",
-    con: "Knockback received while active is doubled", // regular class knockback
+    pro: "Alt-Fire: Time a swing to reflect a projectile!",
+    con: "Knockback received while active is tripled", // regular class knockback + 50%
   },
   //// AllEngineer ////
   {
@@ -1585,10 +1628,10 @@ const weaponEffects = [
   {
     for: weaponTypeGroups.AllEngineer,
     classLimit: ["Engineer"],
-    pro: "Start off 5% slower. +<value>% movespeed for each building active",
+    pro: "Start off 10% slower. +<value>% movespeed for each building active",
     con: "-<value> max metal capacity for each building active",
     valuePro: 10,
-    valueCon: 20,
+    valueCon: 25,
   },
   {
     for: weaponTypeGroups.AllEngineer,
@@ -1617,7 +1660,7 @@ const weaponEffects = [
     classLimit: ["Engineer"],
     pro: "Electrified: Mini-crits wet targets",
     con: "Sparky: -8 HP/s for <value>s when wet",
-    valueCon: 10,
+    valueCon: 8,
   },
   {
     for: ["Wrench"],
@@ -1662,10 +1705,10 @@ const weaponEffects = [
   },
   {
     for: ["Wrench"],
-    pro: "Alt-Fire to toggle conversion of -5 metal/sec -> +<value> HP/sec",
+    pro: "Alt-Fire: Toggle regeneration mode (-5 metal/sec for +<value> HP/sec)",
     con: "Full Metal: -<value> HP/sec while out of metal",
     valuePro: 5,
-    valueCon: 10,
+    valueCon: 20,
   },
   {
     for: ["Wrench"],
@@ -1727,10 +1770,10 @@ const weaponEffects = [
   },
   {
     for: ["Wrench"],
-    pro: "-<value> metal on any hit",
-    con: "+<value> metal gained on hit against an enemy",
-    valuePro: 10,
-    valueCon: 25,
+    pro: "+<value> metal gained on hit against an enemy",
+    con: "-<value> metal on hit against an enemy",
+    valuePro: 50,
+    valueCon: 50,
   },
   {
     for: ["Wrench"],
@@ -1772,6 +1815,18 @@ const weaponEffects = [
     for: ["Wrench"],
     pro: "Spark of Innovation: If all buildings are up, ignite on hit",
     con: "Overcharged: If all buildings are up, ignites user on hit",
+  },
+  {
+    for: ["Wrench"],
+    pro: "Scrap Tap: If 3+ buildings are up, cause bleed on hit",
+    con: "Lead Poisoning: If 2+ buildings are up, bleed on hit",
+  },
+  {
+    for: ["Wrench"],
+    pro: "On Hit: Electrify target for <value>s (-8 HP/s; the damage minicrits while wet)",
+    con: "Conductor: User is electrified while wet (-8 HP/s for <value>s)",
+    valuePro: 8,
+    valuePro: 8,
   },
   {
     for: ["Wrench"],
@@ -1850,6 +1905,18 @@ const weaponEffects = [
     con: "+<value>% damage vulnerability for 8s when a nearby ally dies",
     valuePro: 30,
     valueCon: 25,
+  },
+  {
+    for: weaponTypeGroups.AllMedic,
+    classLimit: ["Medic"],
+    pro: "Vaccinated: User cannot be marked for death or debuffed",
+    con: "Weak Immune System: User takes crits when marked for death",
+  },
+  {
+    for: weaponTypeGroups.AllMedic, // Sniper has same
+    classLimit: ["Medic"],
+    pro: "Adaptable: The user cannot take damage over time (afterburn, bleed, etc.)",
+    con: "Taking instances of damage greater than 75 incite bleed for 4s",
   },
   {
     for: ["Syringe_Gun"],
@@ -1941,7 +2008,7 @@ const weaponEffects = [
     for: ["Medi_Gun"],
     pro: "Overheal bonus doesn't decay for <value> second(s)",
     con: "Overheal decays <value>% faster",
-    valuePro: 10,
+    valuePro: 8,
     valueCon: 50,
   },
   {
@@ -2083,6 +2150,12 @@ const weaponEffects = [
     con: "When hit by a melee, you are doused in jarate for 2s",
   },
   {
+    for: weaponTypeGroups.AllSniper, // Medic has same
+    classLimit: ["Sniper"],
+    pro: "Adaptable: The user cannot take damage over time (afterburn, bleed, etc.)",
+    con: "Give and Get: Taking instances of damage greater than 75 incite bleed for 4s",
+  },
+  {
     for: ["Sniper_Rifle"],
     pro: "Deals massive knockback",
     con: "No headshots",
@@ -2147,7 +2220,7 @@ const weaponEffects = [
     pro: "Landing any hit while disguised grants the user +<value>% movespeed for 5s",
     con: "Cannot disguise for <value> seconds after attacking",
     valuePro: 30,
-    valueCon: 10,
+    valueCon: 8,
   },
   {
     for: weaponTypeGroups.AllSpy,
@@ -2223,7 +2296,7 @@ const weaponEffects = [
     pro: "+<value>% cloak on hit",
     con: "-<value>% cloak on hit",
     valuePro: 30,
-    valueCon: 10,
+    valueCon: 30,
   },
   {
     for: ["Revolver"],
@@ -2288,6 +2361,11 @@ const weaponEffects = [
     for: ["Invis_Watch"],
     pro: "The first hit received while disguised deals no damage, but removes the disguise",
     con: "Cannot cloak while disguised",
+  },
+  {
+    for: ["Invis_Watch"],
+    pro: "The first hit received while cloaked deals no damage, but uncloaks the user",
+    con: "Cannot disguise while cloaked",
   },
   {
     for: ["Invis_Watch"],
@@ -2393,6 +2471,13 @@ const weaponEffects = [
     pro: "On Backstab: Cloak instantaneously",
     con: "On Backstab: Cannot cloak for 5s",
   },
+  // {
+  //   for: ["Knife"], // this one is a bit weird
+  //   pro: "Sleight of Hand: Enemies who melee the user from the front cut themselves, bleeding for <value>s",
+  //   con: "On receiving a melee attack from the front: Hit yourself. Idiot. Bleed for <value>s",
+  //   valuePro: 4,
+  //   valuePro: 4,
+  // },
   {
     for: ["Knife"],
     pro: "+<value>% jump height while active",
@@ -3218,7 +3303,7 @@ const weaponEffects = [
     pro: "Nearby teammates receive +<value>% movespeed",
     con: "+<value>% damage vulnerability for each nearby teammate",
     valuePro: 15,
-    valueCon: 10,
+    valueCon: 8,
   },
   {
     for: weaponTypeGroups.SingleShotProjectile,
@@ -3304,6 +3389,37 @@ const weaponEffects = [
     valuePro: 60,
     valueCon: 90,
   },
+  {
+    for: weaponTypeGroups.AllCanHit,
+    classLimit: ["Pyro", "Engineer", "Sniper"], // average speed
+    pro: "+<value>% damage dealt to targets who move faster than you",
+    con: "-<value>% damage dealt to targets who move faster than you",
+    valuePro: 30,
+    valueCon: 30,
+  },
+  {
+    for: weaponTypeGroups.AllCanHit,
+    classLimit: ["Pyro", "Engineer", "Sniper"], // average speed
+    pro: "+<value>% damage dealt to targets who move slower than you",
+    con: "-<value>% damage dealt to targets who move slower than you",
+    valuePro: 30,
+    valueCon: 30,
+  },
+  {
+    for: weaponTypeGroups.AllCanHit,
+    classLimit: ["Scout", "Medic"], // head-shot able
+    pro: "Sturdy: Cannot be reduced below 1 HP by a single instance of damage from full HP (except for backstabs; once per life)",
+    con: "Prey: Being reduced to below 25% HP by a single instance of damage from full HP marks the user for death for 5s",
+  },
+  // comp group would be cool (Scout, Soldier, Demo)
+  // {
+  //   for: weaponTypeGroups.AllCanHit,
+  //   classLimit: ["Scout", "Soldier", "Demo"], // comp
+  //   pro: "Slowly gain up to +<value>% damage resistance while in combat",
+  //   con: "Slowly gain up to +<value>% damage vulnerability while in combat",
+  //   valuePro: 30,
+  //   valueCon: 30,
+  // },
   
   //// Misc., Weapon-Specific ////
   {
