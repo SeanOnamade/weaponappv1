@@ -4557,3 +4557,29 @@ document.getElementById('backgroundModal').addEventListener('click', function(e)
     hideBackgroundModal();
   }
 });
+
+function getStatPoolCounts() {
+  let mandatory = 0;
+  for (const options of Object.values(mandatoryPros)) {
+    for (const option of options) {
+      if (option.text && option.text.trim()) mandatory++;
+    }
+  }
+  let neutral = 0;
+  for (const options of Object.values(neutralStats)) {
+    for (const option of options) {
+      if (option.text && option.text.trim()) neutral++;
+    }
+  }
+  const pairs = weaponEffects.filter((effect) => effect.pro).length;
+  return { mandatory, neutral, pairs, total: mandatory + neutral + pairs };
+}
+
+function updateStatPoolCount() {
+  const el = document.getElementById('statPoolCount');
+  if (!el) return;
+  const { total } = getStatPoolCounts();
+  el.textContent = `(${total.toLocaleString()} stats in the pool)`;
+}
+
+updateStatPoolCount();
