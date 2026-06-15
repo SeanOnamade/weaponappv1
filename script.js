@@ -473,13 +473,17 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
 
   Banner: [
     { pointCost: -1, text: "Provides a group buff that slowly heals nearby team members. Rage increases through damage done.", },
-    { pointCost: -1, text: "Provides a group buff that increases the firing and reload rates of nearby teammates. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a group buff that increases the firing and reload speeds of nearby teammates. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a group buff that prevents nearby teammates from having to reload. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a group buff where all healing received is tripled. Rage increases through damage done.", },
-    { pointCost: -1, text: "Provides a group buff where allies can heal each other for 35% with attacks on each other. Rage increases through damage done.", },
-    { pointCost: -1, text: "Provides a buff where enemies hit by user are marked for death. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a group buff where allies can heal each other with attacks on each other. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a buff where enemies hit by the user are marked for death. Rage increases through damage done.", },
     { pointCost: -1, text: "Seeing Red: Provides a buff where enemies in the user's line of sight are marked for death for him. Rage increases through damage done.", },
     { pointCost: -1, text: "Provides a buff where the user's next four attacks are guaranteed crits. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a group buff that increases nearby teammates' movespeed and jump height. Rage increases through damage done.", },
+    { pointCost: -2, text: "Provides a minor group buff that nullifies all self-damage and debuffs for self and nearby teammates. Rage increases through damage done.", },
+    { pointCost: -1, text: "Provides a group buff where attacks also deal 25% of their damage again after a short delay. Rage increases through damage done.", },
+    { pointCost: -1, text: "Short Fuse: Group buff. When it ends, enemies damaged during the buff take explosive damage equal to 50% of the damage they received. Rage builds through damage done.", },
     ],
 
   Crossbow: [
@@ -507,6 +511,8 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "Only explodes once, and must be recharged with ammo" },
     { pointCost: 0, text: "Creates a fiery eplosion whenever hitting a debuffed enemy" },
     { pointCost: 0, text: "Deals immense knockback on hit; enemies who collide into others explode" },
+    { pointCost: 0, text: "Melee is dropped on death, exploding after 3 seconds" },
+    { pointCost: 1, text: "Can be used to blast jump by smacking the ground" },
   ],
 
   Flare_Gun: [
@@ -524,6 +530,8 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: -1, text: "Eat to double your current health (into overheal). Alt-Fire: Share with a friend (Small Health Kit)", },
     { pointCost: -1, text: "Eat to restore 150 health. Alt-Fire: Share with a friend (Medium Health Kit)", },
     { pointCost: -1, text: "Eat to gain 50 health instantaneously. Alt-Fire: Share with a friend (Medium Health Kit)", },
+    { pointCost: -1, text: "Eat to gain afterburn and knockback immunity for 20 seconds. Alt-Fire: Share with a friend (Medium Health Kit)", },
+    { pointCost: -1, text: "Eat to triple all healing received for the next 15s. Alt-Fire: Share with a friend (Small Health Kit)", },
   ],
 
   Medi_Gun: [
@@ -535,11 +543,15 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: -1, text: "ÜberCharge grants 100% minicritical chance" },
     { pointCost: -1, text: "ÜberCharge creates a frontal projectile shield and heals all nearby allies" },
     { pointCost: -1, text: "ÜberCharge prevents user and patient from dropping below 1 HP" },
+    { pointCost: -2, text: "ÜberCharge instantly fully overheals the patient and user, with no overheal decay" },
     { pointCost: -1, text: "ÜberCharge converts 300% of the patient's damage dealt into healing for both Medic and patient" },
     { pointCost: -1, text: "ÜberCharge heals in a massive radius rather than just healing one target" },
     { pointCost: 0, text: "Quickest Fix: On ÜberCharge, switching heal targets instantly heals the new target to full HP (max 3 switches per Über)" },
     { pointCost: 0, text: "ÜberCharge grants 6s of invulnerability" },
     { pointCost: 1, text: "Healing ramps up to +100% the closer the user is to the patient. ÜberCharge grants doubled healing rate." },
+    { pointCost: -2, text: "ÜberCharge has no effect, but this Medi Gun's healing increases up to 50% as its charge increases", },
+    { pointCost: -1, text: "Merasmus' Meddlement: ÜberCharge doesn't grant invulnerability, but deals all damage received back to the attackers", },
+    { pointCost: -2, text: "ÜberCharge creates a ring of fire, igniting damaged enemies and those near the user and patient", },
   ],
 
   Melee_with_Projectile: [
@@ -555,6 +567,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
   Indivisible_Particle_Smasher: [
     { pointCost: 0, text: "Does not require ammo, and projectiles penetrate" },
     { pointCost: 0, text: "Projectiles bounce off surfaces up to three times" },
+    { pointCost: 1, text: "Electrifying Aura: The final shot in the clip will heal the user for 25% of the damage dealt." },
   ],
 
   Sapper: [
@@ -575,6 +588,10 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "Drink to become cloaked for 6s. Cannot attack during this time", },
   ],
 
+  // Scattergun: [
+  //   { pointCost: 0, text: "Alt-Fire to reach and shove someone!", },
+  // ],
+
   Throwable_AoE: [
     { pointCost: -1, text: "On Hit: Removes ally's debuffs", },
     { pointCost: 1, text: "On Hit: Removes all of the enemy's buffs, including overheal", },
@@ -583,6 +600,7 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "Extinguish teammates to earn a guaranteed minicrit on your next attack", },
     { pointCost: 0, text: "Creates a cloud of poison gas dealing 8 dmg/s to those within", },
     { pointCost: -1, text: "Creates a slippery surface for enemies while boosting the speed of allies.", },
+    { pointCost: 0, text: "On Hit: Covered enemies received halved healing for 12s", },
   ],
 
   Throwable_Weapon: [
@@ -608,8 +626,14 @@ const mandatoryPros = { // Apparently, weapons with this must choose at least on
     { pointCost: 0, text: "Replaces the Sentry with a Tesla Coil", },
     { pointCost: 1, text: "Teleporters are two-way", },
     // { pointCost: 1, text: "Sentry Gun repairs for 33% after a kill", },
-    { pointCost: 0, text: "", },
+    { pointCost: 0, text: "Dispensers heal at a third of the typical rate, but accumulate and dispense metal twice as fast.", },
+    { pointCost: 1, text: "User can build two Level 1 buildings of the same type, but cannot build additional buildings", },
+    { pointCost: 1, text: "Alt-Fire: Cycle sentry target priority (nearest, farthest, health low-to-high, health high-to-low, class)", },
   ],
+
+  // Revolver: [
+  //   { pointCost: 1, text: "Showdown: Instantly kills any enemy also wielding this weapon", },
+  // ],
   
 };
 
@@ -630,6 +654,7 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "Backstabbing causes victim to bleed critically until healing or death, granting user +40% move/firing speed for the duration",}, 
         { text: "This knife can be thrown a short distance, and recharges over 10s. Recharge time is halved on a backstab.",}, 
         { text: "Backstabs reduce enemies to 1 HP and grant the user an instant primary deploy. Disguises aren't removed on stab.",}, 
+        { text: "Backstabs crit instead of instakill, and guarantee the user's next attack is a crit",}, 
     ],
     Medi_Gun:  [
         { text: "ÜberCharge is split into halves",},
@@ -637,6 +662,9 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "ÜberCharge is split into quarters", },
         { text: "This Medi Gun fires a constant, ammo-less beam that requires aiming",},
         { text: "This Medi Gun fires an arcing, ammo-less beam that requires aiming",},
+        { text: "This Medi Gun can connect to two allies at once, but in this state, its healing and charge rate are halved.",},
+        { text: "This Medi Gun can connect to up to three allies at once, but in this state, its healing and charge rate are reduced accordingly.",},
+        { text: "This Medi Gun can attach to enemies, draining their health to you without building ÜberCharge", },
     ],
     Melee:  [
         { text: "This melee charges from 0 damage up to double damage over 2 seconds",}, 
@@ -644,9 +672,17 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
         { text: "(Purely cosmetic) Victims explode on kill",}, 
         { text: "(Purely cosmetic) Victims disintegrate on kill",}, 
         { text: "(Purely cosmetic) Victims explode into silly gibs",}, 
+        { text: "(Purely cosmetic) Victims receive a calling card tombstone on kill",}, 
     ],
     Rocket_Launcher:  [
         { text: "Hold Fire to charge rockets' speed",},
+    ],
+    Revolver: [
+        { text: "Showdown: Instantly kills any enemy also wielding this weapon", },
+    ],
+    Stickybomb_Launcher: [
+        { text: "Stickybombs blast enemies and user straight upwards",},
+        { text: "Charging increases blast radius and damage instead of fire distance",}, 
     ],
     Shotgun: [
         { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every changed pack being one size smaller", 
@@ -654,6 +690,7 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
     ],
     Scattergun:  [
         { text: "Alt-Fire: Switch between ammo and health collection modes at the cost of every changed pack being one size smaller",},
+        { text: "This Scattergun fires in 3-round bursts",}, 
     ],
     Sniper_Rifle:  [
         { text: "This rifle fires high-speed projectile bullets that deal +15% more damage",}, 
@@ -667,6 +704,9 @@ const neutralStats = { // SPACE I CREATED FOR CUSTOM STATS
 };
 
 const weaponEffects = [
+  // valuePro / valueCon: optional numbers substituted into pro/con text wherever "<value>" appears.
+  // When rolled, each is passed through addRandomnessToNumber (roughly 10–100% of the base, snapped to multiples of 5).
+  // If the same pro/con pair is stacked, its value is multiplied by the stack count. Omit when the text has no <value> placeholder.
 
   //// ---------- ////
 
@@ -722,6 +762,16 @@ const weaponEffects = [
     classLimit: ["Scout"],
     pro: "Any fall damage that an opponent you've recently exchanged blows with receives is tripled",
     con: "Fall damage received shortly after being damaged by an enemy is tripled",
+  },
+  {
+    for: weaponTypeGroups.AllScout.filter(
+        (i) => !weaponTypeGroups.AllPassive.includes(i)
+      ),
+    classLimit: ["Scout"],
+    pro: "Heal <value> HP/s when moving nonstop for at least 15 seconds with this weapon active",
+    con: "Lose <value> HP/s while not moving while this weapon is active",
+    valuePro: 5,
+    valueCon: 2,
   },
   {
     for: weaponTypeGroups.AllScout.filter(
@@ -804,6 +854,12 @@ const weaponEffects = [
     valueCon: 10,
   },
   {
+    for: ["Scattergun"],
+    pro: "+10% firing speed per kill, to a max of +50%",
+    con: "-<value>% firing speed when not moving",
+    valueCon: 40,
+  },
+  {
     for: ["Pistol"],
     classLimit: ["Scout"],
     pro: "User cannot be targeted by a sentry with this active if they keep moving and don't attack",
@@ -814,6 +870,12 @@ const weaponEffects = [
     classLimit: ["Scout"],
     pro: "Inflict 1s of bleed on hit",
     con: "User bleeds for 3s after inflicting bleed with any weapon",
+  },
+  {
+    for: ["Pistol"],
+    classLimit: ["Scout"],
+    pro: "Hot Stuff: The first shot of the clip will ignite enemies",
+    con: "Burning Shame: If missed, the first shot of the clip will briefly ignite the user",
   },
   {
     for: ["Scout_Lunch_Box"],
@@ -912,10 +974,21 @@ const weaponEffects = [
     con: "Fall damage while blast jumping is tripled",
   },
   {
+    for: ["Rocket_Launcher"],
+    pro: "Over-Kill: Critical hits ignite targets",
+    con: "Burning Shame: Missing shots while overhealed ignites the user",
+  },
+  {
     for: ["Shotgun"],
     classLimit: ["Soldier"],
     pro: "Secret Shrapnel: Enemies hit bleed for 1s",
     con: "Poor Handling: Upon fully emptying a clip, bleed for 3s",
+  },
+  {
+    for: ["Shotgun"],
+    classLimit: ["Soldier"],
+    pro: "On Kill: Automatically reload other weapons",
+    con: "Blaze of Glory: User cannot switch weapons for 5s following a kill",
   },
   {
     for: ["Banner"],
@@ -931,6 +1004,12 @@ const weaponEffects = [
     for: ["Boots"],
     pro: "Double Jump to drop straight down and deal stomp damage",
     con: "-10% movespeed for 10s after taking fall damage",
+  },
+  {
+    for: ["Boots"],
+    classLimit: ["Soldier"],
+    pro: "Landing on the ground creates a small shockwave",
+    con: "After taking fall damage, user is stunned for 1s",
   },
   {
     for: ["Boots"],
@@ -1092,6 +1171,11 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Flamethrower,
+    pro: "Airblasted projectiles deal no self-damage",
+    con: "Airblasted projectiles deal double damage to self",
+  },
+  {
+    for: weaponTypeGroups.Flamethrower,
     pro: "Can airblast jump",
     con: "Airblast cannot reflect projectiles or extinguish allies",
   },
@@ -1128,7 +1212,7 @@ const weaponEffects = [
     for: weaponTypeGroups.Melee,
     classLimit: ["Pyro"],
     pro: "On Hit: Target is doused in gasoline for 10s",
-    con: "On Hit: Splash slippery gasoline around",
+    con: "On Hit: Splash slippery gasoline around, affecting the user and enemies alike",
   },
 
   //// AllDemoman ////
@@ -1188,6 +1272,11 @@ const weaponEffects = [
     valueCon: 5,
   },
   {
+    for: ["Grenade_Launcher"],
+    pro: "On Hit: Build a death meter (decays while not dealing damage). On death, explode — radius scales with meter fill",
+    con: "Awful Ordnance: 10% of damage taken returns as delayed explosive self-damage",
+  },
+  {
     for: ["Stickybomb_Launcher"],
     pro: "+<value> max pipebombs out",
     con: "-<value> max pipebombs out",
@@ -1232,7 +1321,7 @@ const weaponEffects = [
     for: ["Stickybomb_Launcher"],
     pro: "Can destroy enemy stickybombs",
     con: "Stickybomb detonations that deal no damage deal <value> psychic damage to the user",
-    valueCon: 25,
+    valueCon: 15,
   },
   {
     for: ["Stickybomb_Launcher"],
@@ -1362,6 +1451,11 @@ const weaponEffects = [
     con: "Taking damage while shield charging reduces remaining charge time",
   },
   {
+    for: ["Demoknight_Shield"],
+    pro: "Become invulnerable for 3s after a charge/melee kill",
+    con: "User is marked for death while charging",
+  },
+  {
     for: ["Demoknight_Melee"],
     pro: "Hit a teammate to knight them, using your charge meter to heal half their health",
     con: "Enemies heal half the melee damage they deal to you",
@@ -1382,7 +1476,7 @@ const weaponEffects = [
       weaponTypeGroups.AllCanHit.includes(i)),
     classLimit: ["Heavy"],
     pro: "On Kill: Move at your victim's movespeed for 5 seconds",
-    con: "No healing can be received within 3 seconds of taking damage", // LMAO
+    con: "An Honorable Battle: No healing can be received within 3 seconds of taking damage", // LMAO
   },
   {
     for: weaponTypeGroups.AllHeavy.filter((i) =>
@@ -1474,6 +1568,13 @@ const weaponEffects = [
     valuePro: 15,
   },
   {
+    for: ["Minigun"],
+    pro: "+<value> max health on wearer at the cost of halved ammo capacity",
+    con: "-<value> max health on wearer, but gain 2x ammo capacity",
+    valuePro: 75,
+    valueCon: 75,
+  },
+  {
     for: ["Shotgun"],
     classLimit: ["Heavy"],
     pro: "Alt-Fire: Empty clip in one shot that deals regular damage and heals you for damage dealt. 5x longer reload after this",
@@ -1501,6 +1602,18 @@ const weaponEffects = [
     pro: "Alt-Fire: Time a swing to reflect a projectile!",
     con: "Knockback received while active is tripled", // regular class knockback + 50%
   },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Heavy"],
+    pro: "Upon receiving lethal damage while this weapon is active, survive an extra 5s before dropping dead",
+    con: "User can be insta-killed while below 20% health with this weapon active",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Heavy"],
+    pro: "Turns victims into Sandviches",
+    con: "Drop a Sandvich on death",
+  },
   //// AllEngineer ////
   {
     for: ["Shotgun"],
@@ -1518,8 +1631,15 @@ const weaponEffects = [
   {
     for: ["Shotgun"],
     classLimit: ["Engineer"],
-    pro: "On Kill: Spawn a Level 1 Dispenser where the enemy died. Once built, its health drains as if being sapped.",
+    pro: "On Kill: Spawn a Level 1 Dispenser where the enemy died. Once built, its health drains as if being sapped, and it cannot be repaired.",
     con: "On Death: Drop health pack (size based on remaining metal)",
+  },
+  {
+    for: ["Shotgun"],
+    classLimit: ["Engineer"],
+    pro: "Alt-Fire: Empty the clip to blast yourself backwards",
+    con: "Addled Mind: <value>% slower reload speed for each building active",
+    valueCon: 10,
   },
   {
     for: ["Revolver"],
@@ -1833,6 +1953,28 @@ const weaponEffects = [
     pro: "Spare Metal: If all buildings are up, cause bleed on hit",
     con: "Too Much Metal: If all buildings are up, bleed on hit",
   },
+  {
+    for: ["Wrench"],
+    pro: "Level 2 buildings have the health of level 3 buildings",
+    con: "Sentries cannot be upgraded beyond level 2",
+  },
+  {
+    for: ["Wrench"],
+    pro: "Alt-Fire: Toggle. While toggled on, hitting any building teleports you to spawn or your teleporter exit",
+    con: "On Hit: Teleport to a random spot within 5 feet",
+  },
+  {
+    for: ["Wrench"],
+    pro: "Sentries swivel and fire <value>% faster",
+    con: "Sentries swivel and fire <value>% slower",
+    valuePro: 75,
+    valueCon: 40,
+  },
+  {
+    for: ["Wrench"],
+    pro: "Every 200 damage repaired on buildings stores a melee crit that activates on enemy hit",
+    con: "Rusty Wrench: This weapon's damage is halved for 30 seconds after repairing a building",
+  },
   //// AllMedic ////
   {
     for: weaponTypeGroups.AllMedic.filter(
@@ -2105,6 +2247,17 @@ const weaponEffects = [
     valueCon: 20,
   },
   {
+    for: ["Medi_Gun"],
+    pro: "This Medi Gun's beam ignites enemy Spies",
+    con: "This Medi Gun's beam makes enemy Spies invulnerable",
+  },
+  {
+    for: ["Medi_Gun"],
+    pro: "Geneva Dissension: Enemies who attack the user while their ÜberCharge is full are marked for death for 2s",
+    con: "+<value>% damage vulnerability while ÜberCharge is full",
+    valueCon: 20,
+  },
+  {
     for: weaponTypeGroups.Melee,
     classLimit: ["Medic"],
     pro: "On Hit: <value>% ÜberCharge added",
@@ -2141,6 +2294,19 @@ const weaponEffects = [
     con: "-<value>% damage towards enemies who haven't damaged you or your last patient",
     valuePro: 9,
     valueCon: 50,
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Medic"],
+    pro: "Hellbringer: Attacks ignite enemies, and the user is immune to afterburn while this weapon is active",
+    con: "Hellborne: Afterburn duration on the user is doubled, and they cannot be extinguished through healing",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    classLimit: ["Medic"],
+    pro: "The user's ÜberCharge is activated whenever this weapon is active, draining at double speed",
+    con: "The user's ÜberCharge drains at a rate of <value>% per second while this weapon is active",
+    valueCon: 5,
   },
   //// AllSniper ////
   {
@@ -2197,6 +2363,33 @@ const weaponEffects = [
     pro: "Gain +<value>% damage on next headshot per second spent tracking an enemy's head before firing (max +100%). Laser dot flashes intensely.",
     con: "Accuracy decreases the longer the user stays scoped",
     valuePro: 25,
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "Bodyshots deal +<value>% damage",
+    con: "Bodyshots deal no damage",
+    valuePro: 25,
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "On Headshot: Target cannot be healed for 3s",
+    con: "User cannot be healed while this weapon is active",
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "Successful headshots don't use ammo and eliminate the need to reload",
+    con: "Cannot fire for 1s after scoping",
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "On Headshot: User's melee attacks mini-crit for 5s",
+    con: "Headshots mini-crit instead of crit",
+  },
+  {
+    for: ["Sniper_Rifle"],
+    pro: "While scoped, user's movespeed increases up to +<value>% with charge",
+    con: "This rifle doesn't charge",
+    valuePro: 50,
   },
   {
     for: ["Bow"],
@@ -2359,6 +2552,11 @@ const weaponEffects = [
   },
   {
     for: ["Invis_Watch"],
+    pro: "Decloak in half the time",
+    con: "Decloaking takes twice as long",
+  },
+  {
+    for: ["Invis_Watch"],
     pro: "The first hit received while disguised deals no damage, but removes the disguise",
     con: "Cannot cloak while disguised",
   },
@@ -2370,14 +2568,14 @@ const weaponEffects = [
   {
     for: ["Invis_Watch"],
     pro: "+<value>% movespeed while cloaked near objectives",
-    con: "Lone Wolf: User cannot perform objectives",
+    con: "Lone Wolf: User cannot capture objectives",
     valuePro: 20,
   },
   {
     for: ["Invis_Watch"],
     pro: "+<value>% jump height while cloaked",
     con: "Footsteps are twice as loud while cloaked",
-    valuePro: 50,
+    valuePro: 75,
   },
   {
     for: ["Invis_Watch"],
@@ -2392,6 +2590,26 @@ const weaponEffects = [
     con: "+<value> HP/sec while cloaked",
     valuePro: 5,
     valueCon: 5,
+  },
+  {
+    for: ["Invis_Watch"],
+    pro: "While cloaked, see nearby enemies through walls",
+    con: "User is marked for death while cloaked",
+  },
+  {
+    for: ["Invis_Watch"],
+    pro: "Securing a kill immediately refills cloak",
+    con: "Must secure a kill before cloaking again",
+  },
+  {
+    for: ["Invis_Watch"],
+    pro: "The user cannot bump into enemies while cloaked",
+    con: "The user's cloak flickers when bumping into any surface, not just enemies",
+  },
+  {
+    for: ["Invis_Watch"],
+    pro: "Cloaking teleports the user forward a short distance",
+    con: "User must completely stop moving for 1s before cloaking",
   },
   {
     for: ["Sapper"],
@@ -2419,8 +2637,9 @@ const weaponEffects = [
   },
   {
     for: ["Sapper"],
-    pro: "+5 health regenerated per second for each active sapper",
+    pro: "+<value> health regenerated per second for each active sapper",
     con: "Maximum one sapper active at a time",
+    valuePro: 10,
   },
   {
     for: ["Sapper"],
@@ -2450,6 +2669,23 @@ const weaponEffects = [
     for: ["Sapper"],
     pro: "Sapping also drains metal from the Engineer",
     con: "As the building is sapped, metal returns to the Engineer",
+  },
+  {
+    for: ["Sapper"],
+    pro: "Sapped buildings explode when destroyed",
+    con: "The user takes <value> psychic damage when a placed sapper is destroyed",
+    valueCon: 30,
+  },
+  {
+    for: ["Sapper"],
+    pro: "Edgy Espionage: Sappers deal <value> damage to the player who removes it",
+    con: "Disguises are automatically removed once a sapper is pulled out",
+    valuePro: 35,
+  },
+  {
+    for: ["Sapper"],
+    pro: "Damaging a building that is being sapped doubles the sap rate",
+    con: "Sappers can only lower a building's HP to 1. Can never destroy it outright",
   },
   {
     for: ["Knife"],
@@ -3201,6 +3437,16 @@ const weaponEffects = [
   },
   {
     for: weaponTypeGroups.Melee,
+    pro: "Taunting within a second of a kill makes the user invulnerable for the duration",
+    con: "Deals no damage against taunting enemies",
+  },
+  {
+    for: weaponTypeGroups.Melee,
+    pro: "Landing a hit Spooks the opponent for 3s, but disables this weapon for 6s",
+    con: "Being hit by an opponent's melee while this weapon is active Spooks the user",
+  },
+  {
+    for: weaponTypeGroups.Melee,
     pro: "Imbued with an ancient power -- victims turn to gold and drop a large ammo pack upon death",
     con: "Being killed with this active fully heals the killer",
   },
@@ -3483,6 +3729,12 @@ const weaponEffects = [
     valueCon: 30,
   },
   {
+    for: ["Rocket_Launcher", "Minigun"],
+    pro: "Head of the Charge: On kill, nearby allies heal for <value> HP/s for 3s",
+    con: "When the Medic healing you dies, you are marked for death for 5s",
+    valuePro: 20,
+  },
+  {
     for: ["Banner", "Demoknight_Shield"],
     pro: "Alt-Fire to charge meter 50% faster at the cost of marking yourself for death until it's full",
     con: "Meter charges at half speed when below half health",
@@ -3526,7 +3778,7 @@ const weaponEffects = [
   {
     for: ["Scattergun", "Shotgun"],
     pro: "Electricity In The Air: Gain a stored mini-crit for every hit you land on a crit/mini-crit boosted target. Activate with Alt-Fire.",
-    con: "Damage dealt to crit/mini-crit boosted targets is reduced to 33%",
+    con: "Stolen Thunder: Damage dealt to crit/mini-crit boosted targets is reduced to 33%",
   },
   {
     for: ["Scattergun", "Shotgun", "Rocket_Launcher"],
@@ -3542,6 +3794,12 @@ const weaponEffects = [
     for: weaponTypeGroups.RayGun,
     pro: "Projectile travels at twice the regular speed",
     con: "Unstable Up Quarks: Firing while in the midst of reloading zaps the user for a small amount of damage",
+  },
+  {
+    for: weaponTypeGroups.RayGun,
+    classLimit: ["Engineer"],
+    pro: "Chain Lightning: Beam bounces up to three times between nearby enemies; damage and max bounce distance halve each time",
+    con: "Close Quarters: Beam rebounds on you for 25% damage if the target is too close",
   },
 ];
 
@@ -3891,8 +4149,12 @@ function generateWeapon(playerClass, weaponSlot, powerLevel, extraStats, weaponT
 function addMandatoryPro(weapon) {
   const mandatoryProOptions = mandatoryPros[weapon.type]; // gets options
   if (!mandatoryProOptions || !mandatoryProOptions.length) return; // if none for this weapon type, then exit
+  const applicableOptions = mandatoryProOptions.filter(
+    (option) => !option.classLimit || option.classLimit.includes(weapon.playerClassName)
+  );
+  if (!applicableOptions.length) return;
   const selectedPro =
-    mandatoryProOptions[getRandom(0, mandatoryProOptions.length - 1)]; // chooses one
+    applicableOptions[getRandom(0, applicableOptions.length - 1)]; // chooses one
 
   weapon.mandatoryPros.push(selectedPro.text); // adds it
   weapon.proPoints -= selectedPro.pointCost; // propoints in weapon go down
